@@ -1,0 +1,84 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "caseStudies": "Case Studies",
+    "blog": "Blog",
+    "techStack": "Tech Stack",
+    "resume": "Resume",
+    "contact": "Contact",
+    "hireMe": "Hire Me"
+  },
+  "Home": {
+    "available": "Available for freelance projects",
+    "greeting": "Hi, I am",
+    "role": "Backend Developer & Automation Engineer",
+    "description": "I build intelligent backend systems, AI-powered applications, and automation pipelines. Specializing in Python, FastAPI, and OpenAI integrations.",
+    "viewProjects": "View Projects",
+    "contactMe": "Contact Me",
+    "downloadCv": "Download CV",
+    "stats": {
+      "projects": "Projects Delivered",
+      "experience": "Years Experience"
+    }
+  },
+  "Sections": {
+    "coreTech": "Core Technologies",
+    "portfolio": "Portfolio",
+    "featuredProjects": "Featured Projects",
+    "allProjects": "All Projects",
+    "background": "Background",
+    "experienceTimeline": "Experience Timeline",
+    "insights": "Insights",
+    "latestArticles": "Latest Articles",
+    "readBlog": "Read Blog"
+  },
+  "About": {
+    "title": "About Me",
+    "subtitle": "Backend Developer & Automation Engineer",
+    "p1": "I am Barış Çilak, a backend developer and automation engineer based in Turkey. I specialize in building robust, intelligent software systems that automate complex business processes and integrate AI capabilities.",
+    "p2": "My journey in software started with a fascination for how systems work under the hood. Over the years, this evolved into a specialization in backend engineering — designing APIs, data pipelines, automation workflows, and AI-powered applications.",
+    "p3": "Today I work primarily with Python and FastAPI on the backend, integrating services like OpenAI, WhatsApp Business API, and various cloud platforms. I have delivered projects ranging from AI chatbots handling thousands of daily conversations to ETL pipelines processing millions of records.",
+    "p4": "When I am not coding, I am writing technical articles about the things I have learned — both to share knowledge and to deepen my own understanding.",
+    "expertise": "Expertise",
+    "principles": "Core Principles"
+  },
+  "Contact": {
+    "title": "Contact",
+    "subtitle": "Let's Build Something Together",
+    "description": "Have a project in mind or want to discuss potential opportunities? I'd love to hear from you. Fill out the form below and I'll get back to you as soon as possible.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "john@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "Project Inquiry",
+      "message": "Message",
+      "messagePlaceholder": "Tell me about your project...",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again."
+    },
+    "connect": "Connect With Me"
+  },
+  "Common": {
+    "readMore": "Read More",
+    "viewProject": "View Project",
+    "backToHome": "Back to Home",
+    "liveDemo": "Live Demo",
+    "github": "GitHub Repository",
+    "overview": "Overview",
+    "technologies": "Technologies Used",
+    "features": "Key Features"
+  },
+  "Projects": {
+    "work": "Work",
+    "title": "Projects",
+    "description": "A collection of backend systems, AI applications, and automation tools I've built across various domains.",
+    "featured": "Featured",
+    "other": "Other Projects"
+  }
+}
