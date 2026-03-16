@@ -1,8 +1,8 @@
-import { useTranslations, useLocale } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import ProjectCard from "@/components/ui/ProjectCard";
-import { getProjects } from "@/data/projects";
+import { getDbProjects } from "@/lib/dataFetching";
 
 export const metadata: Metadata = {
     title: "Projects",
@@ -10,10 +10,10 @@ export const metadata: Metadata = {
         "Explore Barış Çilak's backend and automation projects including AI chatbots, speech-to-text platforms, and data pipelines.",
 };
 
-export default function ProjectsPage() {
-  const locale = typeof useLocale === 'function' ? useLocale() : require('next-intl').useLocale();
-  const projects = getProjects(locale);
-  const t = useTranslations("Projects");
+export default async function ProjectsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const projects = await getDbProjects(locale);
+  const t = await getTranslations("Projects");
     const featuredProjects = projects.filter((p) => p.featured);
     const otherProjects = projects.filter((p) => !p.featured);
 

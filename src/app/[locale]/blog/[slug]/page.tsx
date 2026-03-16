@@ -4,6 +4,7 @@ import { Link } from "@/i18n/routing";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import { getDbBlogPosts } from "@/lib/dataFetching";
 import { getBlogPosts } from "@/data/blog";
 
 interface Props {
@@ -17,7 +18,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const locale = (await params).locale || "en";
-  const post = getBlogPosts((await params).locale).find((p) => p.slug === slug);
+    const post = getBlogPosts((await params).locale).find((p) => p.slug === slug);
     if (!post) return { title: "Post Not Found" };
     return {
         title: post.title,
@@ -35,7 +36,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogDetailPage({ params }: Props) {
     const { slug } = await params;
-    const locale = (await params).locale; const post = getBlogPosts(locale).find((p) => p.slug === slug);
+    const locale = (await params).locale; const postList = await getDbBlogPosts(locale);
+    const post = postList.find((p) => p.slug === slug);
     if (!post) notFound();
 
     const relatedPosts = getBlogPosts(locale)
@@ -76,7 +78,7 @@ export default async function BlogDetailPage({ params }: Props) {
                         </h1>
                         <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">{post.excerpt}</p>
                         <div className="flex flex-wrap gap-2 mt-4">
-                            {post.tags.map((tag) => (
+                            {post.tags.map((tag: string) => (
                                 <span key={tag} className="text-xs text-slate-500 dark:text-slate-500 bg-white/5 px-2 py-0.5 rounded">
                                     #{tag}
                                 </span>

@@ -1,84 +1,84 @@
 {
-  "Navbar": {
-    "home": "Ana Sayfa",
-    "about": "Hakkımda",
-    "projects": "Projeler",
-    "caseStudies": "Vaka Çalışmaları",
-    "blog": "Blog",
-    "techStack": "Teknolojiler",
-    "resume": "Özgeçmiş",
-    "contact": "İletişim",
-    "hireMe": "Beni İşe Al"
-  },
-  "Home": {
-    "available": "Freelance projeler için müsait",
-    "greeting": "Merhaba, Ben",
-    "role": "Backend Geliştirici & Otomasyon Mühendisi",
-    "description": "Akıllı backend sistemleri, yapay zeka destekli uygulamalar ve otomasyon süreçleri inşa ediyorum. Python, FastAPI ve OpenAI entegrasyonlarında uzmanım.",
-    "viewProjects": "Projeleri İncele",
-    "contactMe": "İletişime Geç",
-    "downloadCv": "CV İndir",
-    "stats": {
-      "projects": "Tamamlanan Proje",
-      "experience": "Yıllık Deneyim"
-    }
-  },
-  "Sections": {
-    "coreTech": "Temel Teknolojiler",
-    "portfolio": "Portfolyo",
-    "featuredProjects": "Öne Çıkan Projeler",
-    "allProjects": "Tüm Projeler",
-    "background": "Arka Plan",
-    "experienceTimeline": "Deneyim Geçmişi",
-    "insights": "İçgörüler",
-    "latestArticles": "Son Makaleler",
-    "readBlog": "Blogu Oku"
-  },
-  "About": {
-    "title": "Hakkımda",
-    "subtitle": "Backend Geliştirici & Otomasyon Mühendisi",
-    "p1": "Ben Barış Çilak, Türkiye'de yaşayan bir backend geliştiricisi ve otomasyon mühendisiyim. Karmaşık iş süreçlerini otomatikleştiren ve yapay zeka entegrasyonlarına sahip sağlam, akıllı yazılım sistemleri inşa etme konusunda uzmanım.",
-    "p2": "Yazılım yolculuğum, sistemlerin arka planda nasıl çalıştığına olan hayranlığımla başladı. Yıllar içinde bu ilgi, API'ler, veri ardışık düzenleri, otomasyon iş akışları ve yapay zeka destekli uygulamalar tasarlama gibi backend mühendisliği uzmanlığına dönüştü.",
-    "p3": "Bugün ağırlıklı olarak backend tarafında Python ve FastAPI ile çalışıyor, OpenAI, WhatsApp Business API ve çeşitli bulut platformları gibi servisleri entegre ediyorum. Günlük binlerce sohbeti işleyen yapay zeka sohbet robotlarından, milyonlarca kaydı işleyen veri ardışık düzenlerine kadar çeşitli projeler teslim ettim.",
-    "p4": "Kod yazmadığım zamanlarda, hem bilgimi paylaşmak hem de kendi anlayışımı derinleştirmek için öğrendiğim şeyler hakkında teknik makaleler yazıyorum.",
-    "expertise": "Uzmanlıklar",
-    "principles": "Temel Prensipler"
-  },
-  "Contact": {
-    "title": "İletişim",
-    "subtitle": "Birlikte Bir Şeyler İnşa Edelim",
-    "description": "Aklınızda bir proje mi var veya potansiyel fırsatları görüşmek mi istiyorsunuz? Sizden haber almaktan memnuniyet duyarım. Aşağıdaki formu doldurun, en kısa sürede size dönüş yapacağım.",
-    "form": {
-      "name": "İsim",
-      "namePlaceholder": "Ahmet Yılmaz",
-      "email": "E-posta",
-      "emailPlaceholder": "ahmet@ornek.com",
-      "subject": "Konu",
-      "subjectPlaceholder": "Proje Başvurusu",
-      "message": "Mesaj",
-      "messagePlaceholder": "Bana projenizden bahsedin...",
-      "send": "Mesajı Gönder",
-      "sending": "Gönderiliyor...",
-      "success": "Mesaj başarıyla gönderildi!",
-      "error": "Mesaj gönderilemedi. Lütfen tekrar deneyin."
+    "Navbar": {
+        "home": "Ana Sayfa",
+        "about": "Hakkımda",
+        "projects": "Projeler",
+        "caseStudies": "Vaka Çalışmaları",
+        "blog": "Blog",
+        "techStack": "Teknolojiler",
+        "resume": "Özgeçmiş",
+        "contact": "İletişim",
+        "hireMe": "İletişime Geç"
     },
-    "connect": "Bağlantı Kurun"
-  },
-  "Common": {
-    "readMore": "Devamını Oku",
-    "viewProject": "Projeyi İncele",
-    "backToHome": "Ana Sayfaya Dön",
-    "liveDemo": "Canlı Demo",
-    "github": "GitHub Deposu",
-    "overview": "Genel Bakış",
-    "technologies": "Kullanılan Teknolojiler",
-    "features": "Temel Özellikler"
-  },
-  "Projects": {
-    "work": "Çalışmalar",
-    "title": "Projeler",
-    "description": "Farklı alanlarda geliştirdiğim backend sistemleri, yapay zeka uygulamaları ve otomasyon araçları koleksiyonu.",
-    "featured": "Öne Çıkanlar",
-    "other": "Diğer Projeler"
-  }
+    "Home": {
+        "available": "Freelance projeler için müsait",
+        "greeting": "Merhaba, Ben",
+        "role": "Backend Geliştirici & Otomasyon Mühendisi",
+        "description": "Akıllı backend sistemleri, yapay zeka destekli uygulamalar ve otomasyon süreçleri inşa ediyorum. Python, FastAPI ve OpenAI entegrasyonlarında uzmanım.",
+        "viewProjects": "Projeleri İncele",
+        "contactMe": "İletişime Geç",
+        "downloadCv": "CV İndir",
+        "stats": {
+            "projects": "Tamamlanan Proje",
+            "experience": "Yıllık Deneyim"
+        }
+    },
+    "Sections": {
+        "coreTech": "Temel Teknolojiler",
+        "portfolio": "Portfolyo",
+        "featuredProjects": "Öne Çıkan Projeler",
+        "allProjects": "Tüm Projeler",
+        "background": "Arka Plan",
+        "experienceTimeline": "Deneyim Geçmişi",
+        "insights": "İçgörüler",
+        "latestArticles": "Son Makaleler",
+        "readBlog": "Blogu Oku"
+    },
+    "About": {
+        "title": "Hakkımda",
+        "subtitle": "Backend Geliştirici & Otomasyon Mühendisi",
+        "p1": "Ben Barış Çilak, Türkiye'de yaşayan bir backend geliştiricisi ve otomasyon mühendisiyim. Karmaşık iş süreçlerini otomatikleştiren ve yapay zeka entegrasyonlarına sahip sağlam, akıllı yazılım sistemleri inşa etme konusunda uzmanım.",
+        "p2": "Yazılım yolculuğum, sistemlerin arka planda nasıl çalıştığına olan hayranlığımla başladı. Yıllar içinde bu ilgi, API'ler, veri ardışık düzenleri, otomasyon iş akışları ve yapay zeka destekli uygulamalar tasarlama gibi backend mühendisliği uzmanlığına dönüştü.",
+        "p3": "Bugün ağırlıklı olarak backend tarafında Python ve FastAPI ile çalışıyor, OpenAI, WhatsApp Business API ve çeşitli bulut platformları gibi servisleri entegre ediyorum. Günlük binlerce sohbeti işleyen yapay zeka sohbet robotlarından, milyonlarca kaydı işleyen veri ardışık düzenlerine kadar çeşitli projeler teslim ettim.",
+        "p4": "Kod yazmadığım zamanlarda, hem bilgimi paylaşmak hem de kendi anlayışımı derinleştirmek için öğrendiğim şeyler hakkında teknik makaleler yazıyorum.",
+        "expertise": "Uzmanlıklar",
+        "principles": "Temel Prensipler"
+    },
+    "Contact": {
+        "title": "İletişim",
+        "subtitle": "Birlikte Bir Şeyler İnşa Edelim",
+        "description": "Aklınızda bir proje mi var veya potansiyel fırsatları görüşmek mi istiyorsunuz? Sizden haber almaktan memnuniyet duyarım. Aşağıdaki formu doldurun, en kısa sürede size dönüş yapacağım.",
+        "form": {
+            "name": "İsim",
+            "namePlaceholder": "Ahmet Yılmaz",
+            "email": "E-posta",
+            "emailPlaceholder": "ahmet@ornek.com",
+            "subject": "Konu",
+            "subjectPlaceholder": "Proje Başvurusu",
+            "message": "Mesaj",
+            "messagePlaceholder": "Bana projenizden bahsedin...",
+            "send": "Mesajı Gönder",
+            "sending": "Gönderiliyor...",
+            "success": "Mesaj başarıyla gönderildi!",
+            "error": "Mesaj gönderilemedi. Lütfen tekrar deneyin."
+        },
+        "connect": "Bağlantı Kurun"
+    },
+    "Common": {
+        "readMore": "Devamını Oku",
+        "viewProject": "Projeyi İncele",
+        "backToHome": "Ana Sayfaya Dön",
+        "liveDemo": "Canlı Demo",
+        "github": "GitHub Deposu",
+        "overview": "Genel Bakış",
+        "technologies": "Kullanılan Teknolojiler",
+        "features": "Temel Özellikler"
+    },
+    "Projects": {
+        "work": "Çalışmalar",
+        "title": "Projeler",
+        "description": "Farklı alanlarda geliştirdiğim backend sistemleri, yapay zeka uygulamaları ve otomasyon araçları koleksiyonu.",
+        "featured": "Öne Çıkanlar",
+        "other": "Diğer Projeler"
+    }
 }

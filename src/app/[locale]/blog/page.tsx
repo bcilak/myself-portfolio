@@ -1,5 +1,5 @@
-import { useLocale } from "next-intl";
-﻿import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import type { Metadata } from "next";
 import BlogClientPage from "./BlogClient";
 
 export const metadata: Metadata = {
@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     "Technical articles by Baris Cilak on backend development, AI integrations, automation, and software architecture.",
 };
 
-export default function BlogPage() {
+export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
+  await params;
+
   return <BlogClientPage />;
 }

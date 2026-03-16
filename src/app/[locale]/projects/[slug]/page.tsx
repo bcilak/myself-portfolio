@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import { getDbProjects } from "@/lib/dataFetching";
 import { getProjects } from "@/data/projects";
 
 interface Props {
@@ -15,7 +16,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const locale = (await params).locale || "en";
-  const project = getProjects(locale).find((p) => p.slug === slug);
+    const projectList = await getDbProjects(locale);
+    const project = projectList.find((p) => p.slug === slug);
     if (!project) return { title: "Project Not Found" };
     return {
         title: project.title,
@@ -25,7 +27,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectDetailPage({ params }: Props) {
     const { slug } = await params;
-    const locale = (await params).locale; const project = getProjects(locale).find((p) => p.slug === slug);
+    const locale = (await params).locale; const projectList = await getDbProjects(locale);
+    const project = projectList.find((p) => p.slug === slug);
     if (!project) notFound();
 
     const sections = [
@@ -59,7 +62,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                             {project.description}
                         </p>
                         <div className="flex flex-wrap gap-2 mb-6">
-                            {project.technologies.map((tech) => (
+                            {project.technologies.map((tech: string) => (
                                 <span
                                     key={tech}
                                     className="px-3 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 text-sm font-medium border border-cyan-500/20"
