@@ -18,13 +18,13 @@ export default function BlogCard({ post }: BlogCardProps) {
                     <span className="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 text-xs font-medium border border-indigo-500/20">
                         {post.category}
                     </span>
-                    <span className="text-slate-600 text-xs">{post.readTime} {t("minRead")}</span>
+                    <span className="text-slate-700 dark:text-slate-300 text-xs">{post.readTime} {t("minRead")}</span>
                 </div>
 
                 <h3 className="text-slate-900 dark:text-slate-100 font-semibold leading-snug group-hover:text-cyan-400 transition-colors">
                     {post.title}
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed flex-1">
+                <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed flex-1">
                     {post.excerpt}
                 </p>
 
@@ -33,7 +33,7 @@ export default function BlogCard({ post }: BlogCardProps) {
                     {post.tags.slice(0, 3).map((tag) => (
                         <span
                             key={tag}
-                            className="text-xs text-slate-500 dark:text-slate-500 bg-white/5 px-2 py-0.5 rounded"
+                            className="text-xs text-slate-700 dark:text-slate-400 bg-slate-100 dark:bg-white/5 px-2 py-0.5 rounded"
                         >
                             #{tag}
                         </span>
@@ -41,7 +41,7 @@ export default function BlogCard({ post }: BlogCardProps) {
                 </div>
 
                 <div className="flex items-center justify-between pt-1 mt-auto">
-                    <time className="text-slate-600 text-xs">
+                    <time className="text-slate-700 dark:text-slate-300 text-xs">
                         {new Date(post.createdAt).toLocaleDateString(locale, {
                             year: "numeric",
                             month: "short",

@@ -124,14 +124,14 @@ export default function HomeClient({
                       <div className="absolute left-3.5 top-5 w-2.5 h-2.5 rounded-full bg-cyan-500 border-2 border-[#0a0d14] -translate-x-1/2 z-10" />
                       <div className="glass-card rounded-xl p-5">
                         <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-                          <h3 className="text-slate-100 font-semibold">{exp.title}</h3>
+                          <h3 className="text-slate-900 dark:text-slate-100 font-semibold">{exp.title}</h3>
                           <span className="text-cyan-400/70 font-mono text-xs">{exp.year}</span>
                         </div>
-                        <p className="text-cyan-400/60 text-sm">{exp.company}</p>
-                        <p className="text-slate-300 dark:text-slate-400 text-sm mt-2 leading-relaxed">{exp.description}</p>
+                        <p className="text-cyan-700 dark:text-cyan-300 text-sm">{exp.company}</p>
+                        <p className="text-slate-700 dark:text-slate-300 text-sm mt-2 leading-relaxed">{exp.description}</p>
                         <div className="flex flex-wrap gap-1.5 mt-3">
                           {exp.technologies.map((t: string) => (
-                            <span key={t} className="text-xs text-slate-300 bg-white/5 px-2 py-0.5 rounded">{t}</span>
+                            <span key={t} className="text-xs text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-white/5 px-2 py-0.5 rounded">{t}</span>
                           ))}
                         </div>
                       </div>

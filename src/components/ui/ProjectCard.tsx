@@ -19,7 +19,7 @@ export default function ProjectCard({
                 <h3 className="text-slate-900 dark:text-slate-100 font-semibold text-lg group-hover:text-cyan-400 transition-colors">
                     {project.title}
                 </h3>
-                <p className="text-slate-600 dark:text-slate-400 text-sm mt-2 leading-relaxed flex-1">
+                <p className="text-slate-700 dark:text-slate-300 text-sm mt-2 leading-relaxed flex-1">
                     {project.shortDescription}
                 </p>
             </div>
@@ -35,7 +35,7 @@ export default function ProjectCard({
                     </span>
                 ))}
                 {project.technologies.length > 5 && (
-                    <span className="px-2 py-0.5 rounded-md bg-white/5 text-slate-500 dark:text-slate-500 text-xs mt-auto">
+                    <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-400 text-xs mt-auto">
                         +{project.technologies.length - 5}
                     </span>
                 )}
@@ -55,7 +55,7 @@ export default function ProjectCard({
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-slate-500 dark:text-slate-300 hover:text-slate-700 transition-colors ml-auto whitespace-nowrap"
+                    className="text-sm text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 transition-colors ml-auto whitespace-nowrap"
                 >
                     {t("github") || "GitHub"} ↗
                 </a>
@@ -64,7 +64,7 @@ export default function ProjectCard({
                         href={project.demoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-slate-500 dark:text-slate-500 hover:text-cyan-400 transition-colors whitespace-nowrap"
+                        className="text-sm text-slate-700 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors whitespace-nowrap"
                     >
                         {t("demo") || "Demo"} ↗
                     </a>
