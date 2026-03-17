@@ -20,7 +20,16 @@
         "downloadCv": "CV İndir",
         "stats": {
             "projects": "Tamamlanan Proje",
-            "experience": "Yıllık Deneyim"
+            "experience": "Yıllık Deneyim",
+            "clients": "Mutlu Müşteri",
+            "apis": "Entegre API"
+        },
+        "cta": {
+            "label": "Birlikte Çalışalım",
+            "title": "Aklınızda Bir Proje mi Var?",
+            "description": "Bir backend API, bir yapay zeka chatbot'u veya uçtan uca bir otomasyon sistemi gerekiyorsa, bunu birlikte inşa etmekten memnuniyet duyarım.",
+            "primary": "İletişime Geç",
+            "secondary": "Çalışmalarımı Gör"
         }
     },
     "Sections": {
@@ -72,13 +81,50 @@
         "github": "GitHub Deposu",
         "overview": "Genel Bakış",
         "technologies": "Kullanılan Teknolojiler",
-        "features": "Temel Özellikler"
+        "features": "Temel Özellikler",
+        "toggleLanguage": "Dili değiştir",
+        "toggleTheme": "Temayı değiştir",
+        "toggleMenu": "Menüyü aç/kapat",
+        "switchToTurkish": "Türkçe",
+        "switchToEnglish": "English",
+        "lightMode": "Açık Mod",
+        "darkMode": "Koyu Mod"
     },
     "Projects": {
         "work": "Çalışmalar",
         "title": "Projeler",
         "description": "Farklı alanlarda geliştirdiğim backend sistemleri, yapay zeka uygulamaları ve otomasyon araçları koleksiyonu.",
         "featured": "Öne Çıkanlar",
-        "other": "Diğer Projeler"
+        "other": "Diğer Projeler",
+        "viewDetails": "Detayları Gör",
+        "github": "GitHub",
+        "demo": "Demo"
+    },
+    "Blog": {
+        "minRead": "dk okuma",
+        "readMore": "Oku"
+    },
+    "Footer": {
+        "description": "Backend Geliştirici ve Otomasyon Mühendisi. Python, yapay zeka ve modern backend teknolojileriyle akıllı sistemler geliştiriyorum.",
+        "navigation": "Navigasyon",
+        "connect": "Bağlantılar",
+        "rights": "Tüm hakları saklıdır.",
+        "builtWith": "Next.js · TailwindCSS · Framer Motion ile geliştirildi",
+        "links": {
+            "projects": "Projeler",
+            "blog": "Blog",
+            "caseStudies": "Vaka Çalışmaları",
+            "techStack": "Teknoloji Yığını",
+            "resume": "Özgeçmiş",
+            "contact": "İletişim"
+        }
+    },
+    "Admin": {
+        "title": "Yönetim Paneli",
+        "dashboard": "Panel",
+        "projects": "Projeler",
+        "blogPosts": "Blog Yazıları",
+        "experiences": "Deneyimler",
+        "signOut": "Çıkış Yap"
     }
 }

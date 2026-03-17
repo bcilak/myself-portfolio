@@ -20,7 +20,16 @@
     "downloadCv": "Download CV",
     "stats": {
       "projects": "Projects Delivered",
-      "experience": "Years Experience"
+      "experience": "Years Experience",
+      "clients": "Happy Clients",
+      "apis": "APIs Integrated"
+    },
+    "cta": {
+      "label": "Work Together",
+      "title": "Have a Project in Mind?",
+      "description": "Whether you need a backend API, an AI chatbot, or a full automation system, I would love to help you build it.",
+      "primary": "Get In Touch",
+      "secondary": "See My Work"
     }
   },
   "Sections": {
@@ -72,13 +81,50 @@
     "github": "GitHub Repository",
     "overview": "Overview",
     "technologies": "Technologies Used",
-    "features": "Key Features"
+    "features": "Key Features",
+    "toggleLanguage": "Toggle language",
+    "toggleTheme": "Toggle theme",
+    "toggleMenu": "Toggle menu",
+    "switchToTurkish": "Turkish",
+    "switchToEnglish": "English",
+    "lightMode": "Light Mode",
+    "darkMode": "Dark Mode"
   },
   "Projects": {
     "work": "Work",
     "title": "Projects",
     "description": "A collection of backend systems, AI applications, and automation tools I've built across various domains.",
     "featured": "Featured",
-    "other": "Other Projects"
+    "other": "Other Projects",
+    "viewDetails": "View Details",
+    "github": "GitHub",
+    "demo": "Demo"
+  },
+  "Blog": {
+    "minRead": "min read",
+    "readMore": "Read"
+  },
+  "Footer": {
+    "description": "Backend Developer & Automation Engineer. Building intelligent systems with Python, AI, and modern backend technologies.",
+    "navigation": "Navigation",
+    "connect": "Connect",
+    "rights": "All rights reserved.",
+    "builtWith": "Built with Next.js · TailwindCSS · Framer Motion",
+    "links": {
+      "projects": "Projects",
+      "blog": "Blog",
+      "caseStudies": "Case Studies",
+      "techStack": "Tech Stack",
+      "resume": "Resume",
+      "contact": "Contact"
+    }
+  },
+  "Admin": {
+    "title": "Admin Panel",
+    "dashboard": "Dashboard",
+    "projects": "Projects",
+    "blogPosts": "Blog Posts",
+    "experiences": "Experiences",
+    "signOut": "Sign Out"
   }
 }

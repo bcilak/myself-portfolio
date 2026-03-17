@@ -1,20 +1,24 @@
 import { Link } from "@/i18n/routing";
 import { BlogPost } from "@/data/blog";
+import { useLocale, useTranslations } from "next-intl";
 
 interface BlogCardProps {
     post: BlogPost;
 }
 
 export default function BlogCard({ post }: BlogCardProps) {
+    const locale = useLocale();
+    const t = useTranslations("Blog");
+    
     return (
-        <Link href={`/blog/${post.slug}`} className="block group">
+        <Link href={`/blog/${post.slug}`} className="block group h-full">
             <article className="glass-card rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col gap-3">
                 {/* Category + Read time */}
                 <div className="flex items-center justify-between">
                     <span className="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 text-xs font-medium border border-indigo-500/20">
                         {post.category}
                     </span>
-                    <span className="text-slate-600 text-xs">{post.readTime} min read</span>
+                    <span className="text-slate-600 text-xs">{post.readTime} {t("minRead")}</span>
                 </div>
 
                 <h3 className="text-slate-900 dark:text-slate-100 font-semibold leading-snug group-hover:text-cyan-400 transition-colors">
@@ -36,16 +40,16 @@ export default function BlogCard({ post }: BlogCardProps) {
                     ))}
                 </div>
 
-                <div className="flex items-center justify-between pt-1">
+                <div className="flex items-center justify-between pt-1 mt-auto">
                     <time className="text-slate-600 text-xs">
-                        {new Date(post.createdAt).toLocaleDateString("en-US", {
+                        {new Date(post.createdAt).toLocaleDateString(locale, {
                             year: "numeric",
                             month: "short",
                             day: "numeric",
                         })}
                     </time>
-                    <span className="text-cyan-500 text-sm group-hover:translate-x-1 transition-transform inline-block">
-                        Read →
+                    <span className="text-cyan-500 text-sm group-hover:translate-x-1 transition-transform inline-block font-medium">
+                        {t("readMore")} →
                     </span>
                 </div>
             </article>

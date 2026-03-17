@@ -18,13 +18,6 @@
   --card-bg: #0f1420;
   --card-border: rgba(255, 255, 255, 0.06);
   --muted: #64748b;
-  --background: #080b11;
-  --foreground: #e2e8f0;
-  --accent: #06b6d4;
-  --accent-glow: rgba(6, 182, 212, 0.15);
-  --card-bg: #0f1420;
-  --card-border: rgba(255, 255, 255, 0.06);
-  --muted: #64748b;
 }
 
 @theme inline {

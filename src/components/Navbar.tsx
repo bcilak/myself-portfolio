@@ -9,6 +9,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 export default function Navbar() {
     const t = useTranslations("Navbar");
+    const tCommon = useTranslations("Common");
 
     const navLinks = [
         { href: "/", label: t("home") },
@@ -25,7 +26,6 @@ export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
     const { theme, setTheme } = useTheme();
-    const [mounted, setMounted] = useState(false);
 
     // i18n
     const locale = useLocale();
@@ -35,23 +35,17 @@ export default function Navbar() {
         router.replace(pathname, { locale: locale === "en" ? "tr" : "en" });
     };
 
-    useEffect(() => setMounted(true), []);
-
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    useEffect(() => {
-        setMenuOpen(false);
-    }, [pathname]);
-
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
                 ? "bg-white dark:bg-[#080b11]/90 backdrop-blur-md border-b border-black/5 dark:border-white/5 shadow-lg"
-                : "bg-transparent"
+                : "bg-white/75 dark:bg-[#080b11]/70 backdrop-blur-sm border-b border-black/5 dark:border-white/5"
                 }`}
         >
             <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -89,22 +83,20 @@ export default function Navbar() {
                     <button
                         onClick={toggleLocale}
                         className="hidden md:flex items-center gap-1.5 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors mr-1"
-                        aria-label="Toggle language"
+                        aria-label={tCommon("toggleLanguage")}
                     >
                         <Globe size={18} />
                         <span className="text-sm font-medium uppercase">{locale}</span>
                     </button>
 
                     {/* Theme Toggle (Desktop) */}
-                    {mounted && (
-                        <button
-                            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                            className="hidden md:flex p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors mr-2"
-                            aria-label="Toggle theme"
-                        >
-                            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-                        </button>
-                    )}
+                    <button
+                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                        className="hidden md:flex p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors mr-2"
+                        aria-label={tCommon("toggleTheme")}
+                    >
+                        {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                    </button>
 
                     {/* CTA */}
                     <Link
@@ -119,7 +111,7 @@ export default function Navbar() {
                 <button
                     onClick={() => setMenuOpen(!menuOpen)}
                     className="md:hidden flex flex-col gap-1.5 p-2"
-                    aria-label="Toggle menu"
+                    aria-label={tCommon("toggleMenu")}
                 >
                     <span
                         className={`w-5 h-0.5 bg-slate-800 dark:bg-slate-300 transition-transform duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
@@ -152,6 +144,7 @@ export default function Navbar() {
                                     <li key={link.href}>
                                         <Link
                                             href={link.href}
+                                            onClick={() => setMenuOpen(false)}
                                             className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive
                                                 ? "text-cyan-600 bg-cyan-600/10 dark:text-cyan-400 dark:bg-cyan-400/10"
                                                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
@@ -165,25 +158,26 @@ export default function Navbar() {
                             {/* Language Toggle (Mobile) */}
                             <li className="pt-2 mt-2 border-t border-black/5 dark:border-white/5">
                                 <button
-                                    onClick={toggleLocale}
+                                    onClick={() => {
+                                        toggleLocale();
+                                        setMenuOpen(false);
+                                    }}
                                     className="flex items-center gap-3 w-full px-3 py-2 rounded-md text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
                                 >
                                     <Globe size={18} />
-                                    <span>{locale === 'en' ? 'Türkçe' : 'English'}</span>
+                                    <span>{locale === "en" ? tCommon("switchToTurkish") : tCommon("switchToEnglish")}</span>
                                 </button>
                             </li>
                             {/* Theme Toggle (Mobile) */}
-                            {mounted && (
-                                <li>
-                                    <button
-                                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                        className="flex items-center gap-3 w-full px-3 py-2 rounded-md text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
-                                    >
-                                        {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-                                        <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
-                                    </button>
-                                </li>
-                            )}
+                            <li>
+                                <button
+                                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                                    className="flex items-center gap-3 w-full px-3 py-2 rounded-md text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                                >
+                                    {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                                    <span>{theme === "dark" ? tCommon("lightMode") : tCommon("darkMode")}</span>
+                                </button>
+                            </li>
                         </ul>
                     </motion.div>
                 )}
