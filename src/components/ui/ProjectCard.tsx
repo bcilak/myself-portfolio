@@ -16,9 +16,17 @@ export default function ProjectCard({
     return (
         <div className="glass-card rounded-xl p-6 flex flex-col gap-4 hover:border-cyan-500/30 transition-all duration-300 hover:-translate-y-1 group h-full">
             <div>
-                <h3 className="text-slate-900 dark:text-slate-100 font-semibold text-lg group-hover:text-cyan-400 transition-colors">
-                    {project.title}
-                </h3>
+                <div className="flex justify-between items-start gap-4">
+                    <h3 className="text-slate-900 dark:text-slate-100 font-semibold text-lg group-hover:text-cyan-400 transition-colors">
+                        {project.title}
+                    </h3>
+                    {project.views !== undefined && (
+                        <span className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 mt-1 whitespace-nowrap">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                            {project.views}
+                        </span>
+                    )}
+                </div>
                 <p className="text-slate-700 dark:text-slate-300 text-sm mt-2 leading-relaxed flex-1">
                     {project.shortDescription}
                 </p>

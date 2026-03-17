@@ -10,7 +10,7 @@ import { type BlogPost } from "@/data/blog";
 import { featuredSkills } from "@/data/skills";
 import { type Experience } from "@/data/experience";
 import { useTranslations } from "next-intl";
-
+import GithubStatsWidget from "@/components/ui/GithubStatsWidget";
 
 export default function HomeClient({
   featuredProjects,
@@ -55,6 +55,9 @@ export default function HomeClient({
               </motion.div>
             </div>
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.3 }} className="grid grid-cols-2 gap-4">
+              <div className="col-span-2">
+                <GithubStatsWidget />
+              </div>
               {[
                 { value: "15+", label: t("stats.projects") },
                 { value: "3+", label: t("stats.experience") },

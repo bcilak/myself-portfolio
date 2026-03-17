@@ -8,6 +8,8 @@ export interface IProject extends Document {
     featured: boolean;
     screenshots: string[];
     createdAt: string;
+    views: number;
+    likes: number;
 
     // Localized fields
     title: { en: string; tr: string };
@@ -29,6 +31,8 @@ const ProjectSchema: Schema = new Schema(
         featured: { type: Boolean, default: false },
         screenshots: [{ type: String }],
         createdAt: { type: String, required: true },
+        views: { type: Number, default: 0 },
+        likes: { type: Number, default: 0 },
 
         title: { en: { type: String, required: true }, tr: { type: String, required: true } },
         shortDescription: { en: { type: String }, tr: { type: String } },

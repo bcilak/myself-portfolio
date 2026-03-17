@@ -27,7 +27,7 @@ export default function AdminLayout({
             {/* Mobile Sidebar Toggle */}
             <div className="md:hidden flex items-center justify-between bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700">
                 <span className="text-xl font-bold text-gray-900 dark:text-white">{t("title")}</span>
-                <button 
+                <button
                     onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                     className="p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
                 >

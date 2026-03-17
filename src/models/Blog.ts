@@ -6,7 +6,9 @@ export interface IBlog extends Document {
   category: string;
   readTime: number;
   createdAt: string;
-  
+  views: number;
+  likes: number;
+
   // Localized fields
   title: { en: string; tr: string };
   excerpt: { en: string; tr: string };
@@ -20,6 +22,8 @@ const BlogSchema: Schema = new Schema(
     category: { type: String },
     readTime: { type: Number },
     createdAt: { type: String, required: true },
+    views: { type: Number, default: 0 },
+    likes: { type: Number, default: 0 },
 
     title: { en: { type: String, required: true }, tr: { type: String, required: true } },
     excerpt: { en: { type: String }, tr: { type: String } },

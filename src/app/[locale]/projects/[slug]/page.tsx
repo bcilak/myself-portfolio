@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import ViewTracker from "@/components/ViewTracker";
 import { getDbProjects } from "@/lib/dataFetching";
 import { getProjects } from "@/data/projects";
 
@@ -41,6 +42,7 @@ export default async function ProjectDetailPage({ params }: Props) {
 
     return (
         <div className="pt-24">
+            <ViewTracker type="project" slug={project.slug} />
             <div className="max-w-4xl mx-auto px-6 pb-24">
                 {/* Back */}
                 <AnimatedSection>

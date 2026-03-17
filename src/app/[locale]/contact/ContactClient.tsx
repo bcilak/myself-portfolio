@@ -56,7 +56,7 @@ export default function ContactPage() {
                 <h3 className="text-slate-700 dark:text-slate-300 font-semibold mb-4">Contact Info</h3>
                 <div className="space-y-4">
                   <a
-                    href="mailto:bariscilak@email.com"
+                    href="mailto:bcilak@gmail.com"
                     className="flex items-center gap-3 text-slate-600 dark:text-slate-400 hover:text-cyan-400 transition-colors group"
                   >
                     <span className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center text-lg group-hover:bg-cyan-500/10 transition-colors">
@@ -64,11 +64,11 @@ export default function ContactPage() {
                     </span>
                     <div>
                       <p className="text-xs text-slate-600 mb-0.5">Email</p>
-                      <p className="text-sm">bariscilak@email.com</p>
+                      <p className="text-sm">bcilak@gmail.com</p>
                     </div>
                   </a>
                   <a
-                    href="https://github.com/bariscilak"
+                    href="https://github.com/bcilak"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 text-slate-600 dark:text-slate-400 hover:text-cyan-400 transition-colors group"
@@ -78,7 +78,7 @@ export default function ContactPage() {
                     </span>
                     <div>
                       <p className="text-xs text-slate-600 mb-0.5">GitHub</p>
-                      <p className="text-sm">github.com/bariscilak</p>
+                      <p className="text-sm">github.com/bcilak</p>
                     </div>
                   </a>
                   <a

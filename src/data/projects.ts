@@ -15,6 +15,8 @@ export interface Project {
     lessons: string;
     screenshots: string[];
     createdAt: string;
+    views?: number;
+    likes?: number;
 }
 
 export const projectsEn: Project[] = [

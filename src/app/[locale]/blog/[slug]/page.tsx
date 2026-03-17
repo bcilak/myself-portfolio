@@ -4,6 +4,7 @@ import { Link } from "@/i18n/routing";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import ViewTracker from "@/components/ViewTracker";
 import { getDbBlogPosts } from "@/lib/dataFetching";
 import { getBlogPosts } from "@/data/blog";
 
@@ -46,6 +47,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
     return (
         <div className="pt-24">
+            <ViewTracker type="blog" slug={post.slug} />
             <div className="max-w-3xl mx-auto px-6 pb-24">
                 {/* Back */}
                 <AnimatedSection>

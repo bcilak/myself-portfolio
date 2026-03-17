@@ -8,6 +8,8 @@ export interface BlogPost {
     category: string;
     readTime: number;
     createdAt: string;
+    views?: number;
+    likes?: number;
 }
 
 export const blogPostsEn: BlogPost[] = [

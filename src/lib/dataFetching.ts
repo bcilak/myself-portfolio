@@ -25,6 +25,8 @@ export async function getDbProjects(locale: string) {
         lessons: p.lessons?.[locale] || p.lessons?.en || "",
         screenshots: p.screenshots || [],
         createdAt: p.createdAt,
+        views: p.views || 0,
+        likes: p.likes || 0,
     }));
 }
 
@@ -43,6 +45,8 @@ export async function getDbBlogPosts(locale: string) {
         category: b.category || "",
         readTime: b.readTime || 5,
         createdAt: b.createdAt,
+        views: b.views || 0,
+        likes: b.likes || 0,
     }));
 }
 
