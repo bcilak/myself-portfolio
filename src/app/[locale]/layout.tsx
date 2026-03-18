@@ -18,15 +18,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Barış Çilak — Backend & Automation Developer",
+    default: "Barış Çilak — Full Stack & AI Developer",
     template: "%s | Barış Çilak",
   },
   description:
-    "Backend developer specializing in Python, FastAPI, Node.js, AI integrations, and automation systems. Building scalable and intelligent software solutions.",
+    "AI destekli scalable web uygulamaları geliştiriyorum. Akıllı backend sistemleri, yapay zeka entegrasyonları ve otomasyon süreçlerinde uzmanım.",
   keywords: [
-    "backend developer",
-    "automation developer",
     "AI developer portfolio",
+    "Full Stack developer",
+    "Backend developer",
     "Python developer",
     "FastAPI",
     "OpenAI API",
@@ -35,17 +35,27 @@ export const metadata: Metadata = {
   authors: [{ name: "Barış Çilak" }],
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "tr_TR",
+    alternateLocale: "en_US",
     siteName: "Barış Çilak Portfolio",
-    title: "Barış Çilak — Backend & Automation Developer",
+    title: "Barış Çilak — Full Stack & AI Developer",
     description:
-      "Backend developer specializing in Python, FastAPI, AI integrations, and automation systems.",
+      "AI destekli scalable web uygulamaları ve akıllı backend sistemleri geliştiriyorum.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Barış Çilak - Full Stack & AI Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Barış Çilak — Backend & Automation Developer",
+    title: "Barış Çilak — Full Stack & AI Developer",
     description:
-      "Backend developer specializing in Python, FastAPI, AI integrations, and automation systems.",
+      "AI destekli scalable web uygulamaları ve akıllı backend sistemleri geliştiriyorum.",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -76,6 +86,9 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} suppressHydrationWarning>
+      <head>
+        <script defer data-domain="bariscilak.dev" src="https://plausible.io/js/script.js"></script>
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

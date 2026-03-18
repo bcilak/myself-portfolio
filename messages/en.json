@@ -13,10 +13,11 @@
   "Home": {
     "available": "Available for freelance projects",
     "greeting": "Hi, I am",
-    "role": "Backend Developer & Automation Engineer",
-    "description": "I build intelligent backend systems, AI-powered applications, and automation pipelines. Specializing in Python, FastAPI, and OpenAI integrations.",
+    "role": "Full Stack / AI Developer",
+    "description": "I build AI-powered scalable web applications. Specializing in intelligent backend systems and seamless AI integrations.",
+    "discussProject": "Let's Discuss Your Project",
     "viewProjects": "View Projects",
-    "contactMe": "Contact Me",
+    "contactMe": "Get In Touch",
     "downloadCv": "Download CV",
     "stats": {
       "projects": "Projects Delivered",
@@ -44,6 +45,7 @@
     "readBlog": "Read Blog"
   },
   "About": {
+    "experience": "Experience",
     "title": "About Me",
     "subtitle": "Backend Developer & Automation Engineer",
     "p1": "I am Barış Çilak, a backend developer and automation engineer based in Turkey. I specialize in building robust, intelligent software systems that automate complex business processes and integrate AI capabilities.",

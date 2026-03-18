@@ -13,8 +13,9 @@
     "Home": {
         "available": "Freelance projeler için müsait",
         "greeting": "Merhaba, Ben",
-        "role": "Backend Geliştirici & Otomasyon Mühendisi",
-        "description": "Akıllı backend sistemleri, yapay zeka destekli uygulamalar ve otomasyon süreçleri inşa ediyorum. Python, FastAPI ve OpenAI entegrasyonlarında uzmanım.",
+        "role": "Full Stack / AI Developer",
+        "description": "AI destekli scalable web uygulamaları geliştiriyorum. Akıllı backend sistemleri ve yapay zeka entegrasyonlarında uzmanım.",
+        "discussProject": "Projeni Konuşalım",
         "viewProjects": "Projeleri İncele",
         "contactMe": "İletişime Geç",
         "downloadCv": "CV İndir",
@@ -44,6 +45,7 @@
         "readBlog": "Blogu Oku"
     },
     "About": {
+        "experience": "Deneyim",
         "title": "Hakkımda",
         "subtitle": "Backend Geliştirici & Otomasyon Mühendisi",
         "p1": "Ben Barış Çilak, Türkiye'de yaşayan bir backend geliştiricisi ve otomasyon mühendisiyim. Karmaşık iş süreçlerini otomatikleştiren ve yapay zeka entegrasyonlarına sahip sağlam, akıllı yazılım sistemleri inşa etme konusunda uzmanım.",

@@ -44,8 +44,8 @@ export default function Navbar() {
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? "bg-white dark:bg-[#080b11]/90 backdrop-blur-md border-b border-black/5 dark:border-white/5 shadow-lg"
-                : "bg-white/75 dark:bg-[#080b11]/70 backdrop-blur-sm border-b border-black/5 dark:border-white/5"
+                ? "bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-black/5 dark:border-white/5 shadow-lg"
+                : "bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-b border-black/5 dark:border-white/5"
                 }`}
         >
             <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -67,7 +67,7 @@ export default function Navbar() {
                                 <Link
                                     href={link.href}
                                     className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors duration-200 ${isActive
-                                        ? "text-cyan-400 bg-cyan-400/10"
+                                        ? "text-cyan-600 bg-cyan-600/10 dark:text-cyan-400 dark:bg-cyan-400/10"
                                         : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5"
                                         }`}
                                 >
