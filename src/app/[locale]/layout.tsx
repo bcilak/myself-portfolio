@@ -16,52 +16,65 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Barış Çilak — Full Stack & AI Developer",
-    template: "%s | Barış Çilak",
-  },
-  description:
-    "AI destekli scalable web uygulamaları geliştiriyorum. Akıllı backend sistemleri, yapay zeka entegrasyonları ve otomasyon süreçlerinde uzmanım.",
-  keywords: [
-    "AI developer portfolio",
-    "Full Stack developer",
-    "Backend developer",
-    "Python developer",
-    "FastAPI",
-    "OpenAI API",
-    "Barış Çilak",
-  ],
-  authors: [{ name: "Barış Çilak" }],
-  openGraph: {
-    type: "website",
-    locale: "tr_TR",
-    alternateLocale: "en_US",
-    siteName: "Barış Çilak Portfolio",
-    title: "Barış Çilak — Full Stack & AI Developer",
-    description:
-      "AI destekli scalable web uygulamaları ve akıllı backend sistemleri geliştiriyorum.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Barış Çilak - Full Stack & AI Developer",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Barış Çilak — Full Stack & AI Developer",
-    description:
-      "AI destekli scalable web uygulamaları ve akıllı backend sistemleri geliştiriyorum.",
-    images: ["/og-image.png"],
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+import dbConnect from "@/lib/mongoose";
+import Settings from "@/models/Settings";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  await dbConnect();
+  
+  let settings = await Settings.findOne({}).lean() as any;
+  if (!settings) {
+    settings = {
+      titleTR: "Barış Çilak — Full Stack & AI Developer",
+      titleEN: "Barış Çilak — Full Stack & AI Developer",
+      descriptionTR: "AI destekli scalable web uygulamaları geliştiriyorum.",
+      descriptionEN: "I build scalable AI-powered web applications.",
+      keywords: "AI developer, Full Stack",
+      ogImageUrl: "/og-image.png",
+    };
+  }
+
+  const isTr = locale === "tr";
+  const title = isTr ? settings.titleTR : settings.titleEN;
+  const description = isTr ? settings.descriptionTR : settings.descriptionEN;
+
+  return {
+    title: {
+      default: title,
+      template: `%s | ${title.split("—")[0]?.trim() || "Barış Çilak"}`,
+    },
+    description: description,
+    keywords: settings.keywords.split(",").map((k: string) => k.trim()),
+    authors: [{ name: "Barış Çilak" }],
+    openGraph: {
+      type: "website",
+      locale: isTr ? "tr_TR" : "en_US",
+      alternateLocale: isTr ? "en_US" : "tr_TR",
+      siteName: title,
+      title: title,
+      description: description,
+      images: [
+        {
+          url: settings.ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: title,
+      description: description,
+      images: [settings.ogImageUrl],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";

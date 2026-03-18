@@ -1,9 +1,14 @@
-import { Link } from "@/i18n/routing";
+"use client";
+
+import { Link, usePathname } from "@/i18n/routing";
 import { useTranslations } from "next-intl";
 
 export default function Footer() {
+  const pathname = usePathname();
   const year = new Date().getFullYear();
   const t = useTranslations("Footer");
+
+  if (pathname.includes("/admin")) return null;
 
   return (
     <footer className="border-t border-black/5 dark:border-white/5 bg-white dark:bg-[#080b11]">

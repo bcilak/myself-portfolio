@@ -52,6 +52,41 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
         }
     };
 
+    const [aiLoading, setAiLoading] = useState(false);
+
+    const handleAIGenerate = async (e: React.MouseEvent) => {
+        e.preventDefault();
+        if (!formData.titleTR || !formData.technologies) {
+            alert("Lütfen önce başlık (Title TR) ve Teknolojiler alanlarını doldurun.");
+            return;
+        }
+        setAiLoading(true);
+        try {
+            const res = await fetch("/api/admin/generate-content", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: `Proje Adı: ${formData.titleTR}\nTeknolojiler: ${formData.technologies}\nLütfen bu proje için etkileyici bir kısa açıklama (short description) ve Markdown formatında detaylı bir uzun açıklama (description) yaz. Önce 'KISA:' yazıp kısasını, sonra 'UZUN:' yazıp uzunu ver.`, type: "project" })
+            });
+            const data = await res.json();
+            if (data.result) {
+                const parts = data.result.split("UZUN:");
+                const shortDesc = parts[0]?.replace("KISA:", "").trim();
+                const longDesc = parts[1]?.trim();
+                if (shortDesc && longDesc) {
+                    setFormData(prev => ({ ...prev, shortDescriptionTR: shortDesc, descriptionTR: longDesc }));
+                } else {
+                    setFormData(prev => ({ ...prev, descriptionTR: data.result }));
+                }
+            } else {
+                alert("AI Hatası: " + data.error);
+            }
+        } catch (err) {
+            alert("Hata: " + err);
+        } finally {
+            setAiLoading(false);
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -123,7 +158,12 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
             </div>
 
             <div className="border-t border-gray-200 dark:border-gray-700 pt-8 mt-8">
-                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-6">İçerikler (Türkçe / İngilizce)</h3>
+                <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-lg font-medium text-gray-900 dark:text-white">İçerikler (Türkçe / İngilizce)</h3>
+                    <button onClick={handleAIGenerate} disabled={aiLoading || !formData.titleTR || !formData.technologies} className="px-4 py-2 text-sm font-medium bg-purple-100 text-purple-700 hover:bg-purple-200 disabled:opacity-50 rounded-lg flex items-center gap-2 transition-colors">
+                        ✨ {aiLoading ? "AI Yazıyor..." : "AI ile Açıklama Üret"}
+                    </button>
+                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>

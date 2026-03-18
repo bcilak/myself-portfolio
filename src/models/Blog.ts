@@ -8,6 +8,7 @@ export interface IBlog extends Document {
   createdAt: string;
   views: number;
   likes: number;
+  status: "draft" | "published";
 
   // Localized fields
   title: { en: string; tr: string };
@@ -24,6 +25,7 @@ const BlogSchema: Schema = new Schema(
     createdAt: { type: String, required: true },
     views: { type: Number, default: 0 },
     likes: { type: Number, default: 0 },
+    status: { type: String, enum: ["draft", "published"], default: "published" },
 
     title: { en: { type: String, required: true }, tr: { type: String, required: true } },
     excerpt: { en: { type: String }, tr: { type: String } },
