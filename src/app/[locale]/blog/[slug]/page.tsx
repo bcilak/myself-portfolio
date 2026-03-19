@@ -13,9 +13,7 @@ interface Props {
     params: Promise<{ slug: string; locale: string }>;
 }
 
-export async function generateStaticParams() {
-    return getBlogPosts("en").map((p) => ({ slug: p.slug }));
-}
+// Removed generateStaticParams to ensure proper DB fetching on dynamic routes.
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug, locale = "en" } = await params;
