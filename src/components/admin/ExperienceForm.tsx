@@ -8,7 +8,7 @@ export default function ExperienceForm({ initialData }: { initialData?: any }) {
     const locale = useLocale();
 
     const [formData, setFormData] = useState({
-        period: initialData?.period || "",
+        period: initialData?.year || initialData?.period || "",
         technologies: initialData?.technologies?.join(", ") || "",
         titleTR: initialData?.title?.tr || "",
         titleEN: initialData?.title?.en || "",
@@ -25,7 +25,7 @@ export default function ExperienceForm({ initialData }: { initialData?: any }) {
         setLoading(true);
 
         const payload = {
-            period: formData.period,
+            year: formData.period,
             technologies: formData.technologies.split(",").map((t: string) => t.trim()).filter(Boolean),
             title: { tr: formData.titleTR, en: formData.titleEN },
             company: { tr: formData.companyTR, en: formData.companyEN },

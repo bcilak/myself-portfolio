@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import { getExperiences } from "@/data/experience";
+import { getDbExperiences } from "@/lib/dataFetching";
 import { skillCategories } from "@/data/skills";
 import { getTranslations } from "next-intl/server";
 
@@ -18,7 +18,7 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
   const { locale } = await params;
   const t = await getTranslations("Resume");
   const tTech = await getTranslations("TechStack");
-  const experiences = getExperiences(locale);
+  const experiences = await getDbExperiences(locale);
     return (
         <div className="pt-24">
             <div className="max-w-4xl mx-auto px-6 pb-24">
@@ -83,9 +83,9 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
                                         </div>
                                         <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-3">{exp.description}</p>
                                         <div className="flex flex-wrap gap-1.5">
-                                            {exp.technologies.map((t) => (
-                                                <span key={t} className="text-xs text-slate-500 dark:text-slate-500 bg-white/5 px-2 py-0.5 rounded">
-                                                    {t}
+                                            {exp.technologies.map((tech: string) => (
+                                                <span key={tech} className="text-xs text-slate-500 dark:text-slate-500 bg-white/5 px-2 py-0.5 rounded">
+                                                    {tech}
                                                 </span>
                                             ))}
                                         </div>
