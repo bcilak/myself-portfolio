@@ -6,9 +6,10 @@ interface BlogCardProps {
     post: BlogPost;
 }
 
-export default function BlogCard({ post }: BlogCardProps) {
-    const locale = useLocale();
+export default function BlogCard({ post }: { post: BlogPost }) {
     const t = useTranslations("Blog");
+    const locale = useLocale();
+    const dateLocale = locale === "tr" ? "tr-TR" : "en-US";
 
     return (
         <Link href={`/blog/${post.slug}`} className="block group h-full">
@@ -49,10 +50,10 @@ export default function BlogCard({ post }: BlogCardProps) {
                 </div>
 
                 <div className="flex items-center justify-between pt-1 mt-auto">
-                    <time className="text-slate-700 dark:text-slate-300 text-xs">
-                        {new Date(post.createdAt).toLocaleDateString(locale, {
+                    <time className="text-slate-600 text-xs">
+                        {new Date(post.createdAt).toLocaleDateString(dateLocale, {
                             year: "numeric",
-                            month: "short",
+                            month: "long",
                             day: "numeric",
                         })}
                     </time>

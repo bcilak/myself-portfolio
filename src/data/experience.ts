@@ -41,10 +41,9 @@ export const experiencesEn: Experience[] = [
     },
 ];
 
-
 export const experiencesTr: Experience[] = [
     {
-        year: "2024 – Present",
+        year: "2024 – Devam Ediyor",
         title: "Backend & Otomasyon Geliştirici",
         company: "Serbest Çalışan",
         description:
@@ -76,6 +75,5 @@ export const experiencesTr: Experience[] = [
         technologies: ["Python", "SQL", "Git", "Linux"],
     },
 ];
-
 
 export const getExperiences = (locale: string) => locale === "tr" ? experiencesTr : experiencesEn;

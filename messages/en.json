@@ -100,11 +100,81 @@
     "other": "Other Projects",
     "viewDetails": "View Details",
     "github": "GitHub",
-    "demo": "Demo"
+    "demo": "Demo",
+    "problem": "Problem",
+    "solution": "Solution",
+    "architecture": "Architecture",
+    "challenges": "Challenges",
+    "lessonsLearned": "Lessons Learned",
+    "backToProjects": "Back to Projects",
+    "viewSource": "View Source",
+    "liveDemo": "Live Demo",
+    "allProjects": "All Projects",
+    "discussSimilar": "Discuss a Similar Project"
   },
   "Blog": {
+    "writing": "Writing",
+    "title": "Blog",
+    "description": "Technical articles about backend development, AI integrations, automation, and software architecture.",
+    "searchPlaceholder": "Search articles...",
+    "allCategories": "All",
+    "noArticles": "No articles found for",
     "minRead": "min read",
-    "readMore": "Read"
+    "readMore": "Read Mode",
+    "backToBlog": "Back to Blog",
+    "relatedArticles": "Related Articles",
+    "notFound": "Post Not Found"
+  },
+  "CaseStudies": {
+    "analysis": "Analysis",
+    "title": "Case Studies",
+    "description": "Deep technical analysis of complex projects — the problems, approaches, architectures, and lessons learned.",
+    "problem": "Problem",
+    "approach": "Approach",
+    "architecture": "Architecture",
+    "challenges": "Challenges",
+    "lessonsLearned": "Lessons Learned",
+    "technologies": "Technologies",
+    "discussPrompt": "Want to discuss a similar project?",
+    "getInTouch": "Get In Touch"
+  },
+  "TechStack": {
+    "tools": "Tools",
+    "title": "Tech Stack",
+    "description": "Technologies I work with daily to build scalable backends, AI integrations, and automation systems.",
+    "levels": {
+      "Expert": "Expert",
+      "Advanced": "Advanced",
+      "Intermediate": "Intermediate"
+    },
+    "categories": {
+      "Backend": "Backend",
+      "Databases": "Databases",
+      "DevOps": "DevOps",
+      "AI & Automation": "AI & Automation",
+      "Frontend": "Frontend"
+    },
+    "workflow": "Development Workflow",
+    "os": "OS",
+    "editor": "Editor",
+    "versionControl": "Version Control",
+    "hosting": "Hosting"
+  },
+  "Resume": {
+    "cv": "CV",
+    "title": "Resume",
+    "description": "Barış Çilak's professional resume — backend developer with expertise in Python, FastAPI, AI integrations, and automation systems.",
+    "downloadPdf": "Download PDF",
+    "role": "Backend Developer & Automation Engineer",
+    "summary": "Backend developer with 3+ years of experience building scalable APIs, AI-powered applications, and automation systems. Specialized in Python/FastAPI, OpenAI integrations, and Docker-based deployments. Passionate about clean architecture and eliminating manual processes through intelligent automation.",
+    "workExperience": "Work Experience",
+    "technicalSkills": "Technical Skills",
+    "education": "Education",
+    "computerEngineering": "Computer Engineering",
+    "university": "University",
+    "eduDescription": "Bachelor's degree in Computer Engineering. Focused on software development, algorithms, database systems, and computer networks.",
+    "getInTouch": "Get In Touch",
+    "viewProjects": "View Projects"
   },
   "Footer": {
     "description": "Backend Developer & Automation Engineer. Building intelligent systems with Python, AI, and modern backend technologies.",

@@ -32,7 +32,7 @@ export default function ProjectCard({
                     <div className="mt-4 flex-1 space-y-3 bg-slate-50 dark:bg-white/5 p-4 rounded-xl border border-black/5 dark:border-white/5 shadow-inner">
                         <div>
                             <div className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                                <span className="text-cyan-500 text-sm">🎯</span> Problem
+                                <span className="text-cyan-500 text-sm">🎯</span> {t("problem")}
                             </div>
                             <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed line-clamp-2">
                                 {project.problem}
@@ -40,7 +40,7 @@ export default function ProjectCard({
                         </div>
                         <div className="pt-3 border-t border-black/5 dark:border-white/5">
                             <div className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                                <span className="text-cyan-500 text-sm">💡</span> Solution
+                                <span className="text-cyan-500 text-sm">💡</span> {t("solution")}
                             </div>
                             <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed line-clamp-2">
                                 {project.solution}

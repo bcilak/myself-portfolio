@@ -7,6 +7,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import ViewTracker from "@/components/ViewTracker";
 import { getDbBlogPosts } from "@/lib/dataFetching";
 import { getBlogPosts } from "@/data/blog";
+import { getTranslations } from "next-intl/server";
 
 interface Props {
     params: Promise<{ slug: string; locale: string }>;
@@ -17,9 +18,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = await params;
-    const locale = (await params).locale || "en";
-    const post = getBlogPosts((await params).locale).find((p) => p.slug === slug);
+    const { slug, locale = "en" } = await params;
+    const post = getBlogPosts(locale).find((p) => p.slug === slug);
     if (!post) return { title: "Post Not Found" };
     return {
         title: post.title,
@@ -36,10 +36,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogDetailPage({ params }: Props) {
-    const { slug } = await params;
-    const locale = (await params).locale; const postList = await getDbBlogPosts(locale);
+    const { slug, locale } = await params;
+    const postList = await getDbBlogPosts(locale);
     const post = postList.find((p) => p.slug === slug);
     if (!post) notFound();
+
+    const t = await getTranslations("Blog");
+    const dateLocale = locale === "tr" ? "tr-TR" : "en-US";
 
     const relatedPosts = getBlogPosts(locale)
         .filter((p) => p.slug !== slug && p.tags.some((t) => post.tags.includes(t)))
@@ -55,7 +58,7 @@ export default async function BlogDetailPage({ params }: Props) {
                         href="/blog"
                         className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-500 hover:text-cyan-400 text-sm mb-8 transition-colors"
                     >
-                        ← Back to Blog
+                        ← {t("backToBlog")}
                     </Link>
                 </AnimatedSection>
 
@@ -66,9 +69,9 @@ export default async function BlogDetailPage({ params }: Props) {
                             <span className="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 text-xs font-medium border border-indigo-500/20">
                                 {post.category}
                             </span>
-                            <span className="text-slate-600 text-xs">{post.readTime} min read</span>
+                            <span className="text-slate-600 text-xs">{post.readTime} {t("minRead")}</span>
                             <time className="text-slate-600 text-xs">
-                                {new Date(post.createdAt).toLocaleDateString("en-US", {
+                                {new Date(post.createdAt).toLocaleDateString(dateLocale, {
                                     year: "numeric",
                                     month: "long",
                                     day: "numeric",
@@ -101,7 +104,7 @@ export default async function BlogDetailPage({ params }: Props) {
                 {relatedPosts.length > 0 && (
                     <AnimatedSection delay={0.2}>
                         <div className="mt-16 pt-10 border-t border-black/5 dark:border-white/5">
-                            <h2 className="text-slate-700 dark:text-slate-300 font-semibold mb-6">Related Articles</h2>
+                            <h2 className="text-slate-700 dark:text-slate-300 font-semibold mb-6">{t("relatedArticles")}</h2>
                             <div className="space-y-4">
                                 {relatedPosts.map((related) => (
                                     <Link

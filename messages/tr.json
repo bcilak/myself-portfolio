@@ -100,11 +100,81 @@
         "other": "Diğer Projeler",
         "viewDetails": "Detayları Gör",
         "github": "GitHub",
-        "demo": "Demo"
+        "demo": "Demo",
+        "problem": "Problem",
+        "solution": "Çözüm",
+        "architecture": "Mimari",
+        "challenges": "Zorluklar",
+        "lessonsLearned": "Çıkarılan Dersler",
+        "backToProjects": "Projeler'e Dön",
+        "viewSource": "Kaynağı İncele",
+        "liveDemo": "Canlı Demo",
+        "allProjects": "Tüm Projeler",
+        "discussSimilar": "Benzer Bir Proje Konuşalım"
     },
     "Blog": {
+        "writing": "Yazılar",
+        "title": "Blog",
+        "description": "Backend geliştirme, yapay zeka entegrasyonları, otomasyon ve yazılım mimarisi hakkında teknik makaleler.",
+        "searchPlaceholder": "Makalelerde ara...",
+        "allCategories": "Tümü",
+        "noArticles": "Şu arama için makale bulunamadı:",
         "minRead": "dk okuma",
-        "readMore": "Oku"
+        "readMore": "Oku",
+        "backToBlog": "Blog'a Dön",
+        "relatedArticles": "İlgili Makaleler",
+        "notFound": "Yazı Bulunamadı"
+    },
+    "CaseStudies": {
+        "analysis": "Analiz",
+        "title": "Vaka Çalışmaları",
+        "description": "Karmaşık projelerin derinlemesine teknik analizi; problemler, yaklaşımlar, mimariler ve çıkarılan dersler.",
+        "problem": "Problem",
+        "approach": "Yaklaşım",
+        "architecture": "Mimari",
+        "challenges": "Zorluklar",
+        "lessonsLearned": "Çıkarılan Dersler",
+        "technologies": "Teknolojiler",
+        "discussPrompt": "Benzer bir projeyi görüşmek ister misiniz?",
+        "getInTouch": "İletişime Geç"
+    },
+    "TechStack": {
+        "tools": "Araçlar",
+        "title": "Teknoloji Yığını",
+        "description": "Ölçeklenebilir arka uç sistemleri, yapay zeka entegrasyonları ve otomasyon sistemleri geliştirmek için her gün kullandığım teknolojiler.",
+        "levels": {
+            "Expert": "Uzman",
+            "Advanced": "İleri",
+            "Intermediate": "Orta"
+        },
+        "categories": {
+            "Backend": "Arka Uç (Backend)",
+            "Databases": "Veritabanları",
+            "DevOps": "DevOps",
+            "AI & Automation": "Yapay Zeka ve Otomasyon",
+            "Frontend": "Ön Yüz (Frontend)"
+        },
+        "workflow": "Geliştirme İş Akışı",
+        "os": "İşletim Sistemi",
+        "editor": "Editör",
+        "versionControl": "Sürüm Kontrolü",
+        "hosting": "Barındırma (Hosting)"
+    },
+    "Resume": {
+        "cv": "Özgeçmiş",
+        "title": "Özgeçmiş",
+        "description": "Barış Çilak'ın profesyonel özgeçmişi - Python, FastAPI, yapay zeka entegrasyonları ve otomasyon sistemlerinde uzman backend geliştirici.",
+        "downloadPdf": "PDF İndir",
+        "role": "Backend Geliştirici ve Otomasyon Mühendisi",
+        "summary": "Ölçeklenebilir API'ler, yapay zeka destekli uygulamalar ve otomasyon sistemleri oluşturmada 3+ yıllık deneyime sahip backend geliştirici. Python/FastAPI, OpenAI entegrasyonları ve Docker tabanlı dağıtımlarda uzmanlaştım. Temiz mimariye ve akıllı otomasyon aracılığıyla manuel süreçleri ortadan kaldırmaya tutkuyla bağlıyım.",
+        "workExperience": "İş Deneyimi",
+        "technicalSkills": "Teknik Yetenekler",
+        "education": "Eğitim",
+        "computerEngineering": "Bilgisayar Mühendisliği",
+        "university": "Üniversite",
+        "eduDescription": "Bilgisayar Mühendisliği lisans derecesi. Yazılım geliştirme, algoritmalar, veritabanı sistemleri ve bilgisayar ağlarına odaklandım.",
+        "getInTouch": "İletişime Geç",
+        "viewProjects": "Projeleri İncele"
     },
     "Footer": {
         "description": "Backend Geliştirici ve Otomasyon Mühendisi. Python, yapay zeka ve modern backend teknolojileriyle akıllı sistemler geliştiriyorum.",

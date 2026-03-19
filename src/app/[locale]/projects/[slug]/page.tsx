@@ -5,6 +5,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import ViewTracker from "@/components/ViewTracker";
 import { getDbProjects } from "@/lib/dataFetching";
 import { getProjects } from "@/data/projects";
+import { getTranslations } from "next-intl/server";
 
 interface Props {
     params: Promise<{ slug: string; locale: string }>;
@@ -15,8 +16,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const { slug } = await params;
-    const locale = (await params).locale || "en";
+    const { slug, locale = "en" } = await params;
     const projectList = await getDbProjects(locale);
     const project = projectList.find((p) => p.slug === slug);
     if (!project) return { title: "Project Not Found" };
@@ -27,17 +27,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ProjectDetailPage({ params }: Props) {
-    const { slug } = await params;
-    const locale = (await params).locale; const projectList = await getDbProjects(locale);
+    const { slug, locale } = await params;
+    const projectList = await getDbProjects(locale);
     const project = projectList.find((p) => p.slug === slug);
     if (!project) notFound();
 
+    const t = await getTranslations("Projects");
+
     const sections = [
-        { title: "Problem", icon: "🎯", content: project.problem },
-        { title: "Solution", icon: "💡", content: project.solution },
-        { title: "Architecture", icon: "🏗️", content: project.architecture },
-        { title: "Challenges", icon: "⚠️", content: project.challenges },
-        { title: "Lessons Learned", icon: "📚", content: project.lessons },
+        { title: t("problem"), icon: "🎯", content: project.problem },
+        { title: t("solution"), icon: "💡", content: project.solution },
+        { title: t("architecture"), icon: "🏗️", content: project.architecture },
+        { title: t("challenges"), icon: "⚠️", content: project.challenges },
+        { title: t("lessonsLearned"), icon: "📚", content: project.lessons },
     ];
 
     return (
@@ -50,7 +52,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                         href="/projects"
                         className="inline-flex items-center gap-2 text-slate-500 dark:text-slate-500 hover:text-cyan-400 text-sm mb-8 transition-colors"
                     >
-                        ← Back to Projects
+                        ← {t("backToProjects")}
                     </Link>
                 </AnimatedSection>
 
@@ -80,7 +82,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                                 rel="noopener noreferrer"
                                 className="px-5 py-2.5 rounded-lg border border-black/10 dark:border-white/10 hover:border-cyan-500/40 text-slate-700 dark:text-slate-300 hover:text-cyan-400 text-sm font-semibold transition-all"
                             >
-                                View Source ↗
+                                {t("viewSource")} ↗
                             </a>
                             {project.demoUrl !== "#" && (
                                 <a
@@ -89,7 +91,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                                     rel="noopener noreferrer"
                                     className="px-5 py-2.5 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-sm font-semibold transition-colors"
                                 >
-                                    Live Demo ↗
+                                    {t("liveDemo")} ↗
                                 </a>
                             )}
                         </div>
@@ -118,13 +120,13 @@ export default async function ProjectDetailPage({ params }: Props) {
                             href="/projects"
                             className="px-6 py-3 rounded-lg border border-black/10 dark:border-white/10 hover:border-cyan-500/40 text-slate-700 dark:text-slate-300 hover:text-cyan-400 text-sm font-semibold transition-all text-center"
                         >
-                            ← All Projects
+                            ← {t("allProjects")}
                         </Link>
                         <Link
                             href="/contact"
                             className="px-6 py-3 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-sm font-semibold transition-colors text-center"
                         >
-                            Discuss a Similar Project
+                            {t("discussSimilar")}
                         </Link>
                     </div>
                 </AnimatedSection>

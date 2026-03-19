@@ -1,108 +1,32 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import { getTranslations } from "next-intl/server";
+import { getCaseStudies } from "@/data/case-studies";
 
-export const metadata: Metadata = {
-    title: "Case Studies",
-    description:
-        "Deep technical case studies from Barış Çilak — WhatsApp AI chatbot, speech-to-text architecture, and automation pipelines.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: "CaseStudies" });
+    return {
+        title: t("title"),
+        description: t("description"),
+    };
+}
 
-const caseStudies = [
-    {
-        slug: "whatsapp-chatbot",
-        title: "Building a WhatsApp AI Chatbot",
-        subtitle: "From 0 to 1,000 conversations/day",
-        category: "AI Integration",
-        icon: "💬",
-        problem:
-            "A customer support team was drowning in repetitive WhatsApp messages, spending 4+ hours daily on questions that could be answered automatically.",
-        approach:
-            "Integrated WhatsApp Business API with a FastAPI backend and OpenAI GPT-4, building a context-aware conversational agent with Redis-backed session memory.",
-        architecture:
-            "Webhook receives WhatsApp messages → FastAPI processes → Redis retrieves conversation context → GPT-4 generates response → WhatsApp API sends reply. All in under 2 seconds.",
-        challenges: [
-            "Maintaining conversation context across sessions",
-            "Staying under 2-second response latency",
-            "Handling WhatsApp rate limits gracefully",
-            "Message deduplication to prevent double responses",
-        ],
-        lessons: [
-            "Redis session caching is non-negotiable for context-aware chatbots",
-            "Webhook idempotency keys prevent duplicate processing",
-            "GPT-4 system prompts need exhaustive testing with real user inputs",
-            "Fallback to human agent must be seamless and fast",
-        ],
-        impact: "70% reduction in support tickets, 4 hours saved daily",
-        technologies: ["Python", "FastAPI", "OpenAI GPT-4", "Redis", "WhatsApp Business API", "Docker"],
-    },
-    {
-        slug: "speech-to-text",
-        title: "AI Speech-to-Text Architecture",
-        subtitle: "Real-time transcription at scale",
-        category: "AI / Backend",
-        icon: "🎙️",
-        problem:
-            "A business needed accurate Turkish speech transcription with speaker identification and automatic meeting summaries, but off-the-shelf tools had poor Turkish accuracy.",
-        approach:
-            "Built a streaming transcription pipeline using OpenAI Whisper fine-tuned approach with custom post-processing NLP chain for Turkish language accuracy.",
-        architecture:
-            "Audio stream → chunking layer → Redis queue → Whisper inference workers → NLP post-processing (diarization, sentiment, summary) → WebSocket push to client.",
-        challenges: [
-            "Real-time processing with Whisper latency constraints",
-            "Speaker diarization in Turkish with limited training data",
-            "GPU resource management for cost efficiency",
-            "WebSocket reconnection and stream recovery",
-        ],
-        lessons: [
-            "Audio preprocessing (noise reduction, normalization) is as important as the model",
-            "Chunk overlap strategy is critical for accurate sentence boundaries",
-            "GPU spot instances with failover reduce costs by 60%",
-            "Speaker embeddings need continuous learning from user feedback",
-        ],
-        impact: "95% transcription accuracy, 3x cheaper than existing solution",
-        technologies: ["Python", "OpenAI Whisper", "WebSocket", "Redis", "Docker", "GPU Computing"],
-    },
-    {
-        slug: "automation-pipelines",
-        title: "Enterprise Automation Pipelines",
-        subtitle: "Eliminating manual business processes",
-        category: "Automation",
-        icon: "⚙️",
-        problem:
-            "A company had 12+ manual data entry processes between CRM, ERP, email systems, and communication tools, consuming 20+ person-hours per week.",
-        approach:
-            "Built a visual workflow automation platform with 50+ service connectors, enabling business teams to create automations without engineering involvement.",
-        architecture:
-            "React workflow editor → Node.js execution engine → JSON DAG workflow storage → distributed worker pool → execution logs and monitoring dashboard.",
-        challenges: [
-            "Reliable retry logic for long-running multi-step workflows",
-            "Rate limiting across 50+ different external API providers",
-            "Schema evolution without breaking existing workflows",
-            "Real-time execution visibility for non-technical users",
-        ],
-        lessons: [
-            "Event-driven architecture with dead letter queues handles failures gracefully",
-            "Visual error indicators are more valuable than detailed logs for business users",
-            "Idempotent workflow steps prevent data duplication on retries",
-            "A well-designed connector SDK accelerates adding new integrations 10x",
-        ],
-        impact: "20 person-hours/week saved, 12 manual processes automated",
-        technologies: ["Node.js", "React", "PostgreSQL", "Redis", "Docker", "Power Automate"],
-    },
-];
+export default async function CaseStudiesPage({ params }: { params: Promise<{ locale: string }> }) {
+    const { locale } = await params;
+    const t = await getTranslations("CaseStudies");
+    const caseStudies = getCaseStudies(locale);
 
-export default function CaseStudiesPage() {
     return (
         <div className="pt-24">
             <div className="max-w-5xl mx-auto px-6 pb-24">
                 <AnimatedSection>
                     <div className="mb-16">
-                        <p className="text-cyan-400 text-sm font-medium uppercase tracking-widest mb-3">Analysis</p>
-                        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-4">Case Studies</h1>
+                        <p className="text-cyan-400 text-sm font-medium uppercase tracking-widest mb-3">{t("analysis")}</p>
+                        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-4">{t("title")}</h1>
                         <p className="text-slate-600 dark:text-slate-400 text-lg max-w-2xl">
-                            Deep technical analysis of complex projects — the problems, approaches,
-                            architectures, and lessons learned.
+                            {t("description")}
                         </p>
                         <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full mt-6" />
                     </div>
@@ -136,17 +60,17 @@ export default function CaseStudiesPage() {
                                 <div className="p-8 grid md:grid-cols-2 gap-8">
                                     <div>
                                         <h3 className="text-slate-700 dark:text-slate-300 font-semibold mb-3 flex items-center gap-2">
-                                            <span className="text-red-400">🎯</span> Problem
+                                            <span className="text-red-400">🎯</span> {t("problem")}
                                         </h3>
                                         <p className="text-slate-500 dark:text-slate-500 text-sm leading-relaxed mb-6">{cs.problem}</p>
 
                                         <h3 className="text-slate-700 dark:text-slate-300 font-semibold mb-3 flex items-center gap-2">
-                                            <span className="text-blue-400">🔍</span> Approach
+                                            <span className="text-blue-400">🔍</span> {t("approach")}
                                         </h3>
                                         <p className="text-slate-500 dark:text-slate-500 text-sm leading-relaxed mb-6">{cs.approach}</p>
 
                                         <h3 className="text-slate-700 dark:text-slate-300 font-semibold mb-3 flex items-center gap-2">
-                                            <span className="text-purple-400">🏗️</span> Architecture
+                                            <span className="text-purple-400">🏗️</span> {t("architecture")}
                                         </h3>
                                         <p className="text-slate-500 dark:text-slate-500 text-sm leading-relaxed font-mono text-xs bg-white/5 p-3 rounded-lg">
                                             {cs.architecture}
@@ -155,7 +79,7 @@ export default function CaseStudiesPage() {
 
                                     <div>
                                         <h3 className="text-slate-700 dark:text-slate-300 font-semibold mb-3 flex items-center gap-2">
-                                            <span className="text-orange-400">⚠️</span> Challenges
+                                            <span className="text-orange-400">⚠️</span> {t("challenges")}
                                         </h3>
                                         <ul className="space-y-2 mb-6">
                                             {cs.challenges.map((c) => (
@@ -167,7 +91,7 @@ export default function CaseStudiesPage() {
                                         </ul>
 
                                         <h3 className="text-slate-700 dark:text-slate-300 font-semibold mb-3 flex items-center gap-2">
-                                            <span className="text-green-400">📚</span> Lessons Learned
+                                            <span className="text-green-400">📚</span> {t("lessonsLearned")}
                                         </h3>
                                         <ul className="space-y-2 mb-6">
                                             {cs.lessons.map((l) => (
@@ -179,7 +103,7 @@ export default function CaseStudiesPage() {
                                         </ul>
 
                                         <div>
-                                            <h3 className="text-slate-700 dark:text-slate-300 font-semibold mb-3">Technologies</h3>
+                                            <h3 className="text-slate-700 dark:text-slate-300 font-semibold mb-3">{t("technologies")}</h3>
                                             <div className="flex flex-wrap gap-2">
                                                 {cs.technologies.map((t) => (
                                                     <span
@@ -200,12 +124,12 @@ export default function CaseStudiesPage() {
 
                 <AnimatedSection delay={0.3}>
                     <div className="mt-16 text-center">
-                        <p className="text-slate-600 dark:text-slate-400 mb-4">Want to discuss a similar project?</p>
+                        <p className="text-slate-600 dark:text-slate-400 mb-4">{t("discussPrompt")}</p>
                         <Link
                             href="/contact"
                             className="px-8 py-3 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-semibold transition-colors duration-200"
                         >
-                            Get In Touch
+                            {t("getInTouch")}
                         </Link>
                     </div>
                 </AnimatedSection>

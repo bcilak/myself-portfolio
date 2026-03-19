@@ -1,18 +1,23 @@
-import { useLocale } from "next-intl";
 import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { getExperiences } from "@/data/experience";
 import { skillCategories } from "@/data/skills";
+import { getTranslations } from "next-intl/server";
 
-export const metadata: Metadata = {
-    title: "Resume",
-    description:
-        "Barış Çilak's professional resume — backend developer with expertise in Python, FastAPI, AI integrations, and automation systems.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: "Resume" });
+    return {
+        title: t("title"),
+        description: t("description"),
+    };
+}
 
-export default function ResumePage() {
-  const locale = useLocale();
+export default async function ResumePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations("Resume");
+  const tTech = await getTranslations("TechStack");
   const experiences = getExperiences(locale);
     return (
         <div className="pt-24">
@@ -21,8 +26,8 @@ export default function ResumePage() {
                 <AnimatedSection>
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12">
                         <div>
-                            <p className="text-cyan-400 text-sm font-medium uppercase tracking-widest mb-2">CV</p>
-                            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">Resume</h1>
+                            <p className="text-cyan-400 text-sm font-medium uppercase tracking-widest mb-2">{t("cv")}</p>
+                            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">{t("title")}</h1>
                         </div>
                         <a
                             href="/resume.pdf"
@@ -30,7 +35,7 @@ export default function ResumePage() {
                             className="flex items-center gap-2 px-6 py-3 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-semibold text-sm transition-colors"
                         >
                             <span>↓</span>
-                            Download PDF
+                            {t("downloadPdf")}
                         </a>
                     </div>
                     <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-indigo-500 rounded-full mb-12" />
@@ -40,11 +45,9 @@ export default function ResumePage() {
                 <AnimatedSection>
                     <div className="glass-card rounded-2xl p-8 mb-10">
                         <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-1">Barış Çilak</h2>
-                        <p className="text-cyan-400 font-medium mb-4">Backend Developer & Automation Engineer</p>
+                        <p className="text-cyan-400 font-medium mb-4">{t("role")}</p>
                         <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                            Backend developer with 3+ years of experience building scalable APIs, AI-powered applications,
-                            and automation systems. Specialized in Python/FastAPI, OpenAI integrations, and Docker-based
-                            deployments. Passionate about clean architecture and eliminating manual processes through intelligent automation.
+                            {t("summary")}
                         </p>
                         <div className="flex flex-wrap gap-4 mt-5">
                             <a href="mailto:bariscilak@email.com" className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-cyan-400 text-sm transition-colors">
@@ -65,7 +68,7 @@ export default function ResumePage() {
                     <section className="mb-10">
                         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-cyan-500 inline-block"></span>
-                            Work Experience
+                            {t("workExperience")}
                         </h2>
                         <div className="space-y-5">
                             {experiences.map((exp, i) => (
@@ -98,14 +101,14 @@ export default function ResumePage() {
                     <section className="mb-10">
                         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-indigo-500 inline-block"></span>
-                            Technical Skills
+                            {t("technicalSkills")}
                         </h2>
                         <div className="glass-card rounded-xl p-6">
                             <div className="space-y-4">
                                 {skillCategories.map((cat) => (
                                     <div key={cat.name} className="flex flex-wrap items-start gap-3">
                                         <span className="text-slate-600 dark:text-slate-400 text-sm font-medium w-24 shrink-0 pt-0.5">
-                                            {cat.name}
+                                            {tTech(`categories.${cat.name}` as any) || cat.name}
                                         </span>
                                         <div className="flex flex-wrap gap-2 flex-1">
                                             {cat.skills.map((skill) => (
@@ -129,17 +132,16 @@ export default function ResumePage() {
                     <section className="mb-10">
                         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
-                            Education
+                            {t("education")}
                         </h2>
                         <div className="glass-card rounded-xl p-6">
                             <div className="flex flex-wrap justify-between gap-2 mb-1">
-                                <h3 className="text-slate-900 dark:text-slate-100 font-semibold">Computer Engineering</h3>
+                                <h3 className="text-slate-900 dark:text-slate-100 font-semibold">{t("computerEngineering")}</h3>
                                 <span className="text-slate-500 dark:text-slate-500 text-sm font-mono">2018 – 2022</span>
                             </div>
-                            <p className="text-cyan-400/70 text-sm">University</p>
+                            <p className="text-cyan-400/70 text-sm">{t("university")}</p>
                             <p className="text-slate-600 dark:text-slate-400 text-sm mt-2">
-                                Bachelor&apos;s degree in Computer Engineering. Focused on software development,
-                                algorithms, database systems, and computer networks.
+                                {t("eduDescription")}
                             </p>
                         </div>
                     </section>
@@ -152,13 +154,13 @@ export default function ResumePage() {
                             href="/contact"
                             className="flex-1 py-3 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black font-semibold text-sm text-center transition-colors"
                         >
-                            Get In Touch
+                            {t("getInTouch")}
                         </Link>
                         <Link
                             href="/projects"
                             className="flex-1 py-3 rounded-lg border border-black/10 dark:border-white/10 hover:border-cyan-500/40 text-slate-700 dark:text-slate-300 hover:text-cyan-400 font-semibold text-sm text-center transition-all"
                         >
-                            View Projects
+                            {t("viewProjects")}
                         </Link>
                     </div>
                 </AnimatedSection>

@@ -499,7 +499,7 @@ def chat(session_id: str, user_message: str) -> str:
 
 A production chatbot is a system design challenge as much as an AI challenge. Invest in the infrastructure around the model.`,
         tags: ["AI", "OpenAI", "Python", "Chatbot", "GPT-4"],
-        category: "AI",
+        category: "Yapay Zeka",
         readTime: 12,
         createdAt: "2025-02-20",
     },
@@ -593,7 +593,7 @@ Always add monitoring:
 
 Once you automate a few processes, you'll start seeing automation opportunities everywhere. Start small, monitor rigorously, and expand systematically.`,
         tags: ["Python", "Automation", "Business", "Productivity"],
-        category: "Automation",
+        category: "Otomasyon",
         readTime: 10,
         createdAt: "2025-03-05",
     },
@@ -653,7 +653,7 @@ Configure PgBouncer for transaction-mode pooling to handle thousands of concurre
 
 Database performance is about understanding your access patterns and building indexes to match them. Profile first, optimize second.`,
         tags: ["PostgreSQL", "Veritabanı", "Performance", "Backend"],
-        category: "Backend",
+        category: "Arka Uç",
         readTime: 9,
         createdAt: "2025-03-12",
     },
