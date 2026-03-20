@@ -68,6 +68,12 @@ export default function AdminLayout({
                                 {t("experiences")}
                             </Link>
                             <Link
+                                href={`/${locale}/admin/education`}
+                                className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                            >
+                                Eğitimler
+                            </Link>
+                            <Link
                                 href={`/${locale}/admin/messages`}
                                 className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md font-bold text-cyan-600 dark:text-cyan-400"
                             >

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import { getDbExperiences } from "@/lib/dataFetching";
+import { getDbExperiences, getDbEducations } from "@/lib/dataFetching";
 import { skillCategories } from "@/data/skills";
 import { getTranslations } from "next-intl/server";
 
@@ -19,6 +19,7 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
   const t = await getTranslations("Resume");
   const tTech = await getTranslations("TechStack");
   const experiences = await getDbExperiences(locale);
+  const educations = await getDbEducations(locale);
     return (
         <div className="pt-24">
             <div className="max-w-4xl mx-auto px-6 pb-24">
@@ -127,22 +128,41 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
                     </section>
                 </AnimatedSection>
 
-                {/* Education */}
+                {/* Education - Dynamic from DB */}
                 <AnimatedSection>
                     <section className="mb-10">
                         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-green-500 inline-block"></span>
                             {t("education")}
                         </h2>
-                        <div className="glass-card rounded-xl p-6">
-                            <div className="flex flex-wrap justify-between gap-2 mb-1">
-                                <h3 className="text-slate-900 dark:text-slate-100 font-semibold">{t("computerEngineering")}</h3>
-                                <span className="text-slate-500 dark:text-slate-500 text-sm font-mono">2018 – 2022</span>
-                            </div>
-                            <p className="text-cyan-400/70 text-sm">{t("university")}</p>
-                            <p className="text-slate-600 dark:text-slate-400 text-sm mt-2">
-                                {t("eduDescription")}
-                            </p>
+                        <div className="space-y-5">
+                            {educations.length > 0 ? (
+                                educations.map((edu, i) => (
+                                    <AnimatedSection key={edu.id} delay={i * 0.08}>
+                                        <div className="glass-card rounded-xl p-6 hover:border-green-500/20 transition-colors">
+                                            <div className="flex flex-wrap justify-between gap-2 mb-1">
+                                                <h3 className="text-slate-900 dark:text-slate-100 font-semibold">{edu.degree}</h3>
+                                                <span className="text-slate-500 dark:text-slate-500 text-sm font-mono">{edu.year}</span>
+                                            </div>
+                                            <p className="text-cyan-400/70 text-sm">{edu.school}</p>
+                                            {edu.description && (
+                                                <p className="text-slate-600 dark:text-slate-400 text-sm mt-2">{edu.description}</p>
+                                            )}
+                                        </div>
+                                    </AnimatedSection>
+                                ))
+                            ) : (
+                                <div className="glass-card rounded-xl p-6">
+                                    <div className="flex flex-wrap justify-between gap-2 mb-1">
+                                        <h3 className="text-slate-900 dark:text-slate-100 font-semibold">{t("computerEngineering")}</h3>
+                                        <span className="text-slate-500 dark:text-slate-500 text-sm font-mono">2018 – 2022</span>
+                                    </div>
+                                    <p className="text-cyan-400/70 text-sm">{t("university")}</p>
+                                    <p className="text-slate-600 dark:text-slate-400 text-sm mt-2">
+                                        {t("eduDescription")}
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     </section>
                 </AnimatedSection>

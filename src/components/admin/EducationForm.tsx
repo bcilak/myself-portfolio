@@ -3,17 +3,16 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useLocale } from "next-intl";
 
-export default function ExperienceForm({ initialData }: { initialData?: any }) {
+export default function EducationForm({ initialData }: { initialData?: any }) {
     const router = useRouter();
     const locale = useLocale();
 
     const [formData, setFormData] = useState({
-        period: initialData?.year || initialData?.period || "",
-        technologies: initialData?.technologies?.join(", ") || "",
-        titleTR: initialData?.title?.tr || "",
-        titleEN: initialData?.title?.en || "",
-        companyTR: initialData?.company?.tr || "",
-        companyEN: initialData?.company?.en || "",
+        year: initialData?.year || "",
+        degreeTR: initialData?.degree?.tr || "",
+        degreeEN: initialData?.degree?.en || "",
+        schoolTR: initialData?.school?.tr || "",
+        schoolEN: initialData?.school?.en || "",
         descriptionTR: initialData?.description?.tr || "",
         descriptionEN: initialData?.description?.en || "",
     });
@@ -27,14 +26,13 @@ export default function ExperienceForm({ initialData }: { initialData?: any }) {
         setSaved(false);
 
         const payload = {
-            year: formData.period,
-            technologies: formData.technologies.split(",").map((t: string) => t.trim()).filter(Boolean),
-            title: { tr: formData.titleTR, en: formData.titleEN },
-            company: { tr: formData.companyTR, en: formData.companyEN },
+            year: formData.year,
+            degree: { tr: formData.degreeTR, en: formData.degreeEN },
+            school: { tr: formData.schoolTR, en: formData.schoolEN },
             description: { tr: formData.descriptionTR, en: formData.descriptionEN },
         };
 
-        const url = initialData ? `/api/experience/${initialData._id}` : "/api/experience";
+        const url = initialData ? `/api/education/${initialData._id}` : "/api/education";
         const method = initialData ? "PUT" : "POST";
 
         try {
@@ -47,7 +45,7 @@ export default function ExperienceForm({ initialData }: { initialData?: any }) {
             if (res.ok) {
                 setSaved(true);
                 setTimeout(() => {
-                    router.push(`/${locale}/admin/experience`);
+                    router.push(`/${locale}/admin/education`);
                     router.refresh();
                 }, 800);
             } else {
@@ -73,36 +71,25 @@ export default function ExperienceForm({ initialData }: { initialData?: any }) {
                 </div>
             )}
 
-            {/* General Info Card */}
+            {/* General Info */}
             <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                    <span className="w-2 h-2 rounded-full bg-green-500"></span>
                     Genel Bilgiler
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label className={labelClass}>Dönem / Yıl</label>
-                        <input
-                            required
-                            placeholder="örn: 2022 - Devam Ediyor"
-                            className={inputClass}
-                            value={formData.period}
-                            onChange={e => setFormData({ ...formData, period: e.target.value })}
-                        />
-                    </div>
-                    <div>
-                        <label className={labelClass}>Teknolojiler</label>
-                        <input
-                            placeholder="React, Node.js, MongoDB (virgülle ayırın)"
-                            className={inputClass}
-                            value={formData.technologies}
-                            onChange={e => setFormData({ ...formData, technologies: e.target.value })}
-                        />
-                    </div>
+                <div>
+                    <label className={labelClass}>Dönem / Yıl</label>
+                    <input
+                        required
+                        placeholder="örn: 2018 – 2022"
+                        className={inputClass}
+                        value={formData.year}
+                        onChange={e => setFormData({ ...formData, year: e.target.value })}
+                    />
                 </div>
             </div>
 
-            {/* Language Cards Side by Side */}
+            {/* Language Cards */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Turkish */}
                 <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
@@ -112,29 +99,29 @@ export default function ExperienceForm({ initialData }: { initialData?: any }) {
                     </h3>
                     <div className="space-y-4">
                         <div>
-                            <label className={labelClass}>Görev / Pozisyon</label>
+                            <label className={labelClass}>Bölüm / Derece</label>
                             <input
                                 required
-                                placeholder="Örn: Frontend Geliştirici"
+                                placeholder="Örn: Bilgisayar Mühendisliği"
                                 className={inputClass}
-                                value={formData.titleTR}
-                                onChange={e => setFormData({ ...formData, titleTR: e.target.value })}
+                                value={formData.degreeTR}
+                                onChange={e => setFormData({ ...formData, degreeTR: e.target.value })}
                             />
                         </div>
                         <div>
-                            <label className={labelClass}>Şirket</label>
+                            <label className={labelClass}>Okul / Üniversite</label>
                             <input
                                 required
-                                placeholder="Şirket adı"
+                                placeholder="Okul adı"
                                 className={inputClass}
-                                value={formData.companyTR}
-                                onChange={e => setFormData({ ...formData, companyTR: e.target.value })}
+                                value={formData.schoolTR}
+                                onChange={e => setFormData({ ...formData, schoolTR: e.target.value })}
                             />
                         </div>
                         <div>
                             <label className={labelClass}>Açıklama</label>
                             <textarea
-                                placeholder="Görev tanımı ve sorumluluklar..."
+                                placeholder="Eğitim detayları, başarılar..."
                                 rows={4}
                                 className={inputClass + " resize-none"}
                                 value={formData.descriptionTR}
@@ -152,29 +139,29 @@ export default function ExperienceForm({ initialData }: { initialData?: any }) {
                     </h3>
                     <div className="space-y-4">
                         <div>
-                            <label className={labelClass}>Title / Position</label>
+                            <label className={labelClass}>Degree / Major</label>
                             <input
                                 required
-                                placeholder="e.g. Frontend Developer"
+                                placeholder="e.g. Computer Engineering"
                                 className={inputClass}
-                                value={formData.titleEN}
-                                onChange={e => setFormData({ ...formData, titleEN: e.target.value })}
+                                value={formData.degreeEN}
+                                onChange={e => setFormData({ ...formData, degreeEN: e.target.value })}
                             />
                         </div>
                         <div>
-                            <label className={labelClass}>Company</label>
+                            <label className={labelClass}>School / University</label>
                             <input
                                 required
-                                placeholder="Company name"
+                                placeholder="University name"
                                 className={inputClass}
-                                value={formData.companyEN}
-                                onChange={e => setFormData({ ...formData, companyEN: e.target.value })}
+                                value={formData.schoolEN}
+                                onChange={e => setFormData({ ...formData, schoolEN: e.target.value })}
                             />
                         </div>
                         <div>
                             <label className={labelClass}>Description</label>
                             <textarea
-                                placeholder="Job description and responsibilities..."
+                                placeholder="Education details, achievements..."
                                 rows={4}
                                 className={inputClass + " resize-none"}
                                 value={formData.descriptionEN}

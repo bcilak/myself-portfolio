@@ -2,6 +2,7 @@ import dbConnect from "./mongoose";
 import Project from "@/models/Project";
 import Blog from "@/models/Blog";
 import Experience from "@/models/Experience";
+import Education from "@/models/Education";
 
 // Projects Verilerini Çek
 export async function getDbProjects(locale: string) {
@@ -62,5 +63,19 @@ export async function getDbExperiences(locale: string) {
         company: e.company[locale] || e.company.en,
         description: e.description?.[locale] || e.description?.en || "",
         technologies: e.technologies || [],
+    }));
+}
+
+// Education Verilerini Çek
+export async function getDbEducations(locale: string) {
+    await dbConnect();
+    const dbEducations = await Education.find({}).sort({ year: -1 }).lean();
+
+    return dbEducations.map((e: any) => ({
+        id: e._id.toString(),
+        year: e.year,
+        degree: e.degree[locale] || e.degree.en,
+        school: e.school[locale] || e.school.en,
+        description: e.description?.[locale] || e.description?.en || "",
     }));
 }
