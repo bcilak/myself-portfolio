@@ -45,6 +45,8 @@
     "readBlog": "Read Blog"
   },
   "About": {
+    "metaTitle": "About Me",
+    "metaDescription": "Learn about Barış Çilak — a backend developer and automation engineer specializing in Python, FastAPI, and AI integrations.",
     "experience": "Experience",
     "title": "About Me",
     "subtitle": "Backend Developer & Automation Engineer",
@@ -53,9 +55,19 @@
     "p3": "Today I work primarily with Python and FastAPI on the backend, integrating services like OpenAI, WhatsApp Business API, and various cloud platforms. I have delivered projects ranging from AI chatbots handling thousands of daily conversations to ETL pipelines processing millions of records.",
     "p4": "When I am not coding, I am writing technical articles about the things I have learned — both to share knowledge and to deepen my own understanding.",
     "expertise": "Expertise",
-    "principles": "Core Principles"
+    "principles": "Core Principles",
+    "principleCleanTitle": "Clean Architecture",
+    "principleCleanDesc": "Code should be readable, testable, and maintainable. Structure matters more than cleverness.",
+    "principleScalableTitle": "Scalable Systems",
+    "principleScalableDesc": "Build for today, design for tomorrow. Every architectural decision considers future growth.",
+    "principleAutoTitle": "Automation Mindset",
+    "principleAutoDesc": "If it happens more than twice, automate it. Manual processes are bugs waiting to happen.",
+    "principleSecurityTitle": "Security First",
+    "principleSecurityDesc": "Security is not a feature, it is a requirement built into every layer from day one."
   },
   "Contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Get in touch with Barış Çilak — available for backend development, AI integrations, and automation projects.",
     "title": "Contact",
     "subtitle": "Let's Build Something Together",
     "description": "Have a project in mind or want to discuss potential opportunities? I'd love to hear from you. Fill out the form below and I'll get back to you as soon as possible.",
@@ -113,6 +125,8 @@
     "discussSimilar": "Discuss a Similar Project"
   },
   "Blog": {
+    "metaTitle": "Blog",
+    "metaDescription": "Technical articles by Baris Cilak on backend development, AI integrations, automation, and software architecture.",
     "writing": "Writing",
     "title": "Blog",
     "description": "Technical articles about backend development, AI integrations, automation, and software architecture.",
@@ -197,6 +211,19 @@
     "projects": "Projects",
     "blogPosts": "Blog Posts",
     "experiences": "Experiences",
-    "signOut": "Sign Out"
+    "educations": "Education",
+    "inbox": "Inbox",
+    "mediaLibrary": "Media Library",
+    "seoSettings": "SEO Settings",
+    "signOut": "Sign Out",
+    "welcome": "Welcome back,",
+    "totalViews": "Total Views",
+    "totalProjects": "Total Projects",
+    "totalBlogs": "Total Blog Posts",
+    "newMessages": "New Messages",
+    "totalExperiences": "Experiences",
+    "totalEducations": "Education Entries",
+    "quickLinks": "Quick Links",
+    "quickLinksDesc": "View traffic details in the graphs tab, and respond to messages from the left menu."
   }
 }

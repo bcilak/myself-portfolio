@@ -10,6 +10,9 @@ export interface ISettings extends Document {
   googleVerification: string;
   twitterHandle: string;
   siteUrl: string;
+  email: string;
+  github: string;
+  linkedin: string;
 }
 
 const SettingsSchema = new Schema(
@@ -23,6 +26,9 @@ const SettingsSchema = new Schema(
     googleVerification: { type: String, default: "" },
     twitterHandle: { type: String, default: "@bariscilak" },
     siteUrl: { type: String, default: "https://bariscilak.dev" },
+    email: { type: String, default: "bcilak@gmail.com" },
+    github: { type: String, default: "github.com/bcilak" },
+    linkedin: { type: String, default: "linkedin.com/in/bariscilak" },
   },
   { timestamps: true }
 );

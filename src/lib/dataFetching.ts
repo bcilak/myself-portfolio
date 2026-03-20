@@ -34,7 +34,7 @@ export async function getDbProjects(locale: string) {
 // Blog Verilerini Çek
 export async function getDbBlogPosts(locale: string) {
     await dbConnect();
-    const dbBlogs = await Blog.find({}).sort({ createdAt: -1 }).lean();
+    const dbBlogs = await Blog.find({ status: "published" }).sort({ createdAt: -1 }).lean();
 
     return dbBlogs.map((b: any) => ({
         id: b._id.toString(),

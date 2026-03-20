@@ -22,6 +22,15 @@ export default function AdminLayout({
         return <>{children}</>;
     }
 
+    const baseLinkClasses = "group flex items-center px-2 py-2 text-sm font-medium rounded-md";
+    const inactiveLinkClasses = "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white";
+    const activeLinkClasses = "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white";
+
+    const getLinkClasses = (href: string, extraClasses: string = "") => {
+        const isActive = pathname === href || (href !== `/${locale}/admin` && pathname.startsWith(href));
+        return `${baseLinkClasses} ${isActive ? activeLinkClasses : inactiveLinkClasses} ${extraClasses}`;
+    };
+
     return (
         <div className="min-h-screen flex flex-col md:flex-row bg-gray-50 dark:bg-gray-900">
             {/* Mobile Sidebar Toggle */}
@@ -45,13 +54,13 @@ export default function AdminLayout({
                         <nav className="px-4 flex-1 space-y-2">
                             <Link
                                 href={`/${locale}/admin`}
-                                className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                                className={getLinkClasses(`/${locale}/admin`)}
                             >
                                 {t("dashboard")}
                             </Link>
                             <Link
                                 href={`/${locale}/admin/projects`}
-                                className="text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                                className={getLinkClasses(`/${locale}/admin/projects`)}
                             >
                                 {t("projects")}
                             </Link>

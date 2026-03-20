@@ -4,6 +4,8 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import { getDbExperiences, getDbEducations } from "@/lib/dataFetching";
 import { skillCategories } from "@/data/skills";
 import { getTranslations } from "next-intl/server";
+import dbConnect from "@/lib/mongoose";
+import Settings from "@/models/Settings";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
@@ -20,7 +22,15 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
   const tTech = await getTranslations("TechStack");
   const experiences = await getDbExperiences(locale);
   const educations = await getDbEducations(locale);
-    return (
+
+  // Fetch contact info from DB Settings
+  await dbConnect();
+  const settings = await Settings.findOne({}).lean() as any;
+  const email = settings?.email || "bcilak@gmail.com";
+  const github = settings?.github || "github.com/bcilak";
+  const linkedin = settings?.linkedin || "linkedin.com/in/bariscilak";
+
+  return (
         <div className="pt-24">
             <div className="max-w-4xl mx-auto px-6 pb-24">
                 {/* Header */}
@@ -51,14 +61,14 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
                             {t("summary")}
                         </p>
                         <div className="flex flex-wrap gap-4 mt-5">
-                            <a href="mailto:bariscilak@email.com" className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-cyan-400 text-sm transition-colors">
-                                <span>✉️</span> bariscilak@email.com
+                            <a href={`mailto:${email}`} className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-cyan-400 text-sm transition-colors">
+                                <span>✉️</span> {email}
                             </a>
-                            <a href="https://github.com/bariscilak" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-cyan-400 text-sm transition-colors">
-                                <span>🐙</span> github.com/bariscilak
+                            <a href={`https://${github}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-cyan-400 text-sm transition-colors">
+                                <span>🐙</span> {github}
                             </a>
-                            <a href="https://linkedin.com/in/bariscilak" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-cyan-400 text-sm transition-colors">
-                                <span>💼</span> linkedin.com/in/bariscilak
+                            <a href={`https://${linkedin}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-slate-600 dark:text-slate-400 hover:text-cyan-400 text-sm transition-colors">
+                                <span>💼</span> {linkedin}
                             </a>
                         </div>
                     </div>

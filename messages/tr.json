@@ -45,6 +45,8 @@
         "readBlog": "Blogu Oku"
     },
     "About": {
+        "metaTitle": "Hakkımda",
+        "metaDescription": "Barış Çilak hakkında bilgi edinin — Python, FastAPI ve yapay zeka entegrasyonları uzmanı backend geliştirici.",
         "experience": "Deneyim",
         "title": "Hakkımda",
         "subtitle": "Backend Geliştirici & Otomasyon Mühendisi",
@@ -53,9 +55,19 @@
         "p3": "Bugün ağırlıklı olarak backend tarafında Python ve FastAPI ile çalışıyor, OpenAI, WhatsApp Business API ve çeşitli bulut platformları gibi servisleri entegre ediyorum. Günlük binlerce sohbeti işleyen yapay zeka sohbet robotlarından, milyonlarca kaydı işleyen veri ardışık düzenlerine kadar çeşitli projeler teslim ettim.",
         "p4": "Kod yazmadığım zamanlarda, hem bilgimi paylaşmak hem de kendi anlayışımı derinleştirmek için öğrendiğim şeyler hakkında teknik makaleler yazıyorum.",
         "expertise": "Uzmanlıklar",
-        "principles": "Temel Prensipler"
+        "principles": "Temel Prensipler",
+        "principleCleanTitle": "Temiz Mimari",
+        "principleCleanDesc": "Kod okunabilir, test edilebilir ve sürdürülebilir olmalıdır. Yapı, zekadan önemlidir.",
+        "principleScalableTitle": "Ölçeklenebilir Sistemler",
+        "principleScalableDesc": "Bugün için inşa et, yarın için tasarla. Her mimari karar gelecekteki büyümeyi göz önünde bulundurur.",
+        "principleAutoTitle": "Otomasyon Anlayışı",
+        "principleAutoDesc": "İki kereden fazla gerçekleşirse, otomatikleştir. Manuel süreçler, bekleyen hatalardır.",
+        "principleSecurityTitle": "Önce Güvenlik",
+        "principleSecurityDesc": "Güvenlik bir özellik değil, ilk günden her katmana yerleştirilmiş bir gerekliliktir."
     },
     "Contact": {
+        "metaTitle": "İletişim",
+        "metaDescription": "Barış Çilak ile iletişime geçin — backend geliştirme, yapay zeka entegrasyonları ve otomasyon projeleri için müsait.",
         "title": "İletişim",
         "subtitle": "Birlikte Bir Şeyler İnşa Edelim",
         "description": "Aklınızda bir proje mi var veya potansiyel fırsatları görüşmek mi istiyorsunuz? Sizden haber almaktan memnuniyet duyarım. Aşağıdaki formu doldurun, en kısa sürede size dönüş yapacağım.",
@@ -113,6 +125,8 @@
         "discussSimilar": "Benzer Bir Proje Konuşalım"
     },
     "Blog": {
+        "metaTitle": "Blog",
+        "metaDescription": "Barış Çilak'tan backend geliştirme, yapay zeka entegrasyonları, otomasyon ve yazılım mimarisi hakkında teknik makaleler.",
         "writing": "Yazılar",
         "title": "Blog",
         "description": "Backend geliştirme, yapay zeka entegrasyonları, otomasyon ve yazılım mimarisi hakkında teknik makaleler.",
@@ -197,6 +211,19 @@
         "projects": "Projeler",
         "blogPosts": "Blog Yazıları",
         "experiences": "Deneyimler",
-        "signOut": "Çıkış Yap"
+        "educations": "Eğitimler",
+        "inbox": "Gelen Kutusu",
+        "mediaLibrary": "Medya Kütüphanesi",
+        "seoSettings": "SEO Ayarları",
+        "signOut": "Çıkış Yap",
+        "welcome": "Hoşgeldin,",
+        "totalViews": "Toplam Görüntülenme",
+        "totalProjects": "Toplam Proje",
+        "totalBlogs": "Toplam Blog Yazısı",
+        "newMessages": "Yeni Mesajlar",
+        "totalExperiences": "Deneyimler",
+        "totalEducations": "Eğitimler",
+        "quickLinks": "Hızlı Yönlendirmeler",
+        "quickLinksDesc": "Sistem trafiğini grafikler sekmesinden okuyabilir, sol menü üzerinden mesajlara cevap verebilirsiniz."
     }
 }

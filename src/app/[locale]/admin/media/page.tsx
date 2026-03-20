@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import dbConnect from "@/lib/mongoose";
 import Media from "@/models/Media";
 import ClientMediaGallery from "./ClientMediaGallery";
+import { getTranslations } from "next-intl/server";
 
 export default async function AdminMediaPage({ params }: { params: Promise<{ locale: string }> }) {
     const session = await getServerSession(authOptions);
@@ -12,6 +13,8 @@ export default async function AdminMediaPage({ params }: { params: Promise<{ loc
     if (!session) {
         redirect(`/${locale}/admin/login`);
     }
+
+    const t = await getTranslations({ locale, namespace: "Admin" });
 
     await dbConnect();
     const mediaList = await Media.find({}).sort({ createdAt: -1 }).lean();
@@ -25,7 +28,7 @@ export default async function AdminMediaPage({ params }: { params: Promise<{ loc
     return (
         <div>
             <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Medya Kütüphanesi</h1>
+                <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{t("mediaLibrary")}</h1>
             </div>
             <ClientMediaGallery mediaList={safeMediaList} />
         </div>

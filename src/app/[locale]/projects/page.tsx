@@ -4,16 +4,19 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { getDbProjects } from "@/lib/dataFetching";
 
-export const metadata: Metadata = {
-    title: "Projects",
-    description:
-        "Explore Barış Çilak's backend and automation projects including AI chatbots, speech-to-text platforms, and data pipelines.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
+    const t = await getTranslations({ locale, namespace: "Projects" });
+    return {
+        title: t("title"),
+        description: t("description"),
+    };
+}
 
 export default async function ProjectsPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
-  const projects = await getDbProjects(locale);
-  const t = await getTranslations("Projects");
+    const { locale } = await params;
+    const projects = await getDbProjects(locale);
+    const t = await getTranslations({ locale, namespace: "Projects" });
     const featuredProjects = projects.filter((p) => p.featured);
     const otherProjects = projects.filter((p) => !p.featured);
 
@@ -31,7 +34,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
 
                 {/* Featured */}
                 <AnimatedSection>
-                    <h2 className="text-slate-500 dark:text-slate-500 text-sm uppercase tracking-widest font-medium mb-6">{t("featured")}</h2 >
+                    <h2 className="text-slate-500 dark:text-slate-500 text-sm uppercase tracking-widest font-medium mb-6">{t("featured")}</h2>
                     <div className="grid md:grid-cols-3 gap-6 mb-16">
                         {featuredProjects.map((project, i) => (
                             <AnimatedSection key={project.id} delay={i * 0.1}>
@@ -44,7 +47,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
                 {/* Other projects */}
                 {otherProjects.length > 0 && (
                     <AnimatedSection>
-                        <h2 className="text-slate-500 dark:text-slate-500 text-sm uppercase tracking-widest font-medium mb-6">{t("other")}</h2 >
+                        <h2 className="text-slate-500 dark:text-slate-500 text-sm uppercase tracking-widest font-medium mb-6">{t("other")}</h2>
                         <div className="grid md:grid-cols-2 gap-6">
                             {otherProjects.map((project, i) => (
                                 <AnimatedSection key={project.id} delay={i * 0.1}>
