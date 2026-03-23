@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/components/AuthProvider";
+import Script from "next/script";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
@@ -111,6 +112,20 @@ export default async function RootLayout({
               <Navbar />
               <main className="min-h-screen">{children}</main>
               <Footer />
+              <Script 
+                src="https://chatbot.altikodtech.com.tr/embed.js" 
+                data-api-base="https://chatbot.altikodtech.com.tr" 
+                data-workflow="bariscilak_dev_mn2wpy15" 
+                data-title="AsistChat" 
+                data-position="right" 
+                data-primary="#2d8cff" 
+                data-theme="light" 
+                data-accent="#2D8CFF" 
+                data-radius="pill" 
+                data-density="normal" 
+                data-greeting="Merhaba Ben Barış'ın Kişisel Yapay Zeka Asistanıyım"
+                strategy="afterInteractive"
+              />
             </NextIntlClientProvider>
           </ThemeProvider>
         </AuthProvider>

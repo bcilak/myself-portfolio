@@ -16,7 +16,6 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import TiltCard from "@/components/ui/TiltCard";
 import InfiniteMarquee from "@/components/ui/InfiniteMarquee";
 import ParallaxText from "@/components/ui/ParallaxText";
-import AIChatDemo from "@/components/ui/AIChatDemo";
 
 export default function HomeClient({
   featuredProjects,
@@ -235,7 +234,7 @@ export default function HomeClient({
         </section>
       </AnimatedSection>
       
-      <AIChatDemo />
+
     </div>
   );
 }
