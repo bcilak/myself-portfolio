@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { getTranslations } from "next-intl/server";
-import { getCaseStudies } from "@/data/case-studies";
+import { getDbCaseStudies } from "@/lib/dataFetching";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function CaseStudiesPage({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
     const t = await getTranslations("CaseStudies");
-    const caseStudies = getCaseStudies(locale);
+    const caseStudies = await getDbCaseStudies(locale);
 
     return (
         <div className="pt-24">
@@ -82,7 +82,7 @@ export default async function CaseStudiesPage({ params }: { params: Promise<{ lo
                                             <span className="text-orange-400">⚠️</span> {t("challenges")}
                                         </h3>
                                         <ul className="space-y-2 mb-6">
-                                            {cs.challenges.map((c) => (
+                                            {cs.challenges.map((c: string) => (
                                                 <li key={c} className="flex items-start gap-2 text-slate-500 dark:text-slate-500 text-sm">
                                                     <span className="text-orange-400 mt-0.5">•</span>
                                                     {c}
@@ -94,7 +94,7 @@ export default async function CaseStudiesPage({ params }: { params: Promise<{ lo
                                             <span className="text-green-400">📚</span> {t("lessonsLearned")}
                                         </h3>
                                         <ul className="space-y-2 mb-6">
-                                            {cs.lessons.map((l) => (
+                                            {cs.lessons.map((l: string) => (
                                                 <li key={l} className="flex items-start gap-2 text-slate-500 dark:text-slate-500 text-sm">
                                                     <span className="text-green-400 mt-0.5">✓</span>
                                                     {l}
@@ -105,7 +105,7 @@ export default async function CaseStudiesPage({ params }: { params: Promise<{ lo
                                         <div>
                                             <h3 className="text-slate-700 dark:text-slate-300 font-semibold mb-3">{t("technologies")}</h3>
                                             <div className="flex flex-wrap gap-2">
-                                                {cs.technologies.map((t) => (
+                                                {cs.technologies.map((t: string) => (
                                                     <span
                                                         key={t}
                                                         className="px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-400 text-xs font-medium border border-cyan-500/20"

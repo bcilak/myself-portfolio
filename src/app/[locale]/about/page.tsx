@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import { skillCategories } from "@/data/skills";
-import { getDbExperiences } from "@/lib/dataFetching";
+import { getDbExperiences, getDbSkills } from "@/lib/dataFetching";
 
 const principles = [
     {
@@ -44,6 +43,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
     // Fetch experiences from DB (falls back to empty array if none)
     const experiences = await getDbExperiences(locale);
+    const skillCategories = await getDbSkills(locale);
 
     return (
         <div className="pt-24">
@@ -122,7 +122,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                 <AnimatedSection>
                     <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-8">{tSection("coreTech")}</h2>
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-                        {skillCategories.map((cat, i) => (
+                        {skillCategories.map((cat: any, i: number) => (
                             <AnimatedSection key={cat.name} delay={i * 0.08}>
                                 <div className="glass-card rounded-xl p-5">
                                     <div className="flex items-center gap-2 mb-4">
@@ -132,7 +132,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                                         </h3>
                                     </div>
                                     <div className="space-y-2">
-                                        {cat.skills.map((skill) => (
+                                        {cat.skills.map((skill: any) => (
                                             <div key={skill.name} className="flex items-center justify-between">
                                                 <div className="flex items-center gap-2">
                                                     <span className="text-base">{skill.icon}</span>

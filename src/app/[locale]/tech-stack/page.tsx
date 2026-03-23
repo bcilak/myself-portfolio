@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { getTranslations } from "next-intl/server";
-import { skillCategories } from "@/data/skills";
+import { getDbSkills } from "@/lib/dataFetching";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
@@ -19,8 +19,9 @@ const levelColors: Record<string, string> = {
 };
 
 export default async function TechStackPage({ params }: { params: Promise<{ locale: string }> }) {
-    await params;
+    const { locale } = await params;
     const t = await getTranslations("TechStack");
+    const skillCategories = await getDbSkills(locale);
 
     return (
         <div className="pt-24">
@@ -57,7 +58,7 @@ export default async function TechStackPage({ params }: { params: Promise<{ loca
                                     {t(`categories.${cat.name}` as any) || cat.name}
                                 </h2>
                                 <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                    {cat.skills.map((skill, i) => (
+                                    {cat.skills.map((skill: any, i: number) => (
                                         <AnimatedSection key={skill.name} delay={ci * 0.05 + i * 0.05}>
                                             <div className="glass-card rounded-xl p-5 flex flex-col items-center text-center gap-3 hover:border-cyan-500/20 transition-all group hover:-translate-y-1">
                                                 <span className="text-3xl">{skill.icon}</span>

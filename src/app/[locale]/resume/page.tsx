@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import { getDbExperiences, getDbEducations } from "@/lib/dataFetching";
-import { skillCategories } from "@/data/skills";
+import { getDbExperiences, getDbEducations, getDbSkills } from "@/lib/dataFetching";
 import { getTranslations } from "next-intl/server";
 import dbConnect from "@/lib/mongoose";
 import Settings from "@/models/Settings";
@@ -22,6 +21,7 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
   const tTech = await getTranslations("TechStack");
   const experiences = await getDbExperiences(locale);
   const educations = await getDbEducations(locale);
+  const skillCategories = await getDbSkills(locale);
 
   // Fetch contact info from DB Settings
   await dbConnect();
@@ -122,7 +122,7 @@ export default async function ResumePage({ params }: { params: Promise<{ locale:
                                             {tTech(`categories.${cat.name}` as any) || cat.name}
                                         </span>
                                         <div className="flex flex-wrap gap-2 flex-1">
-                                            {cat.skills.map((skill) => (
+                                            {cat.skills.map((skill: any) => (
                                                 <span
                                                     key={skill.name}
                                                     className="text-xs text-slate-700 dark:text-slate-300 bg-white/5 px-2 py-0.5 rounded border border-black/5 dark:border-white/5"

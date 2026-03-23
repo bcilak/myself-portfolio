@@ -3,6 +3,8 @@ import Project from "@/models/Project";
 import Blog from "@/models/Blog";
 import Experience from "@/models/Experience";
 import Education from "@/models/Education";
+import Skill from "@/models/Skill";
+import CaseStudy from "@/models/CaseStudy";
 
 // Projects Verilerini Çek
 export async function getDbProjects(locale: string) {
@@ -78,4 +80,52 @@ export async function getDbEducations(locale: string) {
         school: e.school[locale] || e.school.en,
         description: e.description?.[locale] || e.description?.en || "",
     }));
+}
+
+// Olay İncelemelerini (Case Studies) Çek
+export async function getDbCaseStudies(locale: string) {
+    await dbConnect();
+    const dbCaseStudies = await CaseStudy.find({}).sort({ order: 1, createdAt: -1 }).lean();
+
+    return dbCaseStudies.map((cs: any) => ({
+        slug: cs.slug,
+        icon: cs.icon,
+        title: cs.title?.[locale] || cs.title?.en || "",
+        subtitle: cs.subtitle?.[locale] || cs.subtitle?.en || "",
+        category: cs.category?.[locale] || cs.category?.en || "",
+        problem: cs.problem?.[locale] || cs.problem?.en || "",
+        approach: cs.approach?.[locale] || cs.approach?.en || "",
+        architecture: cs.architecture?.[locale] || cs.architecture?.en || "",
+        impact: cs.impact?.[locale] || cs.impact?.en || "",
+        challenges: cs.challenges?.[locale] || cs.challenges?.en || [],
+        lessons: cs.lessons?.[locale] || cs.lessons?.en || [],
+        technologies: cs.technologies || [],
+    }));
+}
+
+// Yetenekleri (Skills) Çek
+export async function getDbSkills(locale: string) {
+    await dbConnect();
+    const dbSkills = await Skill.find({}).sort({ order: 1, createdAt: -1 }).lean();
+
+    const categoriesMap = new Map();
+
+    dbSkills.forEach((skill: any) => {
+        const catName = skill.category?.[locale] || skill.category?.en || "";
+        if (!categoriesMap.has(catName)) {
+            categoriesMap.set(catName, {
+                name: catName,
+                icon: skill.categoryIcon || "",
+                skills: []
+            });
+        }
+        categoriesMap.get(catName).skills.push({
+            name: skill.name,
+            icon: skill.icon,
+            level: skill.level,
+            featured: skill.featured || false
+        });
+    });
+
+    return Array.from(categoriesMap.values());
 }

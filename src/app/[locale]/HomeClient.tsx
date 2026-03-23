@@ -7,7 +7,6 @@ import ProjectCard from "@/components/ui/ProjectCard";
 import BlogCard from "@/components/ui/BlogCard";
 import { type Project } from "@/data/projects";
 import { type BlogPost } from "@/data/blog";
-import { featuredSkills } from "@/data/skills";
 import { type Experience } from "@/data/experience";
 import { useTranslations } from "next-intl";
 import GithubStatsWidget from "@/components/ui/GithubStatsWidget";
@@ -22,11 +21,13 @@ import AIChatDemo from "@/components/ui/AIChatDemo";
 export default function HomeClient({
   featuredProjects,
   recentPosts,
-  experiences
+  experiences,
+  featuredSkills
 }: {
   featuredProjects: Project[];
   recentPosts: BlogPost[];
   experiences: Experience[];
+  featuredSkills: any[];
 }) {
   const t = useTranslations("Home");
   const tSection = useTranslations("Sections");
