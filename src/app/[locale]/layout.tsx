@@ -113,17 +113,8 @@ export default async function RootLayout({
               <main className="min-h-screen">{children}</main>
               <Footer />
               <Script 
-                src="https://chatbot.altikodtech.com.tr/embed.js" 
-                data-api-base="https://chatbot.altikodtech.com.tr" 
-                data-workflow="bariscilak_dev_mn2wpy15" 
-                data-title="AsistChat" 
-                data-position="right" 
-                data-primary="#2d8cff" 
-                data-theme="light" 
-                data-accent="#2D8CFF" 
-                data-radius="pill" 
-                data-density="normal" 
-                data-greeting="Merhaba Ben Barış'ın Kişisel Yapay Zeka Asistanıyım"
+                src="https://chatbot.altikodtech.com.tr/static/widget.js" 
+                data-bot-id="1"
                 strategy="afterInteractive"
               />
             </NextIntlClientProvider>
