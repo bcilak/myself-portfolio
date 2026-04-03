@@ -12,6 +12,7 @@
     },
     "Home": {
         "available": "Freelance projeler için müsait",
+        "title": "Bilgisayar Mühendisi",
         "greeting": "Merhaba, Ben",
         "role": "Full Stack / AI Developer",
         "description": "AI destekli scalable web uygulamaları geliştiriyorum. Akıllı backend sistemleri ve yapay zeka entegrasyonlarında uzmanım.",

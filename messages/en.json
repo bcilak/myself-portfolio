@@ -12,6 +12,7 @@
   },
   "Home": {
     "available": "Available for freelance projects",
+    "title": "Computer Engineer",
     "greeting": "Hi, I am",
     "role": "Full Stack / AI Developer",
     "description": "I build AI-powered scalable web applications. Specializing in intelligent backend systems and seamless AI integrations.",

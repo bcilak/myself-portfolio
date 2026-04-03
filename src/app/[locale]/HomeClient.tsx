@@ -34,18 +34,18 @@ export default function HomeClient({
   return (
     <div className="pt-16">
       <section className="relative min-h-[calc(100svh-4rem)] md:min-h-screen flex items-center overflow-hidden">
-        
+
         {/* Animated Background Blobs */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <motion.div 
+          <motion.div
             animate={{ x: [0, 80, -40, 0], y: [0, -80, 40, 0], scale: [1, 1.2, 0.9, 1] }}
             transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-            className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-cyan-500/10 dark:bg-cyan-500/20 blur-[100px]" 
+            className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-cyan-500/10 dark:bg-cyan-500/20 blur-[100px]"
           />
-          <motion.div 
+          <motion.div
             animate={{ x: [0, -100, 60, 0], y: [0, 100, -50, 0], scale: [1, 1.3, 0.85, 1] }}
             transition={{ duration: 22, repeat: Infinity, ease: "linear", delay: 2 }}
-            className="absolute top-1/2 right-1/4 w-[500px] h-[500px] rounded-full bg-indigo-500/10 dark:bg-blue-600/20 blur-[100px]" 
+            className="absolute top-1/2 right-1/4 w-[500px] h-[500px] rounded-full bg-indigo-500/10 dark:bg-blue-600/20 blur-[100px]"
           />
         </div>
 
@@ -79,6 +79,9 @@ export default function HomeClient({
               <motion.h1 initial={{ opacity: 0, y: 30, scale: 0.95 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.1 }} className="text-5xl md:text-6xl font-bold leading-tight tracking-tight">
                 {t("greeting")} <span className="gradient-text">Barış Çilak</span>
               </motion.h1>
+              <motion.h2 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.15 }} className="text-2xl md:text-3xl font-semibold mt-2 text-slate-800 dark:text-slate-200">
+                {t("title")}
+              </motion.h2>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 100, damping: 10, delay: 0.2 }} className="text-xl mt-4 font-medium h-8">
                 <TypewriterRole roles={[t("role"), "AI Integrations Expert", "Backend Architecture Specialist"]} speed={80} pause={2500} />
               </motion.div>
@@ -233,7 +236,7 @@ export default function HomeClient({
           </div>
         </section>
       </AnimatedSection>
-      
+
 
     </div>
   );
