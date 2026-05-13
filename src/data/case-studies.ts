@@ -95,6 +95,62 @@ export const caseStudiesEn: CaseStudy[] = [
         impact: "20 person-hours/week saved, 12 manual processes automated",
         technologies: ["Node.js", "React", "PostgreSQL", "Redis", "Docker", "Power Automate"],
     },
+    {
+        slug: "cbs-spatial-decision-support",
+        title: "CBS Spatial Decision Support System",
+        subtitle: "Turning field data into map-based operational clarity",
+        category: "GIS / Full Stack",
+        icon: "🗺️",
+        problem:
+            "Field and location-based records were hard to interpret because they lived in disconnected files, lists, and notes. Teams could store data, but they could not easily see regional patterns, compare locations, or understand which area needed attention first.",
+        approach:
+            "Designed a CBS platform around a map-first workflow: location records, region filters, detail panels, reporting logic, and admin-managed content were brought into one clean operational dashboard.",
+        architecture:
+            "Interactive map UI → region and layer filters → location detail panel → MongoDB-backed records → Next.js API routes → reporting-ready data model. GeoJSON-compatible structures keep the system ready for new layers and external GIS integrations.",
+        challenges: [
+            "Making spatial data useful without overwhelming non-technical users",
+            "Designing a data model that can grow with new map layers and record types",
+            "Balancing map interaction, admin editing, and reporting needs in one interface",
+            "Keeping the product simple while preserving enough structure for future GIS analysis",
+        ],
+        lessons: [
+            "A strong CBS product is not just a map; it is a decision system built around location context",
+            "Spatial data modeling improves both backend discipline and frontend product thinking",
+            "Clear filters, detail panels, and reporting flows make complex field data feel trustworthy",
+            "This work sharpened my ability to translate messy real-world operations into a polished full-stack product",
+        ],
+        impact:
+            "Faster regional analysis, clearer operational priorities, stronger reporting, and a portfolio piece that shows advanced map-based product thinking",
+        technologies: ["Next.js", "React", "TypeScript", "MongoDB", "GIS", "Leaflet", "GeoJSON", "Tailwind CSS"],
+    },
+    {
+        slug: "cbs-spatial-decision-support",
+        title: "CBS Konumsal Karar Destek Sistemi",
+        subtitle: "Saha verisini harita tabanli operasyonel netlige donusturme",
+        category: "CBS / Full Stack",
+        icon: "🗺️",
+        problem:
+            "Saha ve lokasyon bazli kayitlar farkli dosyalarda, listelerde ve notlarda daginik oldugu icin yorumlanmasi zordu. Veri tutulabiliyordu ama bolgesel egilimleri gormek, lokasyonlari karsilastirmak ve hangi alanin once ele alinmasi gerektigini anlamak pratik degildi.",
+        approach:
+            "CBS sistemini harita merkezli bir is akisi olarak tasarladim. Konumsal kayitlar, bolge filtreleri, detay panelleri, raporlama mantigi ve admin tarafindan yonetilebilir icerik tek bir operasyon panelinde birlestirildi.",
+        architecture:
+            "Interaktif harita arayuzu → bolge ve katman filtreleri → lokasyon detay paneli → MongoDB destekli kayitlar → Next.js API route'lari → raporlamaya hazir veri modeli. GeoJSON uyumlu kurgu, yeni katmanlar ve dis CBS entegrasyonlari icin sistemi hazir hale getiriyor.",
+        challenges: [
+            "Konumsal veriyi teknik olmayan kullanicilar icin de rahat okunur hale getirmek",
+            "Yeni harita katmanlari ve kayit tipleriyle buyuyebilecek veri modeli tasarlamak",
+            "Harita etkilesimi, admin duzenleme ve raporlama ihtiyaclarini ayni deneyimde dengelemek",
+            "Urunu sade tutarken ilerideki CBS analizleri icin yeterli mimari derinligi korumak",
+        ],
+        lessons: [
+            "Güçlü bir CBS ürünü sadece harita değildir; lokasyon bağlamıyla karar aldıran bir sistemdir",
+            "Konumsal veri modelleme hem backend disiplinini hem de frontend ürün bakışını güçlendirir",
+            "Net filtreler, detay panelleri ve raporlama akışı karmaşık saha verisini güvenilir hissettirir",
+            "Bu çalışma, dağınık gerçek dünya operasyonlarını parlatılmış bir full-stack ürüne dönüştürme yeteneğimi çok iyi gösteriyor",
+        ],
+        impact:
+            "Daha hızlı bölgesel analiz, daha net operasyon öncelikleri, güçlü raporlama ve portfolyoda ileri seviye harita tabanlı ürün düşüncesini gösteren iddialı bir çalışma",
+        technologies: ["Next.js", "React", "TypeScript", "MongoDB", "CBS", "Leaflet", "GeoJSON", "Tailwind CSS"],
+    },
 ];
 
 export const caseStudiesTr: CaseStudy[] = [

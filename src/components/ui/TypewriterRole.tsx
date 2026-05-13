@@ -12,9 +12,10 @@ export default function TypewriterRole({ roles, speed = 80, pause = 2000 }: { ro
 
     if (isDeleting) {
       if (text === "") {
-        setIsDeleting(false);
-        setRoleIndex((prev) => (prev + 1) % roles.length);
-        timeoutId = setTimeout(() => {}, speed);
+        timeoutId = setTimeout(() => {
+          setIsDeleting(false);
+          setRoleIndex((prev) => (prev + 1) % roles.length);
+        }, speed);
       } else {
         timeoutId = setTimeout(() => setText(currentRole.substring(0, text.length - 1)), speed / 2);
       }

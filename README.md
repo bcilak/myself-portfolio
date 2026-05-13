@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Admin
 
-## Getting Started
+Next.js 16, React 19, next-intl, NextAuth and MongoDB based personal portfolio with an admin panel for projects, blog posts, skills, case studies, experience, education, media and settings.
 
-First, run the development server:
+## Requirements
+
+- Node.js 22+
+- MongoDB database
+- Optional OpenAI API key for admin content generation
+- Optional webhook URL for contact form notifications
+
+## Setup
+
+1. Copy `.env.example` to `.env.local`.
+2. Fill `MONGODB_URI`, `NEXTAUTH_SECRET` and `NEXTAUTH_URL`.
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The site runs at `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Required:
 
-## Learn More
+- `MONGODB_URI`: MongoDB connection string.
+- `NEXTAUTH_SECRET`: long random secret for JWT/session signing.
+- `NEXTAUTH_URL`: canonical app URL.
 
-To learn more about Next.js, take a look at the following resources:
+Optional:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `OPENAI_API_KEY`: enables AI content generation in admin forms.
+- `CONTACT_WEBHOOK_URL`: sends a notification when someone submits the contact form.
+- `CONTACT_WEBHOOK_FORMAT`: `generic`, `slack`, or `discord`.
+- `ENABLE_SETUP_ROUTES`: must be `true` to enable setup/migration endpoints.
+- `SETUP_TOKEN`: required token for setup/migration requests.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Setup Routes
 
-## Deploy on Vercel
+Setup routes are disabled by default. To run them locally, set:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```env
+ENABLE_SETUP_ROUTES="true"
+SETUP_TOKEN="your-one-time-token"
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Then call:
+
+```bash
+curl "http://localhost:3000/api/setup?token=your-one-time-token"
+curl "http://localhost:3000/api/setup/migrate?token=your-one-time-token"
+```
+
+Set `ENABLE_SETUP_ROUTES` back to `false` after use.
+
+## Contact Notifications
+
+The contact form always stores messages in MongoDB. To also receive an external notification, set `CONTACT_WEBHOOK_URL`.
+
+Examples:
+
+- Slack incoming webhook: `CONTACT_WEBHOOK_FORMAT="slack"`
+- Discord webhook: `CONTACT_WEBHOOK_FORMAT="discord"`
+- Make, Zapier or n8n webhook: `CONTACT_WEBHOOK_FORMAT="generic"`
+
+The webhook receives the sender name, email, subject and message text.
+
+## Commands
+
+```bash
+npm run dev
+npm run build
+npm run lint
+```
+
+## Security Notes
+
+- Never commit `.env.local`.
+- Rotate leaked database credentials and NextAuth secrets immediately.
+- Keep setup routes disabled in production.
+- Admin pages are protected by the Next.js proxy and write APIs also verify the NextAuth session.

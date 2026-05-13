@@ -2,8 +2,12 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import dbConnect from "@/lib/mongoose";
 import User from "@/models/User";
+import { validateSetupRequest } from "@/lib/setupGuard";
 
-export async function GET() {
+export async function GET(req: Request) {
+    const guardResponse = validateSetupRequest(req);
+    if (guardResponse) return guardResponse;
+
     try {
         await dbConnect();
 
@@ -22,7 +26,7 @@ export async function GET() {
         const passwordHash = await bcrypt.hash("admin123", salt);
 
         // Yeni admin kullanıcısını oluştur
-        const newUser = await User.create({
+        await User.create({
             username: "admin",
             passwordHash: passwordHash,
         });

@@ -120,6 +120,31 @@ export const projectsEn: Project[] = [
         screenshots: [],
         createdAt: "2024-02-10",
     },
+    {
+        id: "5",
+        slug: "cbs-spatial-decision-support-system",
+        title: "CBS Spatial Decision Support System",
+        shortDescription:
+            "A GIS-powered decision support system that turns location-based field data into clear operational insights.",
+        description:
+            "A comprehensive CBS (Geographic Information System) platform designed to collect, organize, visualize, and analyze spatial data from the field. The system brings map layers, asset records, region-based filtering, reporting, and operational follow-up into one dashboard so teams can make faster and more accurate decisions.",
+        technologies: ["Next.js", "React", "TypeScript", "MongoDB", "GIS", "Leaflet", "GeoJSON", "Tailwind CSS"],
+        githubUrl: "https://github.com/bcilak",
+        demoUrl: "#",
+        featured: true,
+        problem:
+            "Location-based operational data was scattered across manual lists, local files, and disconnected field notes. This made it difficult to see what was happening in each region, compare locations, prioritize work, and report progress with confidence.",
+        solution:
+            "Built a map-first CBS platform where spatial records can be viewed, filtered, enriched, and turned into practical reports. The system connects geographic context with business data, making every record easier to understand and every decision easier to justify.",
+        architecture:
+            "The frontend provides an interactive map interface with region filters, layer controls, detail panels, and responsive admin screens. Data is modeled with MongoDB and exposed through Next.js API routes. GeoJSON-compatible structures keep the system ready for future map layers, external GIS integrations, and richer spatial analysis workflows.",
+        challenges:
+            "The main challenge was translating raw geographic data into a clean decision-making experience. The interface had to stay simple for daily users while still supporting layered spatial data, detailed records, filtering, and future expansion.",
+        lessons:
+            "This project strengthened my spatial data modeling, map-based UI thinking, and product-oriented full-stack architecture. It showed that a strong developer does not only write features, but designs systems that make complex information feel usable, trustworthy, and decision-ready.",
+        screenshots: [],
+        createdAt: "2026-05-12",
+    },
 ];
 
 
@@ -223,6 +248,31 @@ export const projectsTr: Project[] = [
             "Ekipler arasındaki veri sözleşmeleri çoğu veri hattı hatasını önler. Veri tazeliğini izlemek, hataları izlemek kadar önemlidir.",
         screenshots: [],
         createdAt: "2024-02-10",
+    },
+    {
+        id: "5",
+        slug: "cbs-spatial-decision-support-system",
+        title: "CBS Konumsal Karar Destek Sistemi",
+        shortDescription:
+            "Saha ve lokasyon verilerini harita uzerinden okunabilir, raporlanabilir ve karar alinabilir hale getiren CBS tabanli sistem.",
+        description:
+            "CBS (Cografi Bilgi Sistemi) odakli bu platform; saha verilerini toplamak, duzenlemek, harita uzerinde gorsellestirmek, bolge bazli analiz etmek ve operasyonel takip sureclerine donusturmek icin hazirlandi. Harita katmanlari, kayit detaylari, filtreler, raporlama mantigi ve yonetim ekranlari tek bir panelde birleserek daginik veriyi net bir karar destek sistemine cevirir.",
+        technologies: ["Next.js", "React", "TypeScript", "MongoDB", "CBS", "Leaflet", "GeoJSON", "Tailwind CSS"],
+        githubUrl: "https://github.com/bcilak",
+        demoUrl: "#",
+        featured: true,
+        problem:
+            "Konuma bagli operasyonel veriler manuel listelerde, yerel dosyalarda ve kopuk saha notlarinda daginik duruyordu. Bu durum bolge bazli durumu gormeyi, lokasyonlari karsilastirmayi, onceliklendirme yapmayi ve guvenilir rapor uretmeyi zorlastiriyordu.",
+        solution:
+            "Harita merkezli bir CBS platformu gelistirildi. Kayitlar konumsal baglamiyla birlikte goruntulenebilir, filtrelenebilir, detaylandirilabilir ve rapora donusturulebilir hale geldi. Sistem, teknik veriyi is karari alinabilecek sade bir ekrana tasidi.",
+        architecture:
+            "On yuzde interaktif harita, bolge filtreleri, katman kontrolleri, detay panelleri ve responsive admin ekranlari yer aliyor. Veriler MongoDB tarafinda modelleniyor ve Next.js API route'lari uzerinden yonetiliyor. GeoJSON uyumlu yaklasim, ileride yeni harita katmanlari, dis CBS entegrasyonlari ve daha zengin konumsal analizler icin saglam bir temel olusturuyor.",
+        challenges:
+            "En buyuk zorluk ham cografi veriyi herkesin rahat kullanabilecegi bir karar deneyimine cevirmekti. Arayuz hem gunluk kullanicilar icin sade kalmali hem de katmanli veri, detayli kayit, filtreleme ve genisleme ihtiyaclarini tasiyabilmeliydi.",
+        lessons:
+            "Bu proje bana konumsal veri modelleme, harita tabanli arayuz dusunme ve urun odakli full-stack mimari konusunda ciddi bir seviye atlatti. Sadece kod yazan degil; karmasik bilgiyi sade, guvenilir ve karar aldiran bir sisteme donusturen bir gelistirici oldugumu guclu sekilde gosteriyor.",
+        screenshots: [],
+        createdAt: "2026-05-12",
     },
 ];
 

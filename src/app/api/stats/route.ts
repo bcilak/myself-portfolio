@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     try {
         const { type, slug } = await req.json();
 
-        if (!type || !slug) {
+        if (!["blog", "project"].includes(type) || typeof slug !== "string" || slug.length > 160) {
             return NextResponse.json({ error: "Eksik parametre" }, { status: 400 });
         }
 
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
         return NextResponse.json({ success: true, views: updatedDoc.views }, { status: 200 });
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("View increment error:", error);
         return NextResponse.json({ error: "Sunucu hatası" }, { status: 500 });
     }
