@@ -4,7 +4,6 @@ import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import ViewTracker from "@/components/ViewTracker";
 import { getDbProjects } from "@/lib/dataFetching";
-import { getProjects } from "@/data/projects";
 import { getTranslations } from "next-intl/server";
 
 interface Props {

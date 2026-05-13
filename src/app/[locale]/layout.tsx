@@ -39,8 +39,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isTr = locale === "tr";
   const title = isTr ? settings.titleTR : settings.titleEN;
   const description = isTr ? settings.descriptionTR : settings.descriptionEN;
+  const siteUrl = settings.siteUrl || process.env.NEXTAUTH_URL || "https://bariscilak.dev";
 
   return {
+    metadataBase: new URL(siteUrl),
     title: {
       default: title,
       template: `%s | ${title.split("—")[0]?.trim() || "Barış Çilak"}`,

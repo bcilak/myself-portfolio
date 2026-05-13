@@ -5,13 +5,15 @@ import Experience from "@/models/Experience";
 import Education from "@/models/Education";
 import Skill from "@/models/Skill";
 import CaseStudy from "@/models/CaseStudy";
+import { getProjects as getStaticProjects } from "@/data/projects";
+import { getCaseStudies as getStaticCaseStudies } from "@/data/case-studies";
 
 // Projects Verilerini Çek
 export async function getDbProjects(locale: string) {
     await dbConnect();
     const dbProjects = await Project.find({}).sort({ createdAt: -1 }).lean();
 
-    return dbProjects.map((p: any) => ({
+    const projects = dbProjects.map((p: any) => ({
         id: p._id.toString(),
         slug: p.slug,
         title: p.title[locale] || p.title.en,
@@ -31,6 +33,17 @@ export async function getDbProjects(locale: string) {
         views: p.views || 0,
         likes: p.likes || 0,
     }));
+
+    const projectSlugs = new Set(projects.map((project) => project.slug));
+    const missingStaticProjects = getStaticProjects(locale)
+        .filter((project) => !projectSlugs.has(project.slug))
+        .map((project) => ({
+            ...project,
+            views: project.views || 0,
+            likes: project.likes || 0,
+        }));
+
+    return [...projects, ...missingStaticProjects];
 }
 
 // Blog Verilerini Çek
@@ -87,7 +100,7 @@ export async function getDbCaseStudies(locale: string) {
     await dbConnect();
     const dbCaseStudies = await CaseStudy.find({}).sort({ order: 1, createdAt: -1 }).lean();
 
-    return dbCaseStudies.map((cs: any) => ({
+    const caseStudies = dbCaseStudies.map((cs: any) => ({
         slug: cs.slug,
         icon: cs.icon,
         title: cs.title?.[locale] || cs.title?.en || "",
@@ -101,6 +114,13 @@ export async function getDbCaseStudies(locale: string) {
         lessons: cs.lessons?.[locale] || cs.lessons?.en || [],
         technologies: cs.technologies || [],
     }));
+
+    const caseStudySlugs = new Set(caseStudies.map((caseStudy) => caseStudy.slug));
+    const missingStaticCaseStudies = getStaticCaseStudies(locale).filter(
+        (caseStudy) => !caseStudySlugs.has(caseStudy.slug)
+    );
+
+    return [...caseStudies, ...missingStaticCaseStudies];
 }
 
 // Yetenekleri (Skills) Çek
