@@ -1,11 +1,14 @@
 "use client";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 import { useState, useRef } from "react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 
 export default function ContactPage() {
   const t = useTranslations("Contact");
+  const locale = useLocale();
+  const isTr = locale === "tr";
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -14,11 +17,26 @@ export default function ContactPage() {
     setStatus("sending");
 
     const formData = new FormData(e.currentTarget);
+    const projectType = String(formData.get("projectType") ?? "").trim();
+    const budget = String(formData.get("budget") ?? "").trim();
+    const timeline = String(formData.get("timeline") ?? "").trim();
+    const existingSystem = String(formData.get("existingSystem") ?? "").trim();
+    const rawMessage = String(formData.get("message") ?? "").trim();
+
+    const briefLines = [
+      projectType ? `Project type: ${projectType}` : null,
+      budget ? `Budget: ${budget}` : null,
+      timeline ? `Timeline: ${timeline}` : null,
+      existingSystem ? `Existing system: ${existingSystem}` : null,
+      "",
+      rawMessage,
+    ].filter((line) => line !== null);
+
     const data = {
       name: String(formData.get("name") ?? "").trim(),
       email: String(formData.get("email") ?? "").trim(),
-      subject: String(formData.get("subject") ?? "").trim(),
-      message: String(formData.get("message") ?? "").trim(),
+      subject: String(formData.get("subject") ?? "").trim() || `Project brief: ${projectType || "General inquiry"}`,
+      message: briefLines.join("\n"),
     };
 
     try {
@@ -114,6 +132,7 @@ export default function ContactPage() {
                 <ul className="space-y-2 text-slate-500 dark:text-slate-500 text-sm">
                   {[
                     "Backend API Development",
+                    "CBS / GIS Dashboards",
                     "AI Chatbot Integration",
                     "Automation Systems",
                     "Data Pipeline Engineering",
@@ -132,7 +151,14 @@ export default function ContactPage() {
           {/* Contact Form */}
           <AnimatedSection className="md:col-span-3" delay={0.1}>
             <div className="glass-card rounded-2xl p-8">
-              <h2 className="text-slate-900 dark:text-slate-100 font-semibold text-lg mb-6">Send a Message</h2>
+              <h2 className="text-slate-900 dark:text-slate-100 font-semibold text-lg mb-2">
+                {isTr ? "Proje Ön Değerlendirme" : "Project Pre-Assessment"}
+              </h2>
+              <p className="text-slate-600 dark:text-slate-400 text-sm mb-6">
+                {isTr
+                  ? "Birkaç net bilgi bırakırsanız size daha hızlı ve doğru bir dönüş yapabilirim."
+                  : "Leave a few concrete details so I can respond with a sharper technical direction."}
+              </p>
 
               {status === "success" ? (
                 <div className="text-center py-10">
@@ -192,6 +218,79 @@ export default function ContactPage() {
                       placeholder={t("form.subjectPlaceholder")}
                       className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
                     />
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="projectType" className="block text-slate-600 dark:text-slate-400 text-sm mb-1.5">
+                        {isTr ? "Proje tipi" : "Project type"}
+                      </label>
+                      <select
+                        id="projectType"
+                        name="projectType"
+                        className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
+                      >
+                        <option value="">{isTr ? "Seçiniz" : "Select"}</option>
+                        <option value="CBS / GIS Dashboard">CBS / GIS Dashboard</option>
+                        <option value="AI Integration">AI Integration</option>
+                        <option value="Automation System">Automation System</option>
+                        <option value="Backend API">Backend API</option>
+                        <option value="Data Pipeline">Data Pipeline</option>
+                        <option value="Technical Consulting">Technical Consulting</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="timeline" className="block text-slate-600 dark:text-slate-400 text-sm mb-1.5">
+                        {isTr ? "Zaman planı" : "Timeline"}
+                      </label>
+                      <select
+                        id="timeline"
+                        name="timeline"
+                        className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
+                      >
+                        <option value="">{isTr ? "Seçiniz" : "Select"}</option>
+                        <option value="Urgent / 1-2 weeks">{isTr ? "Acil / 1-2 hafta" : "Urgent / 1-2 weeks"}</option>
+                        <option value="This month">{isTr ? "Bu ay" : "This month"}</option>
+                        <option value="1-3 months">1-3 months</option>
+                        <option value="Discovery first">{isTr ? "Önce keşif görüşmesi" : "Discovery first"}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label htmlFor="budget" className="block text-slate-600 dark:text-slate-400 text-sm mb-1.5">
+                        {isTr ? "Bütçe aralığı" : "Budget range"}
+                      </label>
+                      <select
+                        id="budget"
+                        name="budget"
+                        className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
+                      >
+                        <option value="">{isTr ? "Belirtmek istemiyorum" : "Prefer not to say"}</option>
+                        <option value="Small / Discovery">Small / Discovery</option>
+                        <option value="Mid-size MVP">Mid-size MVP</option>
+                        <option value="Production system">Production system</option>
+                        <option value="Long-term collaboration">Long-term collaboration</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="existingSystem" className="block text-slate-600 dark:text-slate-400 text-sm mb-1.5">
+                        {isTr ? "Mevcut sistem" : "Existing system"}
+                      </label>
+                      <select
+                        id="existingSystem"
+                        name="existingSystem"
+                        className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
+                      >
+                        <option value="">{isTr ? "Seçiniz" : "Select"}</option>
+                        <option value="No existing system">{isTr ? "Henüz yok" : "No existing system"}</option>
+                        <option value="Excel / manual process">Excel / manual process</option>
+                        <option value="Existing web app">Existing web app</option>
+                        <option value="Legacy system">Legacy system</option>
+                        <option value="Needs integration">Needs integration</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div>

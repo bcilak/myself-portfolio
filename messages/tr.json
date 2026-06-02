@@ -3,6 +3,7 @@
         "home": "Ana Sayfa",
         "about": "Hakkımda",
         "projects": "Projeler",
+        "demoLab": "Demo Lab",
         "caseStudies": "Vaka Çalışmaları",
         "blog": "Blog",
         "techStack": "Teknolojiler",
@@ -199,6 +200,7 @@
         "builtWith": "Next.js · TailwindCSS · Framer Motion ile geliştirildi",
         "links": {
             "projects": "Projeler",
+            "demoLab": "Demo Lab",
             "blog": "Blog",
             "caseStudies": "Vaka Çalışmaları",
             "techStack": "Teknoloji Yığını",

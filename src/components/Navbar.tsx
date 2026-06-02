@@ -15,6 +15,7 @@ export default function Navbar() {
         { href: "/", label: t("home") },
         { href: "/about", label: t("about") },
         { href: "/projects", label: t("projects") },
+        { href: "/demo-lab", label: t("demoLab") },
         { href: "/case-studies", label: t("caseStudies") },
         { href: "/blog", label: t("blog") },
         { href: "/tech-stack", label: t("techStack") },

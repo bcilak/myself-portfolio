@@ -3,6 +3,7 @@
     "home": "Home",
     "about": "About",
     "projects": "Projects",
+    "demoLab": "Demo Lab",
     "caseStudies": "Case Studies",
     "blog": "Blog",
     "techStack": "Tech Stack",
@@ -199,6 +200,7 @@
     "builtWith": "Built with Next.js · TailwindCSS · Framer Motion",
     "links": {
       "projects": "Projects",
+      "demoLab": "Demo Lab",
       "blog": "Blog",
       "caseStudies": "Case Studies",
       "techStack": "Tech Stack",
