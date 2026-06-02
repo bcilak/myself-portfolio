@@ -5,6 +5,7 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 import ViewTracker from "@/components/ViewTracker";
 import { getDbProjects } from "@/lib/dataFetching";
 import { getTranslations } from "next-intl/server";
+import { createSeoMetadata } from "@/lib/seo";
 
 interface Props {
     params: Promise<{ slug: string; locale: string }>;
@@ -17,10 +18,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const projectList = await getDbProjects(locale);
     const project = projectList.find((p) => p.slug === slug);
     if (!project) return { title: "Project Not Found" };
-    return {
+    return createSeoMetadata({
+        locale,
+        path: `/projects/${project.slug}`,
         title: project.title,
         description: project.shortDescription,
-    };
+        keywords: [project.title, ...project.technologies, "Barış Çilak project"],
+    });
 }
 
 export default async function ProjectDetailPage({ params }: Props) {

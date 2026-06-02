@@ -3,14 +3,18 @@ import type { Metadata } from "next";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import ProjectCard from "@/components/ui/ProjectCard";
 import { getDbProjects } from "@/lib/dataFetching";
+import { createSeoMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: "Projects" });
-    return {
+    return createSeoMetadata({
+        locale,
+        path: "/projects",
         title: t("title"),
         description: t("description"),
-    };
+        keywords: ["Barış Çilak projeleri", "CBS projeleri", "AI projeleri", "backend API", "otomasyon"],
+    });
 }
 
 export default async function ProjectsPage({ params }: { params: Promise<{ locale: string }> }) {

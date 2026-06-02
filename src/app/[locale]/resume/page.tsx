@@ -5,14 +5,18 @@ import { getDbExperiences, getDbEducations, getDbSkills } from "@/lib/dataFetchi
 import { getTranslations } from "next-intl/server";
 import dbConnect from "@/lib/mongoose";
 import Settings from "@/models/Settings";
+import { createSeoMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: "Resume" });
-    return {
+    return createSeoMetadata({
+        locale,
+        path: "/resume",
         title: t("title"),
         description: t("description"),
-    };
+        keywords: ["Barış Çilak CV", "Bilgisayar Mühendisi CV", "Full Stack Developer resume"],
+    });
 }
 
 export default async function ResumePage({ params }: { params: Promise<{ locale: string }> }) {

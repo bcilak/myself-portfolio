@@ -8,6 +8,7 @@ import ViewTracker from "@/components/ViewTracker";
 import { getDbBlogPosts } from "@/lib/dataFetching";
 import { getBlogPosts } from "@/data/blog";
 import { getTranslations } from "next-intl/server";
+import { createSeoMetadata } from "@/lib/seo";
 
 interface Props {
     params: Promise<{ slug: string; locale: string }>;
@@ -19,18 +20,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug, locale = "en" } = await params;
     const post = getBlogPosts(locale).find((p) => p.slug === slug);
     if (!post) return { title: "Post Not Found" };
-    return {
+    return createSeoMetadata({
+        locale,
+        path: `/blog/${post.slug}`,
         title: post.title,
         description: post.excerpt,
         keywords: post.tags,
-        openGraph: {
-            title: post.title,
-            description: post.excerpt,
-            type: "article",
-            publishedTime: post.createdAt,
-            tags: post.tags,
-        },
-    };
+        type: "article",
+        publishedTime: post.createdAt,
+        tags: post.tags,
+    });
 }
 
 export default async function BlogDetailPage({ params }: Props) {

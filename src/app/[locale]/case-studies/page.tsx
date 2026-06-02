@@ -3,14 +3,18 @@ import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { getTranslations } from "next-intl/server";
 import { getDbCaseStudies } from "@/lib/dataFetching";
+import { createSeoMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: "CaseStudies" });
-    return {
+    return createSeoMetadata({
+        locale,
+        path: "/case-studies",
         title: t("title"),
         description: t("description"),
-    };
+        keywords: ["case study", "CBS vaka çalışması", "AI backend", "otomasyon mimarisi"],
+    });
 }
 
 export default async function CaseStudiesPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -2,14 +2,18 @@ import type { Metadata } from "next";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { getTranslations } from "next-intl/server";
 import { getDbSkills } from "@/lib/dataFetching";
+import { createSeoMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: "TechStack" });
-    return {
+    return createSeoMetadata({
+        locale,
+        path: "/tech-stack",
         title: t("title"),
         description: t("description"),
-    };
+        keywords: ["Next.js", "FastAPI", "MongoDB", "AI integrations", "GIS dashboard", "Docker"],
+    });
 }
 
 const levelColors: Record<string, string> = {

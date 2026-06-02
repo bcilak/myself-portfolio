@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { getDbExperiences, getDbSkills } from "@/lib/dataFetching";
+import { createSeoMetadata } from "@/lib/seo";
 
 const principles = [
     {
@@ -29,10 +30,19 @@ const principles = [
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: "About" });
-    return {
+    return createSeoMetadata({
+        locale,
+        path: "/about",
         title: t("metaTitle"),
         description: t("metaDescription"),
-    };
+        keywords: [
+            "Barış Çilak",
+            "Bilgisayar Mühendisi",
+            "Full Stack Developer",
+            "AI Developer",
+            "CBS GIS dashboard",
+        ],
+    });
 }
 
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {

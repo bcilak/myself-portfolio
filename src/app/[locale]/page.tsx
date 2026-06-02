@@ -1,5 +1,31 @@
 import { getDbProjects, getDbBlogPosts, getDbExperiences, getDbSkills } from "@/lib/dataFetching";
 import HomeClient from "./HomeClient";
+import type { Metadata } from "next";
+import { createSeoMetadata } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const isTr = locale === "tr";
+
+  return createSeoMetadata({
+    locale,
+    path: "/",
+    title: isTr
+      ? "Barış Çilak | Bilgisayar Mühendisi, Full Stack & AI Developer"
+      : "Barış Çilak | Computer Engineer, Full Stack & AI Developer",
+    description: isTr
+      ? "Web uygulamaları, backend servisleri, CBS/GIS dashboardları, otomasyon akışları ve yapay zeka destekli sistemler geliştiren Bilgisayar Mühendisi."
+      : "Computer Engineer building web applications, backend services, GIS dashboards, automation workflows, and AI-powered systems.",
+    keywords: [
+      "Barış Çilak",
+      "Bilgisayar Mühendisi",
+      "Full Stack Developer",
+      "AI Developer",
+      "CBS GIS dashboard",
+      "Backend API",
+    ],
+  });
+}
 
 // Server Component
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
