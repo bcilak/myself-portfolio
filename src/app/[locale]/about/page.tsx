@@ -44,6 +44,14 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
     // Fetch experiences from DB (falls back to empty array if none)
     const experiences = await getDbExperiences(locale);
     const skillCategories = await getDbSkills(locale);
+    const isTr = locale === "tr";
+    const expertiseItems = [
+        { area: isTr ? "Full Stack Web Uygulamaları" : "Full Stack Web Applications", pct: 92 },
+        { area: isTr ? "Backend API ve Entegrasyon" : "Backend API & Integration", pct: 90 },
+        { area: isTr ? "CBS / GIS Dashboardları" : "GIS Dashboards", pct: 84 },
+        { area: isTr ? "Otomasyon Akışları" : "Automation Workflows", pct: 86 },
+        { area: isTr ? "AI Destekli Sistemler" : "AI-Powered Systems", pct: 82 },
+    ];
 
     return (
         <div className="pt-24">
@@ -74,13 +82,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
                     <AnimatedSection className="md:col-span-2" delay={0.1}>
                         <h2 className="text-slate-900 dark:text-slate-100 font-semibold mb-4">{tAbout("expertise")}</h2>
                         <div className="space-y-3">
-                            {[
-                                { area: "Backend Development", pct: 95 },
-                                { area: "Automation Systems", pct: 90 },
-                                { area: "AI Integrations", pct: 85 },
-                                { area: "Data Processing", pct: 80 },
-                                { area: "DevOps & Docker", pct: 75 },
-                            ].map((item) => (
+                            {expertiseItems.map((item) => (
                                 <div key={item.area}>
                                     <div className="flex justify-between text-sm mb-1">
                                         <span className="text-slate-700 dark:text-slate-300">{item.area}</span>
