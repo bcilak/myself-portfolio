@@ -74,6 +74,24 @@ body {
   backdrop-filter: blur(8px);
 }
 
+select {
+  color-scheme: light;
+}
+
+.dark select {
+  color-scheme: dark;
+}
+
+select option {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.dark select option {
+  background: #0f1420;
+  color: #e2e8f0;
+}
+
 /* Glow effect */
 .glow-accent {
   box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);

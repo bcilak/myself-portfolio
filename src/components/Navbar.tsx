@@ -51,15 +51,15 @@ export default function Navbar() {
                 : "bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-b border-black/5 dark:border-white/5"
                 }`}
         >
-            <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <nav className="max-w-[1440px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
                 {/* Logo */}
-                <Link href="/" className="font-bold text-lg tracking-tight">
+                <Link href="/" className="shrink-0 font-bold text-lg tracking-tight">
                     <span className="gradient-text">Barış</span>
                     <span className="text-slate-600 dark:text-slate-400">Çilak</span>
                 </Link>
 
                 {/* Desktop Links */}
-                <ul className="hidden md:flex items-center gap-1">
+                <ul className="hidden lg:flex flex-1 min-w-0 items-center justify-center gap-0.5 xl:gap-1">
                     {navLinks.map((link) => {
                         const isActive =
                             link.href === "/"
@@ -69,7 +69,7 @@ export default function Navbar() {
                             <li key={link.href}>
                                 <Link
                                     href={link.href}
-                                    className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors duration-200 ${isActive
+                                    className={`block whitespace-nowrap px-2.5 xl:px-3 py-2 rounded-md text-xs xl:text-sm font-medium leading-none transition-colors duration-200 ${isActive
                                         ? "text-cyan-600 bg-cyan-600/10 dark:text-cyan-400 dark:bg-cyan-400/10"
                                         : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5"
                                         }`}
@@ -81,11 +81,11 @@ export default function Navbar() {
                     })}
                 </ul>
 
-                <div className="flex items-center">
+                <div className="flex shrink-0 items-center">
                     {/* Language Toggle (Desktop) */}
                     <button
                         onClick={toggleLocale}
-                        className="hidden md:flex items-center gap-1.5 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors mr-1"
+                        className="hidden lg:flex items-center gap-1.5 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors mr-1"
                         aria-label={tCommon("toggleLanguage")}
                     >
                         <Globe size={18} />
@@ -95,7 +95,7 @@ export default function Navbar() {
                     {/* Theme Toggle (Desktop) */}
                     <button
                         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                        className="hidden md:flex p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors mr-2"
+                        className="hidden lg:flex p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors mr-2"
                         aria-label={tCommon("toggleTheme")}
                     >
                         {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
@@ -104,7 +104,7 @@ export default function Navbar() {
                     {/* CTA */}
                     <Link
                         href="/contact"
-                        className="hidden md:block px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-sm font-semibold transition-colors duration-200"
+                        className="hidden lg:block whitespace-nowrap px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-sm font-semibold leading-none transition-colors duration-200"
                     >
                         {t("hireMe")}
                     </Link>
@@ -113,7 +113,7 @@ export default function Navbar() {
                 {/* Hamburger */}
                 <button
                     onClick={() => setMenuOpen(!menuOpen)}
-                    className="md:hidden flex flex-col gap-1.5 p-2"
+                    className="lg:hidden flex flex-col gap-1.5 p-2"
                     aria-label={tCommon("toggleMenu")}
                 >
                     <span
@@ -135,7 +135,7 @@ export default function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-slate-50 dark:bg-[#0f1420] border-b border-black/5 dark:border-white/5 overflow-hidden"
+                        className="lg:hidden bg-slate-50 dark:bg-[#0f1420] border-b border-black/5 dark:border-white/5 overflow-hidden"
                     >
                         <ul className="px-6 py-4 flex flex-col gap-1">
                             {navLinks.map((link) => {

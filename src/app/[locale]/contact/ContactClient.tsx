@@ -9,6 +9,8 @@ export default function ContactPage() {
   const t = useTranslations("Contact");
   const locale = useLocale();
   const isTr = locale === "tr";
+  const selectClass =
+    "w-full px-4 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-900/80 border border-black/10 dark:border-white/10 text-slate-800 dark:text-slate-200 focus:outline-none focus:border-cyan-500/50 text-sm transition-colors";
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -55,7 +57,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="pt-24">
+    <div className="pt-32 md:pt-36">
       <div className="max-w-5xl mx-auto px-6 pb-24">
         <AnimatedSection>
           <div className="mb-16">
@@ -228,7 +230,7 @@ export default function ContactPage() {
                       <select
                         id="projectType"
                         name="projectType"
-                        className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
+                        className={selectClass}
                       >
                         <option value="">{isTr ? "Seçiniz" : "Select"}</option>
                         <option value="CBS / GIS Dashboard">CBS / GIS Dashboard</option>
@@ -246,7 +248,7 @@ export default function ContactPage() {
                       <select
                         id="timeline"
                         name="timeline"
-                        className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
+                        className={selectClass}
                       >
                         <option value="">{isTr ? "Seçiniz" : "Select"}</option>
                         <option value="Urgent / 1-2 weeks">{isTr ? "Acil / 1-2 hafta" : "Urgent / 1-2 weeks"}</option>
@@ -265,7 +267,7 @@ export default function ContactPage() {
                       <select
                         id="budget"
                         name="budget"
-                        className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
+                        className={selectClass}
                       >
                         <option value="">{isTr ? "Belirtmek istemiyorum" : "Prefer not to say"}</option>
                         <option value="Small / Discovery">Small / Discovery</option>
@@ -281,7 +283,7 @@ export default function ContactPage() {
                       <select
                         id="existingSystem"
                         name="existingSystem"
-                        className="w-full px-4 py-2.5 rounded-lg bg-white/5 border border-black/10 dark:border-white/10 text-slate-700 dark:text-slate-300 focus:outline-none focus:border-cyan-500/50 text-sm transition-colors"
+                        className={selectClass}
                       >
                         <option value="">{isTr ? "Seçiniz" : "Select"}</option>
                         <option value="No existing system">{isTr ? "Henüz yok" : "No existing system"}</option>
