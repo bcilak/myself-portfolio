@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import dbConnect from "@/lib/mongoose";
 import Project from "@/models/Project";
+import { sanitizeProjectPayload } from "@/lib/adminValidators";
 
 export async function POST(req: Request) {
     const session = await getServerSession(authOptions);
@@ -12,10 +13,11 @@ export async function POST(req: Request) {
 
     await dbConnect();
     try {
-        const data = await req.json();
+        const data = sanitizeProjectPayload(await req.json());
         const newProject = await Project.create(data);
         return NextResponse.json(newProject, { status: 201 });
-    } catch (err: any) {
-        return NextResponse.json({ error: err.message }, { status: 500 });
+    } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : "Project could not be created.";
+        return NextResponse.json({ error: message }, { status: 400 });
     }
 }

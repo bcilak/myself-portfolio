@@ -9,9 +9,7 @@ export function validateSetupRequest(req: Request) {
   }
 
   const expectedToken = process.env.SETUP_TOKEN;
-  const requestUrl = new URL(req.url);
-  const token =
-    req.headers.get("x-setup-token") || requestUrl.searchParams.get("token");
+  const token = req.headers.get("x-setup-token");
 
   if (!expectedToken || token !== expectedToken) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });

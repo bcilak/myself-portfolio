@@ -5,48 +5,47 @@ import dbConnect from "@/lib/mongoose";
 import User from "@/models/User";
 
 export const authOptions: NextAuthOptions = {
-    providers: [
-        CredentialsProvider({
-            name: "Credentials",
-            credentials: {
-                username: { label: "Kullanıcı Adı", type: "text" },
-                password: { label: "Şifre", type: "password" },
-            },
-            async authorize(credentials) {
-                await dbConnect();
+  providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: { label: "Kullanıcı Adı", type: "text" },
+        password: { label: "Şifre", type: "password" },
+      },
+      async authorize(credentials) {
+        await dbConnect();
 
-                if (!credentials?.username || !credentials?.password) {
-                    throw new Error("Lütfen kullanıcı adı ve şifre girin.");
-                }
+        const username = String(credentials?.username || "").trim();
+        const password = String(credentials?.password || "");
 
-                const user = await User.findOne({ username: credentials.username });
-                if (!user) {
-                    throw new Error("Kullanıcı bulunamadı.");
-                }
+        if (!username || !password) {
+          throw new Error("Invalid credentials.");
+        }
 
-                const isPasswordMatch = await bcrypt.compare(
-                    credentials.password,
-                    user.passwordHash
-                );
+        const user = await User.findOne({ username });
+        if (!user) {
+          throw new Error("Invalid credentials.");
+        }
 
-                if (!isPasswordMatch) {
-                    throw new Error("Hatalı şifre.");
-                }
+        const isPasswordMatch = await bcrypt.compare(password, user.passwordHash);
+        if (!isPasswordMatch) {
+          throw new Error("Invalid credentials.");
+        }
 
-                return {
-                    id: user._id.toString(),
-                    name: user.username,
-                };
-            },
-        }),
-    ],
-    session: {
-        strategy: "jwt",
-    },
-    pages: {
-        signIn: "/tr/admin/login", // TR locale varsayılan giriş sayfası yönlendirmesi
-    },
-    secret: process.env.NEXTAUTH_SECRET,
+        return {
+          id: user._id.toString(),
+          name: user.username,
+        };
+      },
+    }),
+  ],
+  session: {
+    strategy: "jwt",
+  },
+  pages: {
+    signIn: "/tr/admin/login",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 const handler = NextAuth(authOptions);
