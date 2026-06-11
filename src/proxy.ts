@@ -8,17 +8,19 @@ const intlMiddleware = createMiddleware(routing);
 
 export async function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
-  const adminMatch = pathname.match(/^\/(tr|en)\/admin(\/.*)?$/);
+  const adminMatch = pathname.match(/^\/(?:(tr|en)\/)?admin(\/.*)?$/);
+  const isAdminLogin = /^\/(?:(tr|en)\/)?admin\/login$/.test(pathname);
 
-  if (adminMatch && !pathname.endsWith("/admin/login")) {
+  if (adminMatch && !isAdminLogin) {
     const token = await getToken({
       req,
       secret: process.env.NEXTAUTH_SECRET,
     });
 
     if (!token) {
-      const locale = adminMatch[1];
-      const loginUrl = new URL(`/${locale}/admin/login`, req.url);
+      const locale = adminMatch[1] || routing.defaultLocale;
+      const loginPath = locale === routing.defaultLocale ? "/admin/login" : `/${locale}/admin/login`;
+      const loginUrl = new URL(loginPath, req.url);
       loginUrl.searchParams.set("callbackUrl", pathname);
       return NextResponse.redirect(loginUrl);
     }
