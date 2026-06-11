@@ -1,5 +1,4 @@
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { AuthProvider } from "@/components/AuthProvider";
 import Script from "next/script";
 import type { Metadata } from "next";
 import "../globals.css";
@@ -116,20 +115,18 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <AuthProvider>
-          <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-            <NextIntlClientProvider messages={messages}>
-              <Navbar />
-              <main className="min-h-screen">{children}</main>
-              <Footer />
-              <Script 
-                src="https://chatbot.altikodtech.com.tr/static/widget.js" 
-                data-bot-id="1"
-                strategy="afterInteractive"
-              />
-            </NextIntlClientProvider>
-          </ThemeProvider>
-        </AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+          <NextIntlClientProvider messages={messages}>
+            <Navbar />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+            <Script 
+              src="https://chatbot.altikodtech.com.tr/static/widget.js" 
+              data-bot-id="1"
+              strategy="lazyOnload"
+            />
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

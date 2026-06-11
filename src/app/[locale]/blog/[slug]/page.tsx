@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import ViewTracker from "@/components/ViewTracker";
-import { getDbBlogPosts } from "@/lib/dataFetching";
+import { getBlogPostBySlug } from "@/lib/dataFetching";
 import { getBlogPosts } from "@/data/blog";
 import { getTranslations } from "next-intl/server";
 import { createSeoMetadata } from "@/lib/seo";
@@ -18,7 +18,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug, locale = "en" } = await params;
-    const post = getBlogPosts(locale).find((p) => p.slug === slug);
+    const post = await getBlogPostBySlug(locale, slug);
     if (!post) return { title: "Post Not Found" };
     return createSeoMetadata({
         locale,
@@ -34,8 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogDetailPage({ params }: Props) {
     const { slug, locale } = await params;
-    const postList = await getDbBlogPosts(locale);
-    const post = postList.find((p) => p.slug === slug);
+    const post = await getBlogPostBySlug(locale, slug);
     if (!post) notFound();
 
     const t = await getTranslations("Blog");

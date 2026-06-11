@@ -31,4 +31,7 @@ const SkillSchema: Schema = new Schema(
     { timestamps: true }
 );
 
+SkillSchema.index({ order: 1, createdAt: -1 });
+SkillSchema.index({ featured: 1, order: 1 });
+
 export default mongoose.models.Skill || mongoose.model<ISkill>("Skill", SkillSchema);

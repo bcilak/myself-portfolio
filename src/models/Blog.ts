@@ -34,4 +34,7 @@ const BlogSchema: Schema = new Schema(
   { timestamps: true }
 );
 
+BlogSchema.index({ status: 1, createdAt: -1 });
+BlogSchema.index({ status: 1, views: -1 });
+
 export default mongoose.models.Blog || mongoose.model<IBlog>("Blog", BlogSchema);

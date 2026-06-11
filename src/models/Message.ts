@@ -20,4 +20,6 @@ const MessageSchema = new Schema(
   { timestamps: true }
 );
 
+MessageSchema.index({ status: 1, createdAt: -1 });
+
 export default mongoose.models.Message || mongoose.model<IMessage>("Message", MessageSchema);

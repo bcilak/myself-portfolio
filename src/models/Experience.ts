@@ -22,4 +22,6 @@ const ExperienceSchema: Schema = new Schema(
     { timestamps: true }
 );
 
+ExperienceSchema.index({ year: -1 });
+
 export default mongoose.models.Experience || mongoose.model<IExperience>("Experience", ExperienceSchema);

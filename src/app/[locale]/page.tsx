@@ -1,7 +1,8 @@
-import { getDbProjects, getDbBlogPosts, getDbExperiences, getDbSkills } from "@/lib/dataFetching";
+import { getHomeProjects, getHomeBlogPosts, getDbExperiences, getDbSkills } from "@/lib/dataFetching";
 import HomeClient from "./HomeClient";
 import type { Metadata } from "next";
 import { createSeoMetadata } from "@/lib/seo";
+import { getGithubStats } from "@/lib/githubStats";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -32,14 +33,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const resolvedParams = await params;
   const locale = resolvedParams.locale;
 
-  const projects = await getDbProjects(locale);
-  const featuredProjects = projects.filter(p => p.featured);
-
-  const recentPosts = await getDbBlogPosts(locale);
-  const postsToShow = recentPosts.slice(0, 3);
-
-  const experiences = await getDbExperiences(locale);
-  const skills = await getDbSkills(locale);
+  const [featuredProjects, postsToShow, experiences, skills, githubStats] = await Promise.all([
+    getHomeProjects(locale),
+    getHomeBlogPosts(locale),
+    getDbExperiences(locale),
+    getDbSkills(locale),
+    getGithubStats(),
+  ]);
   
   const featuredSkills: any[] = [];
   skills.forEach((cat: any) => {
@@ -56,6 +56,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       recentPosts={postsToShow}
       experiences={experiences}
       featuredSkills={featuredSkills}
+      githubStats={githubStats}
     />
   );
 }

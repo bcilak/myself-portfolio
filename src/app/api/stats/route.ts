@@ -7,7 +7,12 @@ export async function POST(req: Request) {
     try {
         const { type, slug } = await req.json();
 
-        if (!["blog", "project"].includes(type) || typeof slug !== "string" || slug.length > 160) {
+        if (
+            !["blog", "project"].includes(type) ||
+            typeof slug !== "string" ||
+            slug.length > 160 ||
+            !/^[a-z0-9-]+$/.test(slug)
+        ) {
             return NextResponse.json({ error: "Eksik parametre" }, { status: 400 });
         }
 
@@ -19,13 +24,13 @@ export async function POST(req: Request) {
             updatedDoc = await Blog.findOneAndUpdate(
                 { slug },
                 { $inc: { views: 1 } },
-                { new: true }
+                { new: true, projection: { views: 1 } }
             );
         } else if (type === "project") {
             updatedDoc = await Project.findOneAndUpdate(
                 { slug },
                 { $inc: { views: 1 } },
-                { new: true }
+                { new: true, projection: { views: 1 } }
             );
         }
 
@@ -33,7 +38,13 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Bulunamadı" }, { status: 404 });
         }
 
-        return NextResponse.json({ success: true, views: updatedDoc.views }, { status: 200 });
+        return NextResponse.json(
+            { success: true, views: updatedDoc.views },
+            {
+                status: 200,
+                headers: { "Cache-Control": "no-store" },
+            }
+        );
 
     } catch (error: unknown) {
         console.error("View increment error:", error);

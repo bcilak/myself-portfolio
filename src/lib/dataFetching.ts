@@ -6,34 +6,104 @@ import Education from "@/models/Education";
 import Skill from "@/models/Skill";
 import CaseStudy from "@/models/CaseStudy";
 import { getProjects as getStaticProjects } from "@/data/projects";
+import { getBlogPosts as getStaticBlogPosts } from "@/data/blog";
 import { getCaseStudies as getStaticCaseStudies } from "@/data/case-studies";
 
-// Projects Verilerini Çek
-export async function getDbProjects(locale: string) {
-    await dbConnect();
-    const dbProjects = await Project.find({}).sort({ createdAt: -1 }).lean();
+const projectCardFields = {
+    slug: 1,
+    technologies: 1,
+    githubUrl: 1,
+    demoUrl: 1,
+    featured: 1,
+    createdAt: 1,
+    views: 1,
+    likes: 1,
+    title: 1,
+    shortDescription: 1,
+    problem: 1,
+    solution: 1,
+};
 
-    const projects = dbProjects.map((p: any) => ({
-        id: p._id.toString(),
+const projectDetailFields = {
+    ...projectCardFields,
+    description: 1,
+    architecture: 1,
+    challenges: 1,
+    lessons: 1,
+    screenshots: 1,
+};
+
+const blogCardFields = {
+    slug: 1,
+    tags: 1,
+    category: 1,
+    readTime: 1,
+    createdAt: 1,
+    views: 1,
+    likes: 1,
+    title: 1,
+    excerpt: 1,
+};
+
+const blogDetailFields = {
+    ...blogCardFields,
+    content: 1,
+};
+
+function localized<T = string>(value: any, locale: string, fallback: T = "" as T): T | string {
+    if (typeof value === "string") return value;
+    return value?.[locale] || value?.en || fallback;
+}
+
+function localizedList(value: any, locale: string) {
+    const localizedValue = value?.[locale] || value?.en || [];
+    return Array.isArray(localizedValue) ? localizedValue : [];
+}
+
+function mapProject(p: any, locale: string, includeDetail = true) {
+    return {
+        id: p._id?.toString() || p.id,
         slug: p.slug,
-        title: p.title[locale] || p.title.en,
-        shortDescription: p.shortDescription?.[locale] || p.shortDescription?.en || "",
-        description: p.description?.[locale] || p.description?.en || "",
+        title: localized(p.title, locale),
+        shortDescription: localized(p.shortDescription, locale),
+        description: includeDetail ? localized(p.description, locale) : "",
         technologies: p.technologies || [],
         githubUrl: p.githubUrl || "",
         demoUrl: p.demoUrl || "",
         featured: p.featured || false,
-        problem: p.problem?.[locale] || p.problem?.en || "",
-        solution: p.solution?.[locale] || p.solution?.en || "",
-        architecture: p.architecture?.[locale] || p.architecture?.en || "",
-        challenges: p.challenges?.[locale] || p.challenges?.en || "",
-        lessons: p.lessons?.[locale] || p.lessons?.en || "",
-        screenshots: p.screenshots || [],
+        problem: localized(p.problem, locale),
+        solution: localized(p.solution, locale),
+        architecture: includeDetail ? localized(p.architecture, locale) : "",
+        challenges: includeDetail ? localized(p.challenges, locale) : "",
+        lessons: includeDetail ? localized(p.lessons, locale) : "",
+        screenshots: includeDetail ? p.screenshots || [] : [],
         createdAt: p.createdAt,
         views: p.views || 0,
         likes: p.likes || 0,
-    }));
+    };
+}
 
+function mapBlogPost(b: any, locale: string, includeContent = true) {
+    return {
+        id: b._id?.toString() || b.id,
+        slug: b.slug,
+        title: localized(b.title, locale),
+        excerpt: localized(b.excerpt, locale),
+        content: includeContent ? localized(b.content, locale) : "",
+        tags: b.tags || [],
+        category: b.category || "",
+        readTime: b.readTime || 5,
+        createdAt: b.createdAt,
+        views: b.views || 0,
+        likes: b.likes || 0,
+    };
+}
+
+export async function getDbProjects(locale: string) {
+    await dbConnect();
+    const dbProjects = await Project.find({}, projectDetailFields).sort({ createdAt: -1 }).lean();
+
+    const projects = dbProjects.map((p: any) => mapProject(p, locale));
     const projectSlugs = new Set(projects.map((project) => project.slug));
     const missingStaticProjects = getStaticProjects(locale)
         .filter((project) => !projectSlugs.has(project.slug))
@@ -46,72 +116,148 @@ export async function getDbProjects(locale: string) {
     return [...projects, ...missingStaticProjects];
 }
 
-// Blog Verilerini Çek
-export async function getDbBlogPosts(locale: string) {
+export async function getHomeProjects(locale: string) {
     await dbConnect();
-    const dbBlogs = await Blog.find({ status: "published" }).sort({ createdAt: -1 }).lean();
+    const dbProjects = await Project.find({ featured: true }, projectCardFields)
+        .sort({ createdAt: -1 })
+        .limit(6)
+        .lean();
 
-    return dbBlogs.map((b: any) => ({
-        id: b._id.toString(),
-        slug: b.slug,
-        title: b.title[locale] || b.title.en,
-        excerpt: b.excerpt?.[locale] || b.excerpt?.en || "",
-        content: b.content?.[locale] || b.content?.en || "",
-        tags: b.tags || [],
-        category: b.category || "",
-        readTime: b.readTime || 5,
-        createdAt: b.createdAt,
-        views: b.views || 0,
-        likes: b.likes || 0,
-    }));
+    const projects = dbProjects.map((p: any) => mapProject(p, locale, false));
+    const projectSlugs = new Set(projects.map((project) => project.slug));
+    const missingStaticProjects = getStaticProjects(locale)
+        .filter((project) => project.featured && !projectSlugs.has(project.slug))
+        .slice(0, Math.max(0, 6 - projects.length))
+        .map((project) => ({
+            ...project,
+            views: project.views || 0,
+            likes: project.likes || 0,
+        }));
+
+    return [...projects, ...missingStaticProjects];
 }
 
-// Experience Verilerini Çek
+export async function getProjectBySlug(locale: string, slug: string) {
+    await dbConnect();
+    const dbProject = await Project.findOne({ slug }, projectDetailFields).lean();
+
+    if (dbProject) {
+        return mapProject(dbProject, locale);
+    }
+
+    const staticProject = getStaticProjects(locale).find((project) => project.slug === slug);
+    if (!staticProject) return null;
+
+    return {
+        ...staticProject,
+        views: staticProject.views || 0,
+        likes: staticProject.likes || 0,
+    };
+}
+
+export async function getDbBlogPosts(locale: string) {
+    await dbConnect();
+    const dbBlogs = await Blog.find({ status: "published" }, blogDetailFields).sort({ createdAt: -1 }).lean();
+
+    return dbBlogs.map((b: any) => mapBlogPost(b, locale));
+}
+
+export async function getHomeBlogPosts(locale: string) {
+    await dbConnect();
+    const dbBlogs = await Blog.find({ status: "published" }, blogCardFields)
+        .sort({ createdAt: -1 })
+        .limit(3)
+        .lean();
+
+    return dbBlogs.map((b: any) => mapBlogPost(b, locale, false));
+}
+
+export async function getBlogPostBySlug(locale: string, slug: string) {
+    await dbConnect();
+    const dbBlog = await Blog.findOne({ slug, status: "published" }, blogDetailFields).lean();
+
+    if (dbBlog) {
+        return mapBlogPost(dbBlog, locale);
+    }
+
+    const staticPost = getStaticBlogPosts(locale).find((post) => post.slug === slug);
+    if (!staticPost) return null;
+
+    return {
+        ...staticPost,
+        views: staticPost.views || 0,
+        likes: staticPost.likes || 0,
+    };
+}
+
 export async function getDbExperiences(locale: string) {
     await dbConnect();
-    const dbExperiences = await Experience.find({}).sort({ year: -1 }).lean();
+    const dbExperiences = await Experience.find(
+        {},
+        { year: 1, technologies: 1, title: 1, company: 1, description: 1 }
+    )
+        .sort({ year: -1 })
+        .lean();
 
     return dbExperiences.map((e: any) => ({
         id: e._id.toString(),
         year: e.year,
-        title: e.title[locale] || e.title.en,
-        company: e.company[locale] || e.company.en,
-        description: e.description?.[locale] || e.description?.en || "",
+        title: localized(e.title, locale),
+        company: localized(e.company, locale),
+        description: localized(e.description, locale),
         technologies: e.technologies || [],
     }));
 }
 
-// Education Verilerini Çek
 export async function getDbEducations(locale: string) {
     await dbConnect();
-    const dbEducations = await Education.find({}).sort({ year: -1 }).lean();
+    const dbEducations = await Education.find({}, { year: 1, degree: 1, school: 1, description: 1 })
+        .sort({ year: -1 })
+        .lean();
 
     return dbEducations.map((e: any) => ({
         id: e._id.toString(),
         year: e.year,
-        degree: e.degree[locale] || e.degree.en,
-        school: e.school[locale] || e.school.en,
-        description: e.description?.[locale] || e.description?.en || "",
+        degree: localized(e.degree, locale),
+        school: localized(e.school, locale),
+        description: localized(e.description, locale),
     }));
 }
 
-// Olay İncelemelerini (Case Studies) Çek
 export async function getDbCaseStudies(locale: string) {
     await dbConnect();
-    const dbCaseStudies = await CaseStudy.find({}).sort({ order: 1, createdAt: -1 }).lean();
+    const dbCaseStudies = await CaseStudy.find(
+        {},
+        {
+            slug: 1,
+            icon: 1,
+            title: 1,
+            subtitle: 1,
+            category: 1,
+            problem: 1,
+            approach: 1,
+            architecture: 1,
+            impact: 1,
+            challenges: 1,
+            lessons: 1,
+            technologies: 1,
+        }
+    )
+        .sort({ order: 1, createdAt: -1 })
+        .lean();
 
     const caseStudies = dbCaseStudies.map((cs: any) => ({
         slug: cs.slug,
         icon: cs.icon,
-        title: cs.title?.[locale] || cs.title?.en || "",
-        subtitle: cs.subtitle?.[locale] || cs.subtitle?.en || "",
-        category: cs.category?.[locale] || cs.category?.en || "",
-        problem: cs.problem?.[locale] || cs.problem?.en || "",
-        approach: cs.approach?.[locale] || cs.approach?.en || "",
-        architecture: cs.architecture?.[locale] || cs.architecture?.en || "",
-        impact: cs.impact?.[locale] || cs.impact?.en || "",
-        challenges: cs.challenges?.[locale] || cs.challenges?.en || [],
-        lessons: cs.lessons?.[locale] || cs.lessons?.en || [],
+        title: localized(cs.title, locale),
+        subtitle: localized(cs.subtitle, locale),
+        category: localized(cs.category, locale),
+        problem: localized(cs.problem, locale),
+        approach: localized(cs.approach, locale),
+        architecture: localized(cs.architecture, locale),
+        impact: localized(cs.impact, locale),
+        challenges: localizedList(cs.challenges, locale),
+        lessons: localizedList(cs.lessons, locale),
         technologies: cs.technologies || [],
     }));
 
@@ -123,27 +269,31 @@ export async function getDbCaseStudies(locale: string) {
     return [...caseStudies, ...missingStaticCaseStudies];
 }
 
-// Yetenekleri (Skills) Çek
 export async function getDbSkills(locale: string) {
     await dbConnect();
-    const dbSkills = await Skill.find({}).sort({ order: 1, createdAt: -1 }).lean();
+    const dbSkills = await Skill.find(
+        {},
+        { name: 1, icon: 1, level: 1, category: 1, categoryIcon: 1, featured: 1 }
+    )
+        .sort({ order: 1, createdAt: -1 })
+        .lean();
 
     const categoriesMap = new Map();
 
     dbSkills.forEach((skill: any) => {
-        const catName = skill.category?.[locale] || skill.category?.en || "";
+        const catName = localized(skill.category, locale);
         if (!categoriesMap.has(catName)) {
             categoriesMap.set(catName, {
                 name: catName,
                 icon: skill.categoryIcon || "",
-                skills: []
+                skills: [],
             });
         }
         categoriesMap.get(catName).skills.push({
             name: skill.name,
             icon: skill.icon,
             level: skill.level,
-            featured: skill.featured || false
+            featured: skill.featured || false,
         });
     });
 

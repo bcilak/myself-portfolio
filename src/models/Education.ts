@@ -20,4 +20,6 @@ const EducationSchema: Schema = new Schema(
     { timestamps: true }
 );
 
+EducationSchema.index({ year: -1 });
+
 export default mongoose.models.Education || mongoose.model<IEducation>("Education", EducationSchema);

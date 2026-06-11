@@ -7,8 +7,17 @@ import Blog from "@/models/Blog";
 import Experience from "@/models/Experience";
 import Education from "@/models/Education";
 import Message from "@/models/Message";
-import AnalyticsCharts from "./components/AnalyticsCharts";
+import dynamic from "next/dynamic";
 import { getTranslations } from "next-intl/server";
+
+const AnalyticsCharts = dynamic(() => import("./components/AnalyticsCharts"), {
+    loading: () => (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+            <div className="h-80 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700" />
+            <div className="h-80 rounded-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700" />
+        </div>
+    ),
+});
 
 export default async function AdminDashboard({ params }: { params: Promise<{ locale: string }> }) {
     const session = await getServerSession(authOptions);
@@ -40,8 +49,8 @@ export default async function AdminDashboard({ params }: { params: Promise<{ loc
         Message.countDocuments({ status: "unread" }),
         Project.aggregate([{ $group: { _id: null, total: { $sum: "$views" } } }]),
         Blog.aggregate([{ $group: { _id: null, total: { $sum: "$views" } } }]),
-        Project.find({}, { title: 1, views: 1 }).lean(),
-        Blog.find({}, { title: 1, views: 1 }).lean(),
+        Project.find({}, { title: 1, views: 1 }).sort({ views: -1 }).limit(5).lean(),
+        Blog.find({ status: "published" }, { title: 1, views: 1 }).sort({ views: -1 }).limit(5).lean(),
     ]);
 
     const totalViews = (projectViews[0]?.total || 0) + (blogViews[0]?.total || 0);

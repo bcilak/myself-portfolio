@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { AuthProvider } from "@/components/AuthProvider";
 
 export default function AdminLayout({
     children,
@@ -32,6 +33,7 @@ export default function AdminLayout({
     };
 
     return (
+        <AuthProvider>
         <div className="min-h-screen flex flex-col md:flex-row bg-gray-50 dark:bg-gray-900">
             {/* Mobile Sidebar Toggle */}
             <div className="md:hidden flex items-center justify-between bg-white dark:bg-gray-800 p-4 border-b border-gray-200 dark:border-gray-700">
@@ -132,5 +134,6 @@ export default function AdminLayout({
                 </div>
             </main>
         </div>
+        </AuthProvider>
     );
 }

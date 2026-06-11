@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
@@ -9,24 +10,31 @@ import { type Project } from "@/data/projects";
 import { type BlogPost } from "@/data/blog";
 import { type Experience } from "@/data/experience";
 import { useTranslations } from "next-intl";
-import GithubStatsWidget from "@/components/ui/GithubStatsWidget";
+import { type GithubStats } from "@/lib/githubStats";
 import { Terminal, Code2, Database, Cpu } from "lucide-react";
-import TypewriterRole from "@/components/ui/TypewriterRole";
-import MagneticButton from "@/components/ui/MagneticButton";
-import TiltCard from "@/components/ui/TiltCard";
-import InfiniteMarquee from "@/components/ui/InfiniteMarquee";
-import ParallaxText from "@/components/ui/ParallaxText";
+
+const GithubStatsWidget = dynamic(() => import("@/components/ui/GithubStatsWidget"), {
+  ssr: false,
+  loading: () => <div className="glass-card rounded-xl p-6 h-full min-h-[140px]" />,
+});
+const TypewriterRole = dynamic(() => import("@/components/ui/TypewriterRole"), { ssr: false });
+const MagneticButton = dynamic(() => import("@/components/ui/MagneticButton"), { ssr: false });
+const TiltCard = dynamic(() => import("@/components/ui/TiltCard"), { ssr: false });
+const InfiniteMarquee = dynamic(() => import("@/components/ui/InfiniteMarquee"), { ssr: false });
+const ParallaxText = dynamic(() => import("@/components/ui/ParallaxText"), { ssr: false });
 
 export default function HomeClient({
   featuredProjects,
   recentPosts,
   experiences,
-  featuredSkills
+  featuredSkills,
+  githubStats,
 }: {
   featuredProjects: Project[];
   recentPosts: BlogPost[];
   experiences: Experience[];
   featuredSkills: any[];
+  githubStats: GithubStats | null;
 }) {
   const t = useTranslations("Home");
   const tSection = useTranslations("Sections");
@@ -103,7 +111,7 @@ export default function HomeClient({
             </div>
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.3 }} className="grid grid-cols-2 gap-4">
               <div className="col-span-2">
-                <GithubStatsWidget />
+                <GithubStatsWidget initialData={githubStats} />
               </div>
               {[
                 { value: "15+", label: t("stats.projects") },

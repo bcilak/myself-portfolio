@@ -46,4 +46,7 @@ const ProjectSchema: Schema = new Schema(
     { timestamps: true }
 );
 
+ProjectSchema.index({ featured: 1, createdAt: -1 });
+ProjectSchema.index({ views: -1 });
+
 export default mongoose.models.Project || mongoose.model<IProject>("Project", ProjectSchema);

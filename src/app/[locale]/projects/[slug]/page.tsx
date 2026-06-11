@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Link } from "@/i18n/routing";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import ViewTracker from "@/components/ViewTracker";
-import { getDbProjects } from "@/lib/dataFetching";
+import { getProjectBySlug } from "@/lib/dataFetching";
 import { getTranslations } from "next-intl/server";
 import { createSeoMetadata } from "@/lib/seo";
 
@@ -15,8 +15,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug, locale = "en" } = await params;
-    const projectList = await getDbProjects(locale);
-    const project = projectList.find((p) => p.slug === slug);
+    const project = await getProjectBySlug(locale, slug);
     if (!project) return { title: "Project Not Found" };
     return createSeoMetadata({
         locale,
@@ -29,8 +28,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProjectDetailPage({ params }: Props) {
     const { slug, locale } = await params;
-    const projectList = await getDbProjects(locale);
-    const project = projectList.find((p) => p.slug === slug);
+    const project = await getProjectBySlug(locale, slug);
     if (!project) notFound();
 
     const t = await getTranslations("Projects");

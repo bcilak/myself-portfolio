@@ -1,21 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { type GithubStats } from "@/lib/githubStats";
 
-interface GithubData {
-    followers: number;
-    public_repos: number;
-    total_stars: number;
-}
-
-export default function GithubStatsWidget() {
-    const [data, setData] = useState<GithubData | null>(null);
-    const [loading, setLoading] = useState(true);
-    const t = useTranslations("Sections"); // We can just use general strings or create new ones, I'll fallback to english strings if needed
+export default function GithubStatsWidget({ initialData }: { initialData?: GithubStats | null }) {
+    const [data, setData] = useState<GithubStats | null>(initialData || null);
+    const [loading, setLoading] = useState(!initialData);
 
     useEffect(() => {
+        if (initialData) return;
+
         fetch("/api/github")
             .then((res) => res.json())
             .then((d) => {
@@ -23,7 +17,7 @@ export default function GithubStatsWidget() {
                 setLoading(false);
             })
             .catch(() => setLoading(false));
-    }, []);
+    }, [initialData]);
 
     if (loading || !data) {
         return (

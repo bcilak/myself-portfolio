@@ -62,4 +62,6 @@ const CaseStudySchema: Schema = new Schema(
     { timestamps: true }
 );
 
+CaseStudySchema.index({ order: 1, createdAt: -1 });
+
 export default mongoose.models.CaseStudy || mongoose.model<ICaseStudy>("CaseStudy", CaseStudySchema);
