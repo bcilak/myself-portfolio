@@ -308,3 +308,100 @@ hr,
   color: var(--foreground);
   background: #fff9c4;
 }
+
+/* External chatbot widget */
+#nxc-toggle {
+  width: 64px !important;
+  height: 64px !important;
+  right: 24px !important;
+  bottom: 24px !important;
+  overflow: visible !important;
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border: 3px solid var(--foreground) !important;
+  border-radius: var(--radius-wobbly-md) !important;
+  box-shadow: var(--shadow-ink) !important;
+  transform: rotate(-1deg) !important;
+}
+
+#nxc-toggle:hover {
+  background: var(--accent) !important;
+  box-shadow: 2px 2px 0 0 var(--foreground) !important;
+  transform: translate(2px, 2px) rotate(1deg) !important;
+}
+
+#nxc-toggle::before {
+  content: "Merhaba, ben Barış'ın yapay zeka asistanıyım.";
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 14px);
+  width: min(260px, calc(100vw - 48px));
+  padding: 12px 14px;
+  color: var(--foreground);
+  background: #fff9c4;
+  border: 2px dashed var(--foreground);
+  border-radius: var(--radius-wobbly-md);
+  box-shadow: 3px 3px 0 0 var(--foreground);
+  font-family: "Patrick Hand", "Kalam", cursive;
+  font-size: 18px;
+  line-height: 1.25;
+  text-align: left;
+  white-space: normal;
+  pointer-events: none;
+}
+
+#nxc-toggle::after {
+  content: "";
+  position: absolute;
+  right: 20px;
+  bottom: calc(100% + 5px);
+  width: 16px;
+  height: 16px;
+  background: #fff9c4;
+  border-right: 2px dashed var(--foreground);
+  border-bottom: 2px dashed var(--foreground);
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+#nxc-toggle svg {
+  width: 30px !important;
+  height: 30px !important;
+  fill: #ffffff !important;
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+  opacity: 1 !important;
+  display: block !important;
+}
+
+#nxc-toggle svg path {
+  fill: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+#nxc-container {
+  border: 3px solid var(--foreground) !important;
+  border-radius: var(--radius-wobbly-md) !important;
+  box-shadow: var(--shadow-ink-lg) !important;
+  background: #ffffff !important;
+  color: var(--foreground) !important;
+  font-family: "Patrick Hand", "Kalam", cursive !important;
+}
+
+#nxc-container .nxc-header {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border-bottom: 3px solid var(--foreground) !important;
+}
+
+#nxc-container .nxc-msg.bot,
+#nxc-welcome {
+  background: #fff9c4 !important;
+  color: var(--foreground) !important;
+  border: 2px dashed var(--foreground) !important;
+  border-radius: var(--radius-wobbly-md) !important;
+}
+
+#nxc-container .nxc-branding {
+  display: none !important;
+}

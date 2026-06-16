@@ -60,18 +60,18 @@ export default function Footer() {
             <ul className="space-y-2">
               {[
                 {
-                  href: "https://github.com/bariscilak",
-                  label: "GitHub",
+                  href: "https://github.com/bcilak",
+                  label: "github.com/bcilak",
                   icon: "🐙",
                 },
                 {
                   href: "https://linkedin.com/in/bariscilak",
-                  label: "LinkedIn",
+                  label: "linkedin.com/in/bariscilak",
                   icon: "💼",
                 },
                 {
-                  href: "mailto:bariscilak@email.com",
-                  label: "Email",
+                  href: "mailto:bcilak@gmail.com",
+                  label: "bcilak@gmail.com",
                   icon: "✉️",
                 },
               ].map((link) => (
