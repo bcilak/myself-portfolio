@@ -407,9 +407,46 @@ hr,
 #nxc-container .nxc-msg.bot,
 #nxc-welcome {
   background: #fff9c4 !important;
+  background-image: none !important;
   color: var(--foreground) !important;
   border: 2px dashed var(--foreground) !important;
   border-radius: var(--radius-wobbly-md) !important;
+}
+
+#nxc-container .nxc-msg.user {
+  background: #ffffff !important;
+  background-image: none !important;
+  color: var(--foreground) !important;
+  border: 2px solid var(--foreground) !important;
+  border-radius: var(--radius-wobbly-md) !important;
+  box-shadow: 3px 3px 0 0 var(--foreground) !important;
+}
+
+#nxc-container .nxc-msg.user small,
+#nxc-container .nxc-msg.user .time,
+#nxc-container .nxc-msg.user span {
+  color: rgba(45, 45, 45, 0.62) !important;
+}
+
+#nxc-container .nxc-chip {
+  background: #fff9c4 !important;
+  background-image: none !important;
+  color: var(--foreground) !important;
+  border: 2px dashed var(--foreground) !important;
+  border-radius: var(--radius-wobbly) !important;
+  box-shadow: 3px 3px 0 0 var(--foreground) !important;
+}
+
+#nxc-container .nxc-chip:hover {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+  border-style: solid !important;
+  box-shadow: 2px 2px 0 0 var(--foreground) !important;
+}
+
+#nxc-container .nxc-chip:active {
+  box-shadow: none !important;
+  transform: translate(3px, 3px) rotate(-1deg) !important;
 }
 
 #nxc-container .nxc-branding {
