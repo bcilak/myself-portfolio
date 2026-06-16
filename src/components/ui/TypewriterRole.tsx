@@ -33,7 +33,7 @@ export default function TypewriterRole({ roles, speed = 80, pause = 2000 }: { ro
   return (
     <span className="inline-block gradient-text font-bold">
       {text}
-      <span className="animate-pulse text-cyan-500 opacity-80 backdrop-blur-sm">|</span>
+      <span className="animate-pulse text-cyan-500 opacity-80">|</span>
     </span>
   );
 }

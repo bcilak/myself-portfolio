@@ -13,10 +13,11 @@ export default function BlogCard({ post }: { post: BlogPost }) {
 
     return (
         <Link href={`/blog/${post.slug}`} className="block group h-full">
-            <article className="glass-card rounded-xl p-6 hover:border-cyan-500/30 transition-all duration-300 hover:-translate-y-1 h-full flex flex-col gap-3">
+            <article className="glass-card p-6 hover:rotate-1 transition-transform duration-100 h-full flex flex-col gap-3">
+                <div className="absolute right-6 top-[-10px] h-5 w-16 -rotate-6 border border-black/20 bg-[#e5e0d8]/80" />
                 {/* Category + Read time */}
                 <div className="flex items-center justify-between">
-                    <span className="px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 text-xs font-medium border border-indigo-500/20">
+                    <span className="paper-tag px-2 py-0.5 text-xs font-medium">
                         {post.category}
                     </span>
                     <div className="flex items-center gap-3 text-slate-700 dark:text-slate-300 text-xs">
@@ -30,7 +31,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
                     </div>
                 </div>
 
-                <h3 className="text-slate-900 dark:text-slate-100 font-semibold leading-snug group-hover:text-cyan-400 transition-colors">
+                <h3 className="text-slate-900 dark:text-slate-100 font-semibold text-xl leading-snug group-hover:text-cyan-400 transition-colors">
                     {post.title}
                 </h3>
                 <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed flex-1">
@@ -42,7 +43,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
                     {post.tags.slice(0, 3).map((tag) => (
                         <span
                             key={tag}
-                            className="text-xs text-slate-700 dark:text-slate-400 bg-slate-100 dark:bg-white/5 px-2 py-0.5 rounded"
+                            className="paper-tag text-xs px-2 py-0.5"
                         >
                             #{tag}
                         </span>
@@ -57,7 +58,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
                             day: "numeric",
                         })}
                     </time>
-                    <span className="text-cyan-500 text-sm group-hover:translate-x-1 transition-transform inline-block font-medium">
+                    <span className="text-cyan-500 text-base group-hover:translate-x-1 transition-transform inline-block font-medium underline decoration-wavy decoration-[#ff4d4d]">
                         {t("readMore")} →
                     </span>
                 </div>

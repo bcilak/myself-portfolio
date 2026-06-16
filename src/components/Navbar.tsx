@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
-import { Sun, Moon, Globe } from "lucide-react";
+import { Globe, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
@@ -26,7 +26,7 @@ export default function Navbar() {
     const pathname = usePathname();
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
-    const { theme, setTheme } = useTheme();
+    const { setTheme } = useTheme();
 
     // i18n
     const locale = useLocale();
@@ -37,25 +37,26 @@ export default function Navbar() {
     };
 
     useEffect(() => {
+        setTheme("light");
         const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    }, [setTheme]);
 
     if (pathname.includes("/admin")) return null;
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                ? "bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-black/5 dark:border-white/5 shadow-lg"
-                : "bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm border-b border-black/5 dark:border-white/5"
+            className={`fixed top-3 left-0 right-0 z-50 px-3 transition-all duration-300 ${scrolled
+                ? "translate-y-0"
+                : ""
                 }`}
         >
-            <nav className="max-w-[1440px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+            <nav className="paper-card max-w-[1440px] mx-auto px-4 sm:px-6 min-h-16 flex items-center justify-between gap-4 -rotate-[0.35deg]">
                 {/* Logo */}
-                <Link href="/" className="shrink-0 font-bold text-lg tracking-tight">
+                <Link href="/" className="shrink-0 font-bold text-xl tracking-tight rotate-[0.5deg]">
                     <span className="gradient-text">Barış</span>
-                    <span className="text-slate-600 dark:text-slate-400">Çilak</span>
+                    <span className="text-slate-600 dark:text-slate-400"> Çilak</span>
                 </Link>
 
                 {/* Desktop Links */}
@@ -69,9 +70,9 @@ export default function Navbar() {
                             <li key={link.href}>
                                 <Link
                                     href={link.href}
-                                    className={`block whitespace-nowrap px-2.5 xl:px-3 py-2 rounded-md text-xs xl:text-sm font-medium leading-none transition-colors duration-200 ${isActive
-                                        ? "text-cyan-600 bg-cyan-600/10 dark:text-cyan-400 dark:bg-cyan-400/10"
-                                        : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-black/5 dark:hover:bg-white/5"
+                                    className={`block whitespace-nowrap px-2.5 xl:px-3 py-2 text-sm xl:text-base font-medium leading-none transition-all duration-100 hover:-rotate-1 ${isActive
+                                        ? "paper-tag"
+                                        : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                                         }`}
                                 >
                                     {link.label}
@@ -85,26 +86,17 @@ export default function Navbar() {
                     {/* Language Toggle (Desktop) */}
                     <button
                         onClick={toggleLocale}
-                        className="hidden lg:flex items-center gap-1.5 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors mr-1"
+                        className="hidden lg:flex items-center gap-1.5 p-2 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors mr-1"
                         aria-label={tCommon("toggleLanguage")}
                     >
                         <Globe size={18} />
                         <span className="text-sm font-medium uppercase">{locale}</span>
                     </button>
 
-                    {/* Theme Toggle (Desktop) */}
-                    <button
-                        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                        className="hidden lg:flex p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 text-slate-500 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors mr-2"
-                        aria-label={tCommon("toggleTheme")}
-                    >
-                        {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-                    </button>
-
                     {/* CTA */}
                     <Link
                         href="/contact"
-                        className="hidden lg:block whitespace-nowrap px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-400 text-black text-sm font-semibold leading-none transition-colors duration-200"
+                        className="hidden lg:block whitespace-nowrap px-5 py-2.5 sketch-button text-sm font-semibold leading-none"
                     >
                         {t("hireMe")}
                     </Link>
@@ -113,18 +105,10 @@ export default function Navbar() {
                 {/* Hamburger */}
                 <button
                     onClick={() => setMenuOpen(!menuOpen)}
-                    className="lg:hidden flex flex-col gap-1.5 p-2"
+                    className="lg:hidden inline-flex items-center justify-center p-2 sketch-button"
                     aria-label={tCommon("toggleMenu")}
                 >
-                    <span
-                        className={`w-5 h-0.5 bg-slate-800 dark:bg-slate-300 transition-transform duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
-                    />
-                    <span
-                        className={`w-5 h-0.5 bg-slate-800 dark:bg-slate-300 transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`}
-                    />
-                    <span
-                        className={`w-5 h-0.5 bg-slate-800 dark:bg-slate-300 transition-transform duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-                    />
+                    {menuOpen ? <X size={18} /> : <Menu size={18} />}
                 </button>
             </nav>
 
@@ -135,9 +119,9 @@ export default function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="lg:hidden bg-slate-50 dark:bg-[#0f1420] border-b border-black/5 dark:border-white/5 overflow-hidden"
+                        className="lg:hidden overflow-hidden"
                     >
-                        <ul className="px-6 py-4 flex flex-col gap-1">
+                        <ul className="paper-card mx-auto mt-3 max-w-[1440px] px-6 py-4 flex flex-col gap-2 rotate-[0.25deg]">
                             {navLinks.map((link) => {
                                 const isActive =
                                     link.href === "/"
@@ -148,8 +132,8 @@ export default function Navbar() {
                                         <Link
                                             href={link.href}
                                             onClick={() => setMenuOpen(false)}
-                                            className={`block px-3 py-2 rounded-md text-sm font-medium transition-colors ${isActive
-                                                ? "text-cyan-600 bg-cyan-600/10 dark:text-cyan-400 dark:bg-cyan-400/10"
+                                            className={`block px-3 py-2 text-base font-medium transition-colors ${isActive
+                                                ? "paper-tag"
                                                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
                                                 }`}
                                         >
@@ -165,20 +149,10 @@ export default function Navbar() {
                                         toggleLocale();
                                         setMenuOpen(false);
                                     }}
-                                    className="flex items-center gap-3 w-full px-3 py-2 rounded-md text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
+                                    className="flex items-center gap-3 w-full px-3 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
                                 >
                                     <Globe size={18} />
                                     <span>{locale === "en" ? tCommon("switchToTurkish") : tCommon("switchToEnglish")}</span>
-                                </button>
-                            </li>
-                            {/* Theme Toggle (Mobile) */}
-                            <li>
-                                <button
-                                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                                    className="flex items-center gap-3 w-full px-3 py-2 rounded-md text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors"
-                                >
-                                    {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-                                    <span>{theme === "dark" ? tCommon("lightMode") : tCommon("darkMode")}</span>
                                 </button>
                             </li>
                         </ul>

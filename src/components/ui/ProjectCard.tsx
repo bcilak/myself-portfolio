@@ -15,11 +15,12 @@ export default function ProjectCard({
     const t = useTranslations("Projects");
 
     return (
-        <SpotlightCard className="glass-card rounded-xl hover:border-cyan-500/30 transition-all duration-300 hover:-translate-y-1 group h-full">
+        <SpotlightCard className="glass-card hover:-rotate-1 transition-transform duration-100 group h-full">
             <div className="p-6 flex flex-col gap-4 h-full relative z-10 w-full">
+                <div className="absolute left-1/2 top-[-14px] h-7 w-24 -translate-x-1/2 rotate-2 border border-black/20 bg-[#e5e0d8]/80" />
                 <div>
                     <div className="flex justify-between items-start gap-4">
-                        <h3 className="text-slate-900 dark:text-slate-100 font-semibold text-lg group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                        <h3 className="text-slate-900 dark:text-slate-100 font-semibold text-xl group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                             {project.title}
                         </h3>
                         {project.views !== undefined && (
@@ -29,17 +30,17 @@ export default function ProjectCard({
                             </span>
                         )}
                     </div>
-                    <div className="mt-4 flex-1 space-y-3 bg-slate-50 dark:bg-white/5 p-4 rounded-xl border border-black/5 dark:border-white/5 shadow-inner">
+                    <div className="mt-4 flex-1 space-y-3 bg-[#fff9c4] p-4 rounded-xl border-2 border-dashed border-black shadow-none">
                         <div>
-                            <div className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                            <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
                                 <span className="text-cyan-500 text-sm">🎯</span> {t("problem")}
                             </div>
                             <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed line-clamp-2">
                                 {project.problem}
                             </p>
                         </div>
-                        <div className="pt-3 border-t border-black/5 dark:border-white/5">
-                            <div className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                        <div className="pt-3 border-t-2 border-dashed border-black">
+                            <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
                                 <span className="text-cyan-500 text-sm">💡</span> {t("solution")}
                             </div>
                             <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed line-clamp-2">
@@ -54,13 +55,13 @@ export default function ProjectCard({
                     {project.technologies.slice(0, 5).map((tech) => (
                         <span
                             key={tech}
-                            className="px-2 py-0.5 rounded-md bg-cyan-600/10 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-400 text-xs font-medium border border-cyan-600/20 dark:border-cyan-500/20"
+                            className="paper-tag px-2 py-0.5 text-xs font-medium"
                         >
                             {tech}
                         </span>
                     ))}
                     {project.technologies.length > 5 && (
-                        <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-400 text-xs mt-auto">
+                        <span className="paper-tag px-2 py-0.5 text-xs mt-auto">
                             +{project.technologies.length - 5}
                         </span>
                     )}
@@ -71,7 +72,7 @@ export default function ProjectCard({
                     {showDetail && (
                         <Link
                             href={`/projects/${project.slug}`}
-                            className="text-sm text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 font-medium transition-colors"
+                            className="text-base text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 font-medium transition-colors underline decoration-wavy decoration-[#ff4d4d]"
                         >
                             {t("viewDetails") || "View Details"} →
                         </Link>
@@ -80,7 +81,7 @@ export default function ProjectCard({
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 transition-colors ml-auto whitespace-nowrap"
+                        className="text-base text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-slate-100 transition-colors ml-auto whitespace-nowrap underline decoration-dashed"
                     >
                         {t("github") || "GitHub"} ↗
                     </a>
@@ -89,7 +90,7 @@ export default function ProjectCard({
                             href={project.demoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors whitespace-nowrap"
+                            className="text-base text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors whitespace-nowrap underline decoration-dashed"
                         >
                             {t("demo") || "Demo"} ↗
                         </a>

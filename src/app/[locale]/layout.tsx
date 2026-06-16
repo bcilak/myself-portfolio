@@ -115,7 +115,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="light" forcedTheme="light" enableSystem={false}>
           <NextIntlClientProvider messages={messages}>
             <Navbar />
             <main className="min-h-screen">{children}</main>
