@@ -364,6 +364,16 @@ hr,
   pointer-events: none;
 }
 
+#nxc-toggle.open::before {
+  display: none !important;
+  content: none !important;
+}
+
+#nxc-toggle.open::after {
+  display: none !important;
+  content: none !important;
+}
+
 #nxc-toggle svg {
   width: 30px !important;
   height: 30px !important;
