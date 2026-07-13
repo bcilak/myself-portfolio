@@ -19,10 +19,11 @@ async function migrate() {
         await Skill.deleteMany({});
         console.log("Cleared existing Skills");
 
+        const skillsToInsert = [];
         let skillOrder = 0;
         for (const cat of skillCategories) {
             for (const skill of cat.skills) {
-                await Skill.create({
+                skillsToInsert.push({
                     name: skill.name,
                     icon: skill.icon,
                     level: skill.level,
@@ -33,6 +34,7 @@ async function migrate() {
                 });
             }
         }
+        await Skill.insertMany(skillsToInsert);
         console.log("Skills migrated successfully!");
 
         // Migrate Case Studies
