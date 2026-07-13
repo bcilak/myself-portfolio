@@ -19,8 +19,9 @@ export async function GET(req: Request) {
         await dbConnect();
 
         // 1. PROJELERİ TAŞI
+        const projectsTrMap = new Map(projectsTr.map((p) => [p.slug, p]));
         const mergedProjects = projectsEn.map((enProj) => {
-            const trProj = projectsTr.find((p) => p.slug === enProj.slug) || enProj;
+            const trProj = projectsTrMap.get(enProj.slug) || enProj;
             return {
                 slug: enProj.slug,
                 technologies: enProj.technologies,
@@ -51,8 +52,9 @@ export async function GET(req: Request) {
         // 2. BLOG YAZILARINI TAŞI
         const blogCount = await Blog.countDocuments();
         if (blogCount === 0) {
+            const blogPostsTrMap = new Map(blogPostsTr.map((b) => [b.slug, b]));
             const mergedBlogs = blogPostsEn.map((enBlog) => {
-                const trBlog = blogPostsTr.find((b) => b.slug === enBlog.slug) || enBlog;
+                const trBlog = blogPostsTrMap.get(enBlog.slug) || enBlog;
                 return {
                     slug: enBlog.slug,
                     tags: enBlog.tags,
@@ -87,10 +89,11 @@ export async function GET(req: Request) {
         // 4. ORNEK OLAYLARI TASIMA / GUNCELLEME
         const englishStudies = getCaseStudies("en");
         const turkishStudies = getCaseStudies("tr");
+        const turkishStudiesMap = new Map(turkishStudies.map((s) => [s.slug, s]));
 
         for (let i = 0; i < englishStudies.length; i++) {
             const en = englishStudies[i];
-            const tr = turkishStudies.find((s) => s.slug === en.slug) || en;
+            const tr = turkishStudiesMap.get(en.slug) || en;
 
             await CaseStudy.updateOne(
                 { slug: en.slug },

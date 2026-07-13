@@ -41,11 +41,12 @@ async function migrate() {
 
         const englishStudies = getCaseStudies("en");
         const turkishStudies = getCaseStudies("tr");
+        const turkishStudiesMap = new Map(turkishStudies.map((s) => [s.slug, s]));
 
         let csOrder = 0;
         for (let i = 0; i < englishStudies.length; i++) {
             const en = englishStudies[i];
-            const tr = turkishStudies.find((s) => s.slug === en.slug) || en;
+            const tr = turkishStudiesMap.get(en.slug) || en;
 
             await CaseStudy.create({
                 slug: en.slug,
