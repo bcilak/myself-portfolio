@@ -51,8 +51,9 @@ export async function GET(req: Request) {
         // 2. BLOG YAZILARINI TAŞI
         const blogCount = await Blog.countDocuments();
         if (blogCount === 0) {
+            const trBlogsMap = new Map(blogPostsTr.map((b) => [b.slug, b]));
             const mergedBlogs = blogPostsEn.map((enBlog) => {
-                const trBlog = blogPostsTr.find((b) => b.slug === enBlog.slug) || enBlog;
+                const trBlog = trBlogsMap.get(enBlog.slug) || enBlog;
                 return {
                     slug: enBlog.slug,
                     tags: enBlog.tags,
